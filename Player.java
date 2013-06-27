@@ -10,7 +10,8 @@
 public class Player {
 	private String colour;
 	private Pawn pawns[];
-	private int startingPosition;
+	private int start;
+	private int finish[] = new int[4];
 	private Strategy strategy;//set by giving value between 1 to 5
 	/*
 	(1)Aggressive: Give preference to a move that kicks a pawn;
@@ -25,6 +26,10 @@ public class Player {
 		this.setColour(colour);
 		this.setStrategy(strategy);
 		this.setStartingPosition(startingPosition);
+		for(int i=40;i<44;i++){
+			this.finish[i-40] = this.start + i;
+		}
+
 		this.pawns = new Pawn[4];
 		this.pawns[0] = new Pawn();
 		this.pawns[1] = new Pawn();
@@ -34,9 +39,10 @@ public class Player {
 			p.returnHome();
 			p.setOwner(this);
 		}
+		System.out.println(this.colour+" [Start:"+this.start+"|Finish:"+this.finish+ "] ready!");
 	}
-	public String getCurrentPawnPositions(){
-		String result = "";
+	public String getReport(){
+		String result = "{"+this.colour+"-";
 		for(int i=0;i<4;i++){
 			if(this.pawns[i].getPosition() == -1){
 				result = result.concat("["+i+":"+"Home]");
@@ -45,7 +51,7 @@ public class Player {
 			}
 		result = result.concat(" ");//space it out a little, shall we?
 		}
-		return "{"+result+"}";
+		return result+"}";
 	}
 	public void setColour(String colour){
 		this.colour = colour;
@@ -55,13 +61,13 @@ public class Player {
 	}
 	public void setStartingPosition(int position){
 		if(position % 10 == 1){
-			this.startingPosition = position;
+			this.start = position;
 		}else{
 			throw new UnsupportedOperationException("Invalid startiong position Given!");
 		}
 	}
 	public int getStartingPosition(){
-		return this.startingPosition;
+		return this.start;
 	}
 	public void setStrategy(int option){
 		if(option == 1){

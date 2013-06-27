@@ -4,11 +4,11 @@ JFLAGS =
 
 default: Ludogame.class 
 
-Ludogame.class: Ludogame.java AbstractStrategy.class Dice.class Player.class
+Ludogame.class: Ludogame.java Strategy.class Dice.class Player.class
 	$(JCC) $(JFLAGS) Ludogame.java
 
-AbstractStrategy.class: AbstractStrategy.java AggressiveStrategy.class CautiousStrategy.class DefensiveStrategy.class MoveFirstStrategy.class MoveLastStrategy.class
-	$(JCC) $(JFLAGS) AbstractStrategy.java
+Strategy.class: Strategy.java AggressiveStrategy.class CautiousStrategy.class DefensiveStrategy.class MoveFirstStrategy.class MoveLastStrategy.class
+	$(JCC) $(JFLAGS) Strategy.java
 
 Player.class: Player.java Pawn.class
 	$(JCC) $(JFLAGS) Player.java
