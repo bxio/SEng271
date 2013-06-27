@@ -18,11 +18,13 @@ public class Ludogame {
         red = new Player();
         Dice dice = new Dice();
         
-        blue.setColour("Blue");
-        yellow.setColour("Yellow");
-        green.setColour("Green");
-        red.setColour("Red");
-        
+        blue.initPlayer("Blue",1,1);
+        yellow.initPlayer("Yellow",2,11);
+        green.initPlayer("Green",3,21);
+        red.initPlayer("Red",4,31);
+		
+		System.out.println(blue.getCurrentPawnPositions());
+		
         System.out.println(dice.roll()+dice.roll()+dice.roll());
         System.out.println(dice.getResults());
     }

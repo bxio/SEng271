@@ -11,6 +11,9 @@ public class Pawn {
     private Player owner;
     private int currentPos;
     
+	public void setOwner(Player owner){
+		this.owner = owner;
+	}
     public Player getOwner(){
         return this.owner;
     }
@@ -18,13 +21,10 @@ public class Pawn {
     public int getPosition(){
         return this.currentPos;
     }
-    
-    public void move(int roll){
-        
-    }
-    
+	
     public void returnHome(){
-        System.out.println("Pawn returning home.");
-        
+        //System.out.println("Pawn returning home.");
+		this.currentPos = -1;
     }
+
 }
