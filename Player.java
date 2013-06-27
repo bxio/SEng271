@@ -39,7 +39,7 @@ public class Player {
 			p.returnHome();
 			p.setOwner(this);
 		}
-		System.out.println(this.colour+" [Start:"+this.start+"|Finish:"+this.finish+ "] ready!");
+		System.out.println(this.colour+" [Start:"+this.start+"|Finish:"+this.finish[0]+"-"+this.finish[3]+ "] ready!");
 	}
 	public String getReport(){
 		String result = "{"+this.colour+"-";
