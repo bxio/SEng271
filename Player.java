@@ -33,10 +33,12 @@ public class Player {
 			this.strategy = new MoveFirstStrategy();
 		}else if(option == 5){
 			this.strategy = new MoveLastStrategy();
+		}else{
+			throw new UnsupportedOperationException("Invalid Strategy option Given!");
 		}
 	}
 	public void planMove(int roll){
-		
+		this.strategy.getMoves(roll);
 	}
 	
 	public void executeMove(){

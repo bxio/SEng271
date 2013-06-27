@@ -3,6 +3,7 @@
  * @author bill
  */
 public class AggressiveStrategy implements Strategy{
+	//(1)Aggressive: Give preference to a move that kicks a pawn;
 
 	@Override
 	public void getMoves(int roll) {
