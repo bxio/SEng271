@@ -21,7 +21,23 @@ public class Pawn {
     public int getPosition(){
         return this.currentPos;
     }
+	public void setPosition(int position){
+        this.currentPos = position;
+    }
 	
+	public void move(int spaces){
+		int potential, tmp;
+		potential = (this.currentPos + spaces)%40;
+		if(potential >= this.owner.getStartingPosition()){
+			//pawn moved too far!
+			potential = this.owner.getStartingPosition()-1+spaces;
+		}
+		System.out.println("Original:"+this.currentPos+" New:"+potential);
+		this.currentPos = potential;
+	}
+	public void start(){
+		this.currentPos = this.owner.getStartingPosition();
+	}
     public void returnHome(){
         //System.out.println("Pawn returning home.");
 		this.currentPos = -1;

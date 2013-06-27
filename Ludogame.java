@@ -19,7 +19,8 @@ public class Ludogame {
         green.initPlayer("Green",3,21);
         red.initPlayer("Red",4,31);
 		
-		System.out.println(green.getReport());
+		green.getPawn(0).setPosition(22);
+		green.getPawn(0).move(40);
 
     }
 }

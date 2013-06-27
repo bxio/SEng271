@@ -41,6 +41,9 @@ public class Player {
 		}
 		System.out.println(this.colour+" [Start:"+this.start+"|Finish:"+this.finish[0]+"-"+this.finish[3]+ "] ready!");
 	}
+	public Pawn getPawn(int i){
+		return this.pawns[i];
+	}
 	public String getReport(){
 		String result = "{"+this.colour+"-";
 		for(int i=0;i<4;i++){
