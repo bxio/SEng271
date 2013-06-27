@@ -2,28 +2,37 @@ JCC = javac
 
 JFLAGS = 
 
-default: Calculator.class 
+default: Ludogame.class 
 
-Calculator.class: Calculator.java Strategy.class
-	$(JCC) $(JFLAGS) Calculator.java
+Ludogame.class: Ludogame.java AbstractStrategy.class Dice.class Player.class
+	$(JCC) $(JFLAGS) Ludogame.java
 
-Strategy.class: Strategy.java Add.class Subtract.class Multiply.class Divide.class Modulus.class
-	$(JCC) $(JFLAGS) Strategy.java
+AbstractStrategy.class: AggressiveStrategy.class CautiousStrategy.class DefensiveStrategy.class MoveFirstStrategy.class MoveLastStrategy.class
+	$(JCC) $(JFLAGS) AbstractStrategy.java
 
-Add.class: Add.java
-	$(JCC) $(JFLAGS) Add.java
+Player.class: Player.java Pawn.class
+	$(JCC) $(JFLAGS) Player.java
 
-Subtract.class: Subtract.java
-	$(JCC) $(JFLAGS) Subtract.java
+Pawn.class: Pawn.java
+	$(JCC) $(JFLAGS) Pawn.java
 
-Multiply.class: Multiply.java
-	$(JCC) $(JFLAGS) Multiply.java
+Dice.class: Dice.java
+	$(JCC) $(JFLAGS) Dice.java
 
-Divide.class: Divide.java
-	$(JCC) $(JFLAGS) Divide.java
+AggressiveStrategy.class: AggressiveStrategy.java
+	$(JCC) $(JFLAGS) AggressiveStrategy.java
 
-Modulus.class: Modulus.java
-	$(JCC) $(JFLAGS) Modulus.java
+CautiousStrategy.class: CautiousStrategy.java
+	$(JCC) $(JFLAGS) CautiousStrategy.java
+
+DefensiveStrategy.class: DefensiveStrategy.java
+	$(JCC) $(JFLAGS) DefensiveStrategy.java
+
+MoveFirstStrategy.class: MoveFirstStrategy.java
+	$(JCC) $(JFLAGS) MoveFirstStrategy.java
+
+MoveLastStrategy.class: MoveLastStrategy.java
+		$(JCC) $(JFLAGS) MoveLastStrategy.java
 
 clean: 
 	$(RM) *.class
