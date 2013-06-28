@@ -14,14 +14,24 @@ public class Pawn {
 		this.owner = owner;
 		this.currentPos = currentPos;
 	}
-	
+	/** Sets the Pawn's Owner
+	 * 
+	 * @param owner	The Player whom the pawn belongs to
+	 */
 	public void setOwner(Player owner){
 		this.owner = owner;
 	}
+	/** Returns the pawn's owner
+	 * 
+	 * @return the pawn's owner
+	 */
     public Player getOwner(){
         return this.owner;
     }
-    
+    /** Returns the pawn's position
+	 * 
+	 * @return the pawn's position
+	 */
     public int getPosition(){
         return this.currentPos;
     }
@@ -30,14 +40,7 @@ public class Pawn {
     }
 	
 	public void move(int spaces){
-		int potential;
-		potential = (this.currentPos + spaces)%40;
-		if(potential >= this.owner.getStartingPosition()){
-			//pawn moved too far!
-			potential = this.owner.getStartingPosition()-1+spaces;
-		}
-		System.out.println("Original:"+this.currentPos+" New:"+potential);
-		this.currentPos = potential;
+		
 	}
 	public void start(){
 		this.currentPos = this.owner.getStartingPosition();

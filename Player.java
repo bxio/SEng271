@@ -12,16 +12,7 @@ public class Player {
 	private Pawn pawns[];
 	private int start;
 	private int finish[] = new int[4];
-	private Strategy strategy;//set by giving value between 1 to 5
-	/*
-	(1)Aggressive: Give preference to a move that kicks a pawn;
-	(2)Cautious: Give low priority to a move that kicks a pawn (so as not to anger the other
-	player);
-	(3)Defensive: Give preference to a move to a target field where the pawn cannot be kicked;
-	(4)Move-first: Give preference to moving the foremost pawn;
-	(5)Move-last: Give preference to moving the hindmost pawn.
-	 */
-	
+	private Strategy strategy;
 	public void initPlayer(String colour, int strategy, int startingPosition){
 		this.setColour(colour);
 		this.setStrategy(strategy);
