@@ -2,13 +2,8 @@
  *
  * @author bill
  */
-public class CautiousStrategy implements Strategy{
-	//(2)Cautious: Give low priority to a move that kicks a pawn (so as not to anger the other
-	//player);
-	private String name = "Cautious";
-	public String getName(){
-		return this.name;
-	}
+public class HumanStrategy implements Strategy{
+	private String name = "Human";
 	@Override
 	public int[] getMoves(Player player, int roll) {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -18,5 +13,10 @@ public class CautiousStrategy implements Strategy{
 	public int rankMove() {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
-    
+
+	@Override
+	public String getName() {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
 }

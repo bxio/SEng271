@@ -31,14 +31,10 @@ public class Player {
 		}
 
 		this.pawns = new Pawn[4];
-		this.pawns[0] = new Pawn();
-		this.pawns[1] = new Pawn();
-		this.pawns[2] = new Pawn();
-		this.pawns[3] = new Pawn();
-		for(Pawn p: this.pawns){
-			p.returnHome();
-			p.setOwner(this);
-		}
+		this.pawns[0] = new Pawn(this,-1);
+		this.pawns[1] = new Pawn(this,-1);
+		this.pawns[2] = new Pawn(this,-1);
+		this.pawns[3] = new Pawn(this,-1);
 		System.out.println(this.colour+" [Start:"+this.start+"|Finish:"+this.finish[0]+"-"+this.finish[3]+ "] ready!");
 	}
 	public Pawn getPawn(int i){
@@ -72,6 +68,12 @@ public class Player {
 	public int getStartingPosition(){
 		return this.start;
 	}
+	/** Sets the Player's Strategy
+	 * 
+	 * @param option	Number of the strategy (from 1 to 6)
+	 * @param b			Description of b
+	 * @return			Description of c
+	 */
 	public void setStrategy(int option){
 		if(option == 1){
 			this.strategy = new AggressiveStrategy();
@@ -90,11 +92,11 @@ public class Player {
 	public String getStrategy(){
 		return this.strategy.getName();
 	}
-	public void planMove(int roll){
-		this.strategy.getMoves(roll);
+	public void execute(){
+		
 	}
 	
-	public void executeMove(){
-		
+	public Player passTurn(){
+		return null;
 	}
 }

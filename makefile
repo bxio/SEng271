@@ -7,7 +7,7 @@ default: Ludogame.class
 Ludogame.class: Ludogame.java Strategy.class Dice.class Player.class
 	$(JCC) $(JFLAGS) Ludogame.java
 
-Strategy.class: Strategy.java AggressiveStrategy.class CautiousStrategy.class DefensiveStrategy.class MoveFirstStrategy.class MoveLastStrategy.class
+Strategy.class: Strategy.java AggressiveStrategy.class CautiousStrategy.class DefensiveStrategy.class MoveFirstStrategy.class MoveLastStrategy.class HumanStrategy.class BrutalStrategy.class
 	$(JCC) $(JFLAGS) Strategy.java
 
 Player.class: Player.java Pawn.class
@@ -34,5 +34,10 @@ MoveFirstStrategy.class: MoveFirstStrategy.java
 MoveLastStrategy.class: MoveLastStrategy.java
 		$(JCC) $(JFLAGS) MoveLastStrategy.java
 
+HumanStrategy.class: HumanStrategy.java
+	$(JCC) $(JFLAGS) HumanStrategy.java
+	
+BrutalStrategy.class: BrutalStrategy.java
+	$(JCC) $(JFLAGS) BrutalStrategy.java
 clean: 
 	$(RM) *.class

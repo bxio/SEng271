@@ -10,7 +10,11 @@
 public class Pawn {
     private Player owner;
     private int currentPos;
-    
+    public Pawn(Player owner, int currentPos){
+		this.owner = owner;
+		this.currentPos = currentPos;
+	}
+	
 	public void setOwner(Player owner){
 		this.owner = owner;
 	}
@@ -26,7 +30,7 @@ public class Pawn {
     }
 	
 	public void move(int spaces){
-		int potential, tmp;
+		int potential;
 		potential = (this.currentPos + spaces)%40;
 		if(potential >= this.owner.getStartingPosition()){
 			//pawn moved too far!

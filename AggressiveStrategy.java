@@ -5,17 +5,18 @@
 public class AggressiveStrategy implements Strategy{
 	//(1)Aggressive: Give preference to a move that kicks a pawn;
 	private String name = "Aggressive";
+	public String getName(){
+		return this.name;
+	}
+
 	@Override
-	public void getMoves(int roll) {
+	public int[] getMoves(Player player, int roll) {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 
 	@Override
-	public void rankMove() {
+	public int rankMove() {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
-	public String getName(){
-		return this.name;
 	}
 	
 }
