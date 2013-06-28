@@ -62,8 +62,6 @@ public class Player {
 	/** Sets the Player's Strategy
 	 * 
 	 * @param option	Number of the strategy (from 1 to 6)
-	 * @param b			Description of b
-	 * @return			Description of c
 	 */
 	public void setStrategy(int option){
 		if(option == 1){

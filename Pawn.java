@@ -40,7 +40,24 @@ public class Pawn {
     }
 	
 	public void move(int spaces){
-		
+		int position = this.currentPos;
+		int start = this.owner.getStartingPosition();
+		int target = position + spaces;
+		int limit = start + 43;
+		System.out.println("Start: "+start+" Position: "+position+" Move: "+spaces+" Target: "+target);
+		if(target>start+39){
+			System.out.print("Wrapped around board once. ");
+			target = target - 40 - this.owner.getStartingPosition()+spaces;
+			System.out.println("Target corrected to "+target);
+			if(target > limit){
+				target = limit;
+				System.out.println("Limit reached. Corrected to "+target);
+			}
+		}else{
+			position = target;
+			System.out.println("Target is "+target);
+		}
+		this.currentPos = target;
 	}
 	public void start(){
 		this.currentPos = this.owner.getStartingPosition();
