@@ -32,13 +32,14 @@ public class Ludogame {
         Dice dice = new Dice();
 		Player winner = null;
 		
-		game.players[0].getPawns()[0].setPosition(1);
-		game.players[0].getPawns()[1].setPosition(5);
+		game.players[2].getPawns()[3].setPosition(5);
 		game.players[1].getPawns()[0].setPosition(2);
+		
+		System.out.println(game.printCurrentPositions());
+
 		game.players[1].getPawns()[0].move(game.getCurrentPositions(), 3);
 		
 		
-		System.out.println(game.printCurrentPositions());
     }
 	/** returns the positions of all the pawns on the board
 	 * 
