@@ -101,7 +101,6 @@ public class Pawn {
 			}
 			//System.out.println("Location is: "+location+" OtherPawn: "+otherPlayer+"@"+otherPawn);
 
-			//get opposing pawn and kick it
 			return game.getPlayer(otherPlayer).getPawn(otherPawn);
 		}
 	}
@@ -111,7 +110,6 @@ public class Pawn {
 	 * @param spaces the amount of spaces the pawn moves forward
 	 */
 	public void move(Ludogame game,int spaces){
-		int pawns[] = game.getCurrentPositions();
 		int position = this.currentPos;
 		int start = this.owner.getStartingPosition();
 		int target = position + spaces;
@@ -126,31 +124,8 @@ public class Pawn {
 			target += 40;
 		}
 		//detect Collision
-		int otherPlayer = -1, otherPawn = -1, location = -1;
-		for(int i=0;i<pawns.length;i++){
-			if(pawns[i]==target){
-				location = i;
-			}
-		}
-		if(location == -1){
-			//No collision, no action required.
-		}else{
-			if(location <4){
-				otherPlayer = 0;
-			}else if(location<8){
-				otherPlayer = 1;
-				otherPawn = location - 4;
-			}else if(location<12){
-				otherPlayer = 2;
-				otherPawn = location - 8;
-			}else{
-				otherPlayer = 3;
-				otherPawn = location - 12;
-			}
-			//System.out.println("Location is: "+location+" OtherPawn: "+otherPlayer+"@"+otherPawn);
-
-			//get opposing pawn and kick it
-			game.getPlayer(otherPlayer).getPawn(otherPawn).returnHome();
+		if(this.moveWillKick(game, spaces)!=null){
+			this.moveWillKick(game, spaces).returnHome();
 		}
 		
 		//System.out.println("Start:"+start+" Position:"+position+" End:"+target);
