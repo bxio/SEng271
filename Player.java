@@ -23,12 +23,24 @@ public class Player {
 		this.pawns[3] = new Pawn(this,-1);
 		System.out.println(this.colour+" [Start:"+this.start+"|Finish:"+this.finish[0]+"-"+this.finish[3]+ "] ready!");
 	}
+	/** Gets the player's pawn
+	* 
+	* @param i the position of the pawn to return
+	* @return the player's i-th pawn
+	*/
 	public Pawn getPawn(int i){
 		return this.pawns[i];
 	}
+	/** Returns all pawns of a player
+	* 
+	* @return an array of all the pawns belonging to that player
+	*/
 	public Pawn[] getPawns(){
 		return this.pawns;
 	}
+	/** I have no idea what this does yet
+	 * @return some string.
+	*/
 	public String getReport(){
 		String result = "{"+this.colour+"-";
 		for(int i=0;i<4;i++){
@@ -41,12 +53,21 @@ public class Player {
 		}
 		return result+"}";
 	}
+	/** Sets the color of the pawn
+	* 
+	* @param colour a string with the 
+	*/
 	public void setColour(String colour){
 		this.colour = colour;
 	}
+	/** Returns the color of the pawn
+	* 
+	* @return a string containing the color of the pawn
+	*/
 	public String getColour(){
 		return this.colour;
 	}
+	
 	public void setStartingPosition(int position){
 		if(position % 10 == 1){
 			this.start = position;

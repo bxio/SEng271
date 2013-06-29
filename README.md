@@ -11,3 +11,7 @@ Group members:
 * Bill Xiong
 * Alastair Fehr
 * Hiroki Yun
+
+Ludogame
+=======
+To run, simply run the `make` command.
