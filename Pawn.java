@@ -82,7 +82,6 @@ public class Pawn {
 				location = i;
 			}
 		}
-		System.out.print("Location is: "+location);
 		if(location == -1){
 			//No collision, no action required.
 		}else{
@@ -98,7 +97,7 @@ public class Pawn {
 				otherPlayer = 3;
 				otherPawn = location - 12;
 			}
-			System.out.println(" OtherPawn:"+otherPlayer+"@"+otherPawn);
+			//System.out.println("Location is: "+location+" OtherPawn: "+otherPlayer+"@"+otherPawn);
 
 			//get opposing pawn and kick it
 			Pawn otherPawnObject = game.getPlayer(otherPlayer).getPawn(otherPawn);
