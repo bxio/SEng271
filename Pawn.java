@@ -100,10 +100,8 @@ public class Pawn {
 			//System.out.println("Location is: "+location+" OtherPawn: "+otherPlayer+"@"+otherPawn);
 
 			//get opposing pawn and kick it
-			Pawn otherPawnObject = game.getPlayer(otherPlayer).getPawn(otherPawn);
-			otherPawnObject.returnHome();
+			game.getPlayer(otherPlayer).getPawn(otherPawn).returnHome();
 		}
-		
 		
 		//System.out.println("Start:"+start+" Position:"+position+" End:"+target);
 		this.currentPos = target;

@@ -9,7 +9,7 @@ public class MoveLastStrategy implements Strategy{
 		return this.name;
 	}
 	@Override
-	public int[] getMoves(Player player, int roll) {
+	public int[] getMoves(Ludogame game, int roll) {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 
