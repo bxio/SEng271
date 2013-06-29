@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * @author bill
@@ -10,9 +5,11 @@
 public class Pawn {
     private Player owner;
     private int currentPos;
+	private boolean looped;
     public Pawn(Player owner, int currentPos){
 		this.owner = owner;
 		this.currentPos = currentPos;
+		looped = false;
 	}
 	/** Sets the Pawn's Owner
 	 * 
@@ -28,6 +25,29 @@ public class Pawn {
     public Player getOwner(){
         return this.owner;
     }
+	/** Returns the status of the pawn
+	 * 
+	 * @return the pawn's status
+	 */
+	public boolean getStatus(){
+		return this.looped;
+	}
+	/** Sets the pawn's status
+	 * 
+	 * @param status The status you want the pawn to be. 
+	 */
+	public void setStatus(boolean status){
+		this.looped = status;
+	}
+	
+	/** Sets the pawn's position
+	 * 
+	 * @param position the position you want the pawn to bes
+	 */
+	public void setPosition(int position){
+        this.currentPos = position;
+    }
+	
     /** Returns the pawn's position
 	 * 
 	 * @return the pawn's position
@@ -35,28 +55,26 @@ public class Pawn {
     public int getPosition(){
         return this.currentPos;
     }
-	public void setPosition(int position){
-        this.currentPos = position;
-    }
-	
-	public void move(int spaces){
+	/** Moves the pawn forward.
+	 * 
+	 * @param pawns[] the size 16 array that contains the positions of the pawns
+	 * @param spaces the amount of spaces the pawn moves forward
+	 */
+	public void move(int pawns[],int spaces){
 		int position = this.currentPos;
 		int start = this.owner.getStartingPosition();
 		int target = position + spaces;
 		int limit = start + 43;
-		System.out.println("Start: "+start+" Position: "+position+" Move: "+spaces+" Target: "+target);
-		if(target>start+39){
-			System.out.print("Wrapped around board once. ");
-			target = target - 40 - this.owner.getStartingPosition()+spaces;
-			System.out.println("Target corrected to "+target);
-			if(target > limit){
-				target = limit;
-				System.out.println("Limit reached. Corrected to "+target);
-			}
-		}else{
-			position = target;
-			System.out.println("Target is "+target);
+		
+		if(target >=limit - 4){
+			target = target%40;
+			this.looped = true;
 		}
+		
+		if(this.looped && target >= start){
+			target += 40;
+		}
+		System.out.println("Start:"+start+" Position:"+position+" End:"+target);
 		this.currentPos = target;
 	}
 	public void start(){

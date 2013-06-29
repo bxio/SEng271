@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * @author bill
@@ -30,6 +25,9 @@ public class Player {
 	}
 	public Pawn getPawn(int i){
 		return this.pawns[i];
+	}
+	public Pawn[] getPawns(){
+		return this.pawns;
 	}
 	public String getReport(){
 		String result = "{"+this.colour+"-";
