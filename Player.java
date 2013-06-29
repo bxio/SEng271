@@ -8,6 +8,12 @@ public class Player {
 	private int start;
 	private int finish[] = new int[4];
 	private Strategy strategy;
+	/** Initializes the player
+	* 
+	* @param colour The color of the player
+	* @param strategy the strategy of the player
+	* @param startingPosition the starting position of the player
+	*/
 	public void initPlayer(String colour, int strategy, int startingPosition){
 		this.setColour(colour);
 		this.setStrategy(strategy);

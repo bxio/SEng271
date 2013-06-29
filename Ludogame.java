@@ -2,9 +2,15 @@
  *
  * @author bill
  */
+import java.util.Scanner;
 public class Ludogame {
 	private Player players[];
     public static void main(String[] args) {
+		System.out.println("Welcome to Ludogame.");
+		System.out.print("Enter Number of human players:");
+		Scanner in = new Scanner(System.in);
+		int humanplayers = in.nextInt();
+		
 		//initiate the game
 		Ludogame game = new Ludogame();
 		game.players = new Player[4];
@@ -12,15 +18,17 @@ public class Ludogame {
         game.players[1] = new Player();
         game.players[2] = new Player();
         game.players[3] = new Player();
-		//initiate the dice
-        Dice dice = new Dice();
-		Player winner = null;
 		//initiate the players
-        game.players[0].initPlayer("Blue",1,1);
+		game.players[0].initPlayer("Blue",1,1);
         game.players[1].initPlayer("Yellow",2,11);
         game.players[2].initPlayer("Green",3,21);
         game.players[3].initPlayer("Red",4,31);
-		//take a turn
+		for(int i=0;i<humanplayers;i++){
+			game.players[i].setStrategy(0);
+		}
+		//initiate the dice
+        Dice dice = new Dice();
+		Player winner = null;
 
 		//tests
 		game.players[1].getPawn(0).start();
