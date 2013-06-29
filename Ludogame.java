@@ -8,9 +8,9 @@ public class Ludogame {
     public static void main(String[] args) {
 		System.out.println("Welcome to Ludogame.");
 		System.out.print("Enter Number of human players:");
-		Scanner in = new Scanner(System.in);
-		int humanplayers = in.nextInt();
-		
+		//Scanner in = new Scanner(System.in);
+		//int humanplayers = in.nextInt();
+		int humanplayers = 0;
 		//initiate the game
 		Ludogame game = new Ludogame();
 		game.players = new Player[4];
@@ -31,10 +31,10 @@ public class Ludogame {
 		Player winner = null;
 
 		//tests
-		game.players[1].getPawn(0).start();
-		System.out.println("Pawn at Pos "+game.players[1].getPawn(0).getPosition());
-		game.players[1].getPawn(0).move(null,40);
-		System.out.println("Pawn now at Pos "+game.players[1].getPawn(0).getPosition());
+		game.players[2].getPawn(0).start();
+		System.out.println("Pawn at Pos "+game.players[2].getPawn(0).getPosition());
+		game.players[2].getPawn(0).move(null,40);
+		System.out.println("Pawn now at Pos "+game.players[2].getPawn(0).getPosition());
     }
 	public int[] getCurrentPositions(Player players[]){
 		int i=0;

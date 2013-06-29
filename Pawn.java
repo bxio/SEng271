@@ -74,7 +74,7 @@ public class Pawn {
 		if(this.looped && target >= start){
 			target += 40;
 		}
-		System.out.println("Start:"+start+" Position:"+position+" End:"+target);
+		//System.out.println("Start:"+start+" Position:"+position+" End:"+target);
 		this.currentPos = target;
 	}
 	public void start(){
