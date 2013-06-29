@@ -10,8 +10,12 @@ public class AggressiveStrategy implements Strategy{
 	}
 
 	@Override
-	public int[] getMoves(Ludogame game, int roll) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	public int[] getMoves(Ludogame game, Player self, int roll) {
+		int moves[] = new int[4];
+		for(Pawn p:self.getPawns()){
+			
+		}
+		return moves;
 	}
 
 	@Override

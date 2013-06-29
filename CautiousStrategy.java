@@ -8,7 +8,7 @@ public class CautiousStrategy implements Strategy{
 	private String name = "Cautious";
 	
 	@Override
-	public int[] getMoves(Ludogame game, int roll) {
+	public int[] getMoves(Ludogame game, Player self, int roll) {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 
