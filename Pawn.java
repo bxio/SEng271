@@ -55,9 +55,59 @@ public class Pawn {
     public int getPosition(){
         return this.currentPos;
     }
-	/** Moves the pawn forward.
+	/** Returns whether a move will result in a pawn being kicked or not.
 	 * 
-	 * @param pawns[] the size 16 array that contains the positions of the pawns
+	 * @param game the game in which we are moving the pawns.
+	 * @param spaces the amount of spaces the pawn moves forward
+	 * @return the pawn that will be kicked, or null if there is no pawn
+	 * 
+	 */
+	public Pawn moveWillKick(Ludogame game,int spaces){
+		int pawns[] = game.getCurrentPositions();
+		int start = this.owner.getStartingPosition();
+		int target = this.currentPos + spaces;
+		int limit = start + 43;
+		
+		if(target >=limit - 4){
+			target = target%40;
+			this.looped = true;
+		}
+		
+		if(this.looped && target >= start){
+			target += 40;
+		}
+		//detect Collision
+		int otherPlayer = -1, otherPawn = -1, location = -1;
+		for(int i=0;i<pawns.length;i++){
+			if(pawns[i]==target){
+				location = i;
+			}
+		}
+		if(location == -1){
+			//No collision, no action required.
+			return null;
+		}else{
+			if(location <4){
+				otherPlayer = 0;
+			}else if(location<8){
+				otherPlayer = 1;
+				otherPawn = location - 4;
+			}else if(location<12){
+				otherPlayer = 2;
+				otherPawn = location - 8;
+			}else{
+				otherPlayer = 3;
+				otherPawn = location - 12;
+			}
+			//System.out.println("Location is: "+location+" OtherPawn: "+otherPlayer+"@"+otherPawn);
+
+			//get opposing pawn and kick it
+			return game.getPlayer(otherPlayer).getPawn(otherPawn);
+		}
+	}
+	/** Moves the pawn forward, kicking other pawns when necessary
+	 * 
+	 * @param game the game in which we are moving the pawns.
 	 * @param spaces the amount of spaces the pawn moves forward
 	 */
 	public void move(Ludogame game,int spaces){
