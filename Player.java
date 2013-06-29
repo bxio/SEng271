@@ -27,7 +27,7 @@ public class Player {
 		this.pawns[1] = new Pawn(this,-1);
 		this.pawns[2] = new Pawn(this,-1);
 		this.pawns[3] = new Pawn(this,-1);
-		System.out.println(this.colour+" [Start:"+this.start+"|Finish:"+this.finish[0]+"-"+this.finish[3]+ "] ready!");
+		//System.out.println(this.colour+" [Start:"+this.start+"|Finish:"+this.finish[0]+"-"+this.finish[3]+ "] ready!");
 	}
 	/** Gets the player's pawn
 	* 

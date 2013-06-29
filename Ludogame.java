@@ -6,11 +6,13 @@ import java.util.Scanner;
 public class Ludogame {
 	private Player players[];
     public static void main(String[] args) {
-		System.out.println("Welcome to Ludogame.");
-		System.out.print("Enter Number of human players:");
-		//Scanner in = new Scanner(System.in);
-		//int humanplayers = in.nextInt();
 		int humanplayers = 0;
+		System.out.println("Welcome to Ludogame.");
+		/*
+		System.out.print("Enter Number of human players:");
+		Scanner in = new Scanner(System.in);
+		humanplayers = in.nextInt();
+		*/
 		//initiate the game
 		Ludogame game = new Ludogame();
 		game.players = new Player[4];
@@ -29,17 +31,23 @@ public class Ludogame {
 		//initiate the dice
         Dice dice = new Dice();
 		Player winner = null;
-
-		//tests
-		game.players[2].getPawn(0).start();
-		System.out.println("Pawn at Pos "+game.players[2].getPawn(0).getPosition());
-		game.players[2].getPawn(0).move(null,40);
-		System.out.println("Pawn now at Pos "+game.players[2].getPawn(0).getPosition());
+		
+		game.players[0].getPawns()[0].setPosition(1);
+		game.players[0].getPawns()[1].setPosition(5);
+		game.players[1].getPawns()[0].setPosition(2);
+		game.players[1].getPawns()[0].move(game.getCurrentPositions(), 3);
+		
+		
+		System.out.println(game.printCurrentPositions());
     }
-	public int[] getCurrentPositions(Player players[]){
+	/** returns the positions of all the pawns on the board
+	 * 
+	 * @return an integer array of length 16. (Player 1:0-3 Player 2:4-7 Player 3:8-11 Player 4:12-15)
+	 */
+	public int[] getCurrentPositions(){
 		int i=0;
 		int result[] = new int[16];
-		for(Player p:players){
+		for(Player p:this.players){
 			for(Pawn r:p.getPawns()){
 				result[i] = r.getPosition();
 				++i;
@@ -47,5 +55,22 @@ public class Ludogame {
 		}
 		return result;
 	}
-
+	/** Returns the number of pawns, for debugging only.
+	 * 
+	 * @return a string of the positions of the pawns of [player 1] [player 2] [player 3] [player 4]
+	 */
+	public String printCurrentPositions(){
+		String result = "[";
+		for(int i=0;i<this.getCurrentPositions().length;i++){
+			result += this.getCurrentPositions()[i];
+			if(i == 3 || i == 7 || i == 11){
+				result += "] [";
+			}else if(i==15){
+				result += "]";
+			}else{
+				result += ",";
+			}
+		}
+		return result;
+	}
 }
