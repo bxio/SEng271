@@ -60,7 +60,8 @@ public class Pawn {
 	 * @param pawns[] the size 16 array that contains the positions of the pawns
 	 * @param spaces the amount of spaces the pawn moves forward
 	 */
-	public void move(int pawns[],int spaces){
+	public void move(Ludogame game,int spaces){
+		int pawns[] = game.getCurrentPositions();
 		int position = this.currentPos;
 		int start = this.owner.getStartingPosition();
 		int target = position + spaces;
@@ -97,11 +98,11 @@ public class Pawn {
 				otherPlayer = 3;
 				otherPawn = location - 12;
 			}
-			System.out.print(" OtherPlayer: "+otherPlayer);
-			System.out.print(" Location is now: "+otherPawn);
+			System.out.println(" OtherPawn:"+otherPlayer+"@"+otherPawn);
 
 			//get opposing pawn and kick it
-			Pawn otherPawnObject;
+			Pawn otherPawnObject = game.getPlayer(otherPlayer).getPawn(otherPawn);
+			otherPawnObject.returnHome();
 		}
 		
 		

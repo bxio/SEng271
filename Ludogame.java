@@ -37,10 +37,18 @@ public class Ludogame {
 		
 		System.out.println(game.printCurrentPositions());
 
-		game.players[1].getPawns()[0].move(game.getCurrentPositions(), 3);
-		
+		game.players[1].getPawns()[0].move(game, 3);
+		System.out.println(game.printCurrentPositions());
 		
     }
+	/** Returns a single player at a given index
+	 * 
+	 * @param index the index of the player in the player array(0-3)
+	 * @return the player at that index
+	 */
+	public Player getPlayer(int index){
+		return this.players[index];
+	}
 	/** returns the positions of all the pawns on the board
 	 * 
 	 * @return an integer array of length 16. (Player 1:0-3 Player 2:4-7 Player 3:8-11 Player 4:12-15)
