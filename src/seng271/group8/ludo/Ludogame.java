@@ -1,3 +1,7 @@
+package seng271.group8.ludo;
+
+import seng271.group8.ludo.model.Player;
+
 /**
  *
  * @author bill

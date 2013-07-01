@@ -1,3 +1,5 @@
+package seng271.group8.ludo;
+
 /**Dice Used with Ludo game. This one isn't rigged, I promise.
  * @author bill
  */

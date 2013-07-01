@@ -1,3 +1,13 @@
+package seng271.group8.ludo.model;
+
+import seng271.group8.ludo.model.Pawn;
+import seng271.group8.ludo.strategies.Strategy;
+import seng271.group8.ludo.strategies.MoveFirstStrategy;
+import seng271.group8.ludo.strategies.CautiousStrategy;
+import seng271.group8.ludo.strategies.MoveLastStrategy;
+import seng271.group8.ludo.strategies.AggressiveStrategy;
+import seng271.group8.ludo.strategies.DefensiveStrategy;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -81,6 +91,7 @@ public class Player {
 	public String getStrategy(){
 		return this.strategy.getName();
 	}
+        
 	public void execute(){
 		
 	}
