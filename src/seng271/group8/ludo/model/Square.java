@@ -14,7 +14,8 @@ public class Square {
     protected Grid type;
     protected int gridIndex;
     protected Color color;
-    
+    private Pawn occupies;
+	
     public Square(Grid type, int index) {
         this.type = type;
         this.gridIndex = index;
