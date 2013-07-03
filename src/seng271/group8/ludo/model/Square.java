@@ -5,6 +5,7 @@
 package seng271.group8.ludo.model;
 
 import java.awt.Color;
+import java.awt.Point;
 
 /**
  *
@@ -12,20 +13,19 @@ import java.awt.Color;
  */
 public class Square {
     protected Grid type;
-    protected int gridIndex;
-    protected Color color;
+    protected Point position;
     private Pawn occupies;
 	
-    public Square(Grid type, int index) {
+    public Square(Grid type, Point position) {
         this.type = type;
-        this.gridIndex = index;
+        this.position = position;
     }
     
     public Color getColor() {
-        return type.getColor();
+            return type.getColor();
     }
     
-    public int getGridIndex() {
-        return gridIndex;
+    public Point getPosition() {
+        return position;
     }
 }

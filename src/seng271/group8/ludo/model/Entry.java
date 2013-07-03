@@ -4,7 +4,7 @@
  */
 package seng271.group8.ludo.model;
 
-import java.awt.Color;
+import java.awt.Point;
 
 /**
  *
@@ -12,7 +12,7 @@ import java.awt.Color;
  */
 public class Entry extends Square {
     
-    public Entry(Grid type, int index) {
-       super(type, index);
+    public Entry(Grid type, Point position) {
+       super(type, position);
     }
 }

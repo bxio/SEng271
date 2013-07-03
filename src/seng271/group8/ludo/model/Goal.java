@@ -4,14 +4,14 @@
  */
 package seng271.group8.ludo.model;
 
-import java.awt.Color;
+import java.awt.Point;
 
 /**
  *
  * @author Alastairs
  */
 public class Goal extends Square {
-    public Goal(Grid type, int index) {
-            super(type, index);
+    public Goal(Grid type, Point position) {
+            super(type, position);
         }
 }
