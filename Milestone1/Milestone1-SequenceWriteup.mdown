@@ -1,0 +1,12 @@
+SEng 271 Project Milestone 1 Sequence Diagram
+------------
+
+This sample game contains four players, "Alice" and "Bob" as the two humans, "C3PO" as the computer with Aggressive strategy and "R2D2" computer with Defensive strategy. The game has gone on for a couple of turns before the sequence diagram starts.
+
+Alice rolls a 3, and ends up kicking a pawn
+
+Bob rolls a 6. 
+
+C3PO rolls the 4 
+
+R2D2 rolls the 1
