@@ -12,7 +12,8 @@ package seng271.group8.ludo.model;
 public class Pawn {
     private Player owner;
     private int currentPos;
-	private Square position;
+    private Square position;
+    
     public Pawn(Player owner, int currentPos){
 		this.owner = owner;
 		this.currentPos = currentPos;

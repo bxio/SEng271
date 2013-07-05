@@ -14,12 +14,21 @@ import java.util.HashMap;
  */
 public class ColorConfig {
 
-    public static Color P1_COLOR = Color.BLUE;
-    public static Color P2_COLOR = Color.YELLOW;
-    public static Color P3_COLOR = Color.GREEN;
-    public static Color P4_COLOR = Color.RED;
+    // Player colors
+    public static Color P1_COLOR = new Color(12,23,34);
+    public static Color P2_COLOR;
+    public static Color P3_COLOR;
+    public static Color p4_COLOR;
+ 
+    
+    // Square colors
+    public static Color P1_SQ_COLOR = Color.BLUE;
+    public static Color P2_SQ_COLOR = Color.YELLOW;
+    public static Color P3_SQ_COLOR = Color.GREEN;
+    public static Color P4_SQ_COLOR = Color.RED;
     public static Color EMPTY_SQ = Color.GRAY;
     public static Color SQUARE = Color.WHITE;
+    
    /* public static EnumMap<Grid, Color> squareColors;
     
     static {

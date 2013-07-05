@@ -4,19 +4,11 @@
  */
 package seng271.group8.ludo.ui;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import javax.swing.JPanel;
-import seng271.group8.ludo.graphics.LudoGraphic;
-import seng271.group8.ludo.graphics.SquareGraphic;
+import seng271.group8.ludo.graphics.Animator;
+import seng271.group8.ludo.graphics.Renderer2D;
 import seng271.group8.ludo.model.Board;
-import seng271.group8.ludo.model.BoardConfig;
-import seng271.group8.ludo.model.Square;
 
 /**
  *
@@ -25,34 +17,30 @@ import seng271.group8.ludo.model.Square;
 public class GamePanel extends JPanel {
     
     private Board board;
-    private ArrayList<Square> squares;
-    private ArrayList<LudoGraphic> graphics;
+    private Renderer2D renderer;
+    private Animator animationThread;
     
     public GamePanel(Board b) {
         this.board = b;
-        this.squares = board.getSquareList();
-        this.graphics = new ArrayList<LudoGraphic>();
-        
-        for(Square s : squares) {
-            graphics.add(new SquareGraphic(s));
-        }
-    } 
+        this.renderer = new Renderer2D(this);
+        this.animationThread = new Animator(this);
+        // make sure the thread stops when the JFrame is closed
+        this.animationThread.setDaemon(true);
+        this.animationThread.start();
+        this.addMouseListener(new GameMouseListener(this));
+    }
     
     @Override
     protected void paintComponent(Graphics g) {
        super.paintComponent(g);
-       
-       Graphics2D g2 = (Graphics2D) g;
-       g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);   
-       Dimension squareSize = computeSquareSize();
-        
-       for(LudoGraphic gr : graphics) {
-           gr.paint(g, squareSize);
-       }
+       renderer.paint(g);
     }
     
-    private Dimension computeSquareSize() {
-        int side = Math.min(this.getHeight(), this.getWidth())/BoardConfig.WIDTH;
-        return new Dimension(side,side);
+    public Renderer2D getRenderer2D() {
+        return this.renderer;
+    }
+    
+    public Board getBoard() {
+        return this.board;
     }
 }

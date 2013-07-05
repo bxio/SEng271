@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package seng271.group8.ludo.ui;
 
 import java.awt.BorderLayout;
@@ -23,6 +19,5 @@ public class GameView extends JPanel {
         this.setBackground(Color.red);
         this.setLayout(new BorderLayout());
         this.add(playArea);
-        this.setVisible(true);
     }
 }

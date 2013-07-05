@@ -5,8 +5,10 @@
 package seng271.group8.ludo.ui;
 
 import java.awt.Color;
+import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+//import seng271.group8.ludo.BufferStrategyDemo;
 
 /**
  *
@@ -77,6 +79,10 @@ public class LudoWindow extends JFrame {
     }
    
     public static void main(String[] args) {
-        LudoWindow game = new LudoWindow();
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+               LudoWindow game = new LudoWindow();
+            }
+        });
     }
 }

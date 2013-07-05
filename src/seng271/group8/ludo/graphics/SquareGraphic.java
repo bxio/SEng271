@@ -16,11 +16,12 @@ import seng271.group8.ludo.model.Square;
  *
  * @author Alastairs
  */
-public class SquareGraphic implements LudoGraphic {
+public class SquareGraphic extends LudoGraphic {
     
     private Square square;
     
     public SquareGraphic(Square square) {
+        super(square.getPosition());
         this.square = square;
     }
     
@@ -28,9 +29,10 @@ public class SquareGraphic implements LudoGraphic {
         Graphics2D g2 = (Graphics2D)g;
         
        
-        int x = square.getPosition().x*squareSize.width;
-        int y = square.getPosition().y*squareSize.width; 
+        int x = (int)this.position.getX()*squareSize.width;
+        int y = (int)this.position.getY()*squareSize.width; 
         
+
         //g2.draw(new Rectangle2D.Double(x,y,squareSize.width,squareSize.height));
         //g2.drawRect(x, y, squareSize.width, squareSize.height);
         
@@ -39,7 +41,7 @@ public class SquareGraphic implements LudoGraphic {
         g2.setStroke( new BasicStroke (2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
         g2.setColor(Color.BLACK);
         g2.drawOval(x+ 10,y+10,squareSize.width - 20,squareSize.height - 20);
-        drawDebugIndexes(g2, x ,y);
+        //drawDebugIndexes(g2, x ,y);
         
     }
     

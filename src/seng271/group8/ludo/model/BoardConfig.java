@@ -51,14 +51,16 @@ public class BoardConfig {
     // Stored as vector [x-dir, y-dir[, eg: [4,0]==[4 squares right, zero left]
     public static final Point[] PATH = {new Point(4,0),new Point(0,4),new Point(2,0),new Point(0,-4),
                                         new Point(4,0),new Point(0,-2),new Point(-4,0),new Point(0,-4),
-                                        new Point(-2,0),new Point(0,4),new Point(-4,0),new Point(0,1),
+                                            new Point(-2,0),new Point(0,4),new Point(-4,0),new Point(0,1),
                                         new Point(4,0)};
     // Starting grid position for each player in [x,y] coordinates
     public static final Point[] START_SQUARES = {new Point(0,4),new Point(6,0),new Point(10,6),new Point(4,10)};
     // #degrees (in radians) each players path is offset from player 1
     // starting at player one (top-right) and rotating clockwise
     public static final double ROTATION_OFFSET = -Math.PI/2;
-    
+    // Pawns for Player 1
+    public static final Point[] PAWNS = {new Point(0,0), new Point(0,1), new Point(1,1), new Point(2,1) };
+            
     /*
      *  Thought about doing something like this but the path method 
      *  allows the board to be changed pretty quickly
