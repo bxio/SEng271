@@ -2,42 +2,20 @@ JCC = javac
 
 JFLAGS = 
 
-default: Ludogame.class 
+default: LudoGame
 
-Ludogame.class: Ludogame.java Strategy.class Dice.class Player.class
-	$(JCC) $(JFLAGS) Ludogame.java
+LudoGame: Model UI Strategies Graphics Actions
 
-Strategy.class: Strategy.java AggressiveStrategy.class CautiousStrategy.class DefensiveStrategy.class MoveFirstStrategy.class MoveLastStrategy.class HumanStrategy.class BrutalStrategy.class
-	$(JCC) $(JFLAGS) Strategy.java
+Model:
+	$(JCC) $(JFLAGS) src/seng271/group8/ludo/model/*.java
+UI:
+	$(JCC) $(JFLAGS) src/seng271/group8/ludo/ui/*.java
+Strategies:
+	$(JCC) $(JFLAGS) src/seng271/group8/ludo/strategies/*.java
+Graphics:
+	$(JCC) $(JFLAGS) src/seng271/group8/ludo/graphics/*.java
+Actions:
+	$(JCC) $(JFLAGS) src/seng271/group8/ludo/actions/*.java
 
-Player.class: Player.java Pawn.class
-	$(JCC) $(JFLAGS) Player.java
-
-Pawn.class: Pawn.java
-	$(JCC) $(JFLAGS) Pawn.java
-
-Dice.class: Dice.java
-	$(JCC) $(JFLAGS) Dice.java
-
-AggressiveStrategy.class: AggressiveStrategy.java
-	$(JCC) $(JFLAGS) AggressiveStrategy.java
-
-CautiousStrategy.class: CautiousStrategy.java
-	$(JCC) $(JFLAGS) CautiousStrategy.java
-
-DefensiveStrategy.class: DefensiveStrategy.java
-	$(JCC) $(JFLAGS) DefensiveStrategy.java
-
-MoveFirstStrategy.class: MoveFirstStrategy.java
-	$(JCC) $(JFLAGS) MoveFirstStrategy.java
-
-MoveLastStrategy.class: MoveLastStrategy.java
-		$(JCC) $(JFLAGS) MoveLastStrategy.java
-
-HumanStrategy.class: HumanStrategy.java
-	$(JCC) $(JFLAGS) HumanStrategy.java
-	
-BrutalStrategy.class: BrutalStrategy.java
-	$(JCC) $(JFLAGS) BrutalStrategy.java
 clean: 
-	$(RM) *.class
+	rm `find ./ -name '*.class'` -rf
