@@ -24,6 +24,7 @@ public class Renderer2D {
     // will eventually move the drawing code from game panel here
     // game panel will probably get large handling all the click events
     // for the board
+    private ArrayList<Animation2D> newAnimations;
     private ArrayList<Animation2D> active;
     private ArrayList<LudoGraphic> graphics;
     private GamePanel game;
@@ -32,16 +33,28 @@ public class Renderer2D {
         this.game = game;
         this.graphics = new ArrayList<LudoGraphic>();
         this.active = new ArrayList<Animation2D>();
+        this.newAnimations = new ArrayList<Animation2D>();
         
         for(Square s : game.getBoard().getSquareList()) {
             graphics.add(new SquareGraphic(s));
         }
         
+        
+        /**
+         *  Test animation setup here
+         *  you can see animation chaining in action with the scaling and
+         * translation moves
+         * 
+         */
         PawnGraphic pw = new PawnGraphic(null);
         ScaleAnimation s = new ScaleAnimation(pw, 2,2500);
         s.chain(new ScaleAnimation(pw,1,2500));
-        active.add(s);
-        active.add(new TranslateAnimation(pw, new Point(6,6),5000));
+        TranslateAnimation trans = new TranslateAnimation(pw, new Point(0,6),5000);
+        trans.chain(new TranslateAnimation(pw, new Point(6,6),5000));
+        this.addAnimation(s);
+        this.addAnimation(trans);
+        
+        
         graphics.add(pw);
         
     }
@@ -49,20 +62,25 @@ public class Renderer2D {
     public void refresh(long dt) {
         
         ArrayList<Animation2D> finished = new ArrayList<Animation2D>();
-        ArrayList<Animation2D> starting = new ArrayList<Animation2D>();
+        
+        Iterator<Animation2D> iter = newAnimations.iterator();
+        while (iter.hasNext()) {
+            Animation2D a = iter.next();
+                active.add(a);
+                 a.start();
+                iter.remove();
+        }
         
         for(Animation2D a : active) {
             if(a.tic(dt)) {
                 if(a.next != null)
-                    starting.add(a.next);
+                    newAnimations.add(a.next);
                 finished.add(a);
             }    
         }
+        
         for(Animation2D a : finished)
             active.remove(a);
-        
-        for(Animation2D a : starting)
-            active.add(a);
         
         /* Nicer solution?
          * 
@@ -77,6 +95,10 @@ public class Renderer2D {
         }*/
         
         game.repaint();
+    }
+    
+    public void addAnimation(Animation2D animation) {
+        this.newAnimations.add(animation);
     }
     
     public void paint(Graphics g) {

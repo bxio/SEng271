@@ -11,8 +11,9 @@ import seng271.group8.ludo.model.Square;
 public class TranslateAnimation extends Animation2D {
     
     private Square square;
-    private Point2D start, dest;
-    private double distance;
+    private Point2D start, dest, dir;
+    private double distanceX;
+    private double distanceY; 
     
     public TranslateAnimation(LudoGraphic g, Square s, long dur) {
         this(g, s.getPosition(),dur);
@@ -20,16 +21,21 @@ public class TranslateAnimation extends Animation2D {
     
     public TranslateAnimation(LudoGraphic g, Point dest, long dur) {
         super(g, dur);
-        
-        this.start = graphic.getPosition();
+       
         this.dest = dest;
-        this.distance = start.distance(this.dest); 
+    }
+    
+    public void start() {
+       this.start = graphic.getPosition(); 
+       this.distanceX = this.dest.getX() - start.getX(); 
+       this.distanceY = this.dest.getY() - start.getY();
+       System.out.println("des:" + this.dest.getY() + " start: " + this.start.getX() + " Distance: " + this.distanceY);
     }
     
     public Boolean tic(long dt) {
         Boolean done = super.tic(dt);
-        double x = Animation2D.easeInEaseOut(elapsed, start.getX(), distance, dur);
-        double y = Animation2D.easeInEaseOut(elapsed, start.getY(), distance, dur);
+        double x = Animation2D.easeInEaseOut(elapsed, start.getX(), distanceX, dur);
+        double y = Animation2D.easeInEaseOut(elapsed, start.getY(), distanceY, dur);
         graphic.setPosition(new Point2D.Double(x,y));
         return done;
     }

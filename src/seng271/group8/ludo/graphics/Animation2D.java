@@ -22,6 +22,9 @@ public abstract class Animation2D {
         this.graphic = g;
         this.dur = dur;
     }
+    
+    // update properties to current state before starting
+    public abstract void start();
 
     public Boolean tic(long dt) {
         Boolean done = false;
@@ -39,8 +42,7 @@ public abstract class Animation2D {
         this.next = next;
         return next;
     }
-    
-    
+        
     /***
      *  For info on these functions see: 
      *  https://github.com/jesusgollonet/processing-penner-easing

@@ -15,9 +15,12 @@ public class ScaleAnimation extends Animation2D {
     
     public ScaleAnimation(LudoGraphic g, float scale, long dur) {
         super(g, dur);
-        this.startScale = graphic.getScale();
         this.targetScale = scale;
-        System.out.println("Target Scale is:" + scale + " Start is : " + this.startScale);
+       // System.out.println("Target Scale is:" + scale + " Start is : " + this.startScale);
+    }
+    
+    public void start() {
+        this.startScale = graphic.getScale();
     }
     
     public Boolean tic(long dt) {
