@@ -8,6 +8,10 @@ Please see `Project.pdf` for Specification of the project.
 
 ## Running the Game ##
 Simply `make`.
+
+## Writeups ##
+The Writeups for the milestones and the source file for the diagram is on Google Docs.
+
 Group members:
 =======
 * Greg Richardson
