@@ -16,10 +16,13 @@ public class Server implements Runnable {
     private static final ArrayList<Thread> receivers = new ArrayList<Thread>();
     private static ServerSocket listenSocket;
     private static Socket incomingSocket;
+    private static MessageProcessor mp;
     
     public Server() {
         try {
            listenSocket = new ServerSocket(LISTEN_PORT);
+           this.mp = new MessageProcessor();
+           Thread messageThread = new Thread(this.mp);
         } catch(IOException e){
             System.out.println("Server socket error");
         }

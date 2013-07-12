@@ -21,8 +21,8 @@ public abstract class LudoGraphic {
     // scaled to x,y percentage of a grid square
     protected float xPercent = 1;
     protected float yPercent = 1;
-    
-    public LudoGraphic(Point p) {
+     
+   public LudoGraphic(Point p) {
         this.position = p;
     }
     

@@ -19,6 +19,10 @@ public class Animator extends Thread {
     
     private final static int TARGET_FPS = 60;
     private final static int FRAME_PERIOD = 1000/TARGET_FPS; // 1000 ms
+    private static final int FRAMES = 24;
+    private long totalTime;
+    private long averageTime;
+    private int frameCount;
     
     public Animator(GamePanel game) {
         super();
@@ -35,19 +39,18 @@ public class Animator extends Thread {
             long dt;
             dt = lastFrame == 0 ? 0 : start - lastFrame;
             lastFrame = start;
-            long wait = 10;
-
+            long wait;
+        
             renderer.refresh(dt);
-
+            
             // Calculate how long to wait for the next frame
             wait = FRAME_PERIOD - (System.currentTimeMillis() - start);
-    
-//            System.out.println("Wait was:" + wait);
             
+            //System.out.println("Wait was:" + wait);
             if(wait > 0) {
-               try {
+               /*try {
                     Thread.sleep(wait);
-               } catch (InterruptedException e) {}
+               } catch (InterruptedException e) {}*/
             }
         }
     }

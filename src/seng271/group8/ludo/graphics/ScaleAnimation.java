@@ -25,7 +25,7 @@ public class ScaleAnimation extends Animation2D {
     
     public Boolean tic(long dt) {
         Boolean done = super.tic(dt);
-        this.graphic.setScale((float)Animation2D.linear(elapsed, startScale, 
+        this.graphic.setScale((float)Animation2D.sinEaseInOut(elapsed, startScale, 
                targetScale - startScale, dur));
         
         return done;

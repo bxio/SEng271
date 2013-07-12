@@ -4,6 +4,8 @@
  */
 package seng271.group8.ludo.networking;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.net.Socket;
 
 /**
@@ -12,8 +14,18 @@ import java.net.Socket;
  */
 public class Receive implements Runnable {
 
+    private DataInputStream recv;
+    private DataOutputStream send;
+    private Socket recvSoc;
+    
+    
     public Receive(Socket s) {
-        
+        this.recvSoc = s;
+        try {
+            recv = new DataInputStream(recvSoc.getInputStream());
+        } catch (Exception e) {
+            
+        }
     }
     
     @Override

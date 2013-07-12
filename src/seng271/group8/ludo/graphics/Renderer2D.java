@@ -12,6 +12,7 @@ import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import seng271.group8.ludo.model.BoardConfig;
 import seng271.group8.ludo.model.Square;
 import seng271.group8.ludo.ui.GamePanel;
@@ -36,9 +37,8 @@ public class Renderer2D {
         this.newAnimations = new ArrayList<Animation2D>();
         
         for(Square s : game.getBoard().getSquareList()) {
-            graphics.add(new SquareGraphic(s));
+          graphics.add(new SquareGraphic(s));
         }
-        
         
         /**
          *  Test animation setup here
@@ -48,12 +48,16 @@ public class Renderer2D {
          */
         PawnGraphic pw = new PawnGraphic(null);
         ScaleAnimation s = new ScaleAnimation(pw, 2,2500);
-        s.chain(new ScaleAnimation(pw,1,2500));
-        TranslateAnimation trans = new TranslateAnimation(pw, new Point(0,6),5000);
-        trans.chain(new TranslateAnimation(pw, new Point(6,6),5000));
-        this.addAnimation(s);
+       // s.chain(new ScaleAnimation(pw,1,2500));
+        TranslateAnimation trans = new TranslateAnimation(pw, new Point(0,6),1000);
+        LinkedList<Square> path = game.getBoard().getPaths().get(0);
+        TranslateAnimation temp = trans;
+        for(int i = 0; i < path.size(); i ++) {
+            temp = (TranslateAnimation)temp.chain(new TranslateAnimation(pw, path.get(i).getPosition(),1000));
+       
+         }
+       // this.addAnimation(s);
         this.addAnimation(trans);
-        
         
         graphics.add(pw);
         
@@ -81,20 +85,29 @@ public class Renderer2D {
         
         for(Animation2D a : finished)
             active.remove(a);
-        
-        /* Nicer solution?
-         * 
-         * Iterator<Animation2D> iter = active.iterator();
-        while (iter.hasNext()) {
-            Animation2D a = iter.next();
-            if(a.tic(dt)) {
-                if(a.next != null)
-                    
-                iter.remove();
-            }
+       // try {
+            /* Nicer solution?
+             * 
+             * Iterator<Animation2D> iter = active.iterator();
+            while (iter.hasNext()) {
+                Animation2D a = iter.next();
+                if(a.tic(dt)) {
+                    if(a.next != null)
+                        
+                    iter.remove();
+                }
+            }*/
+            /*
+             EventQueue.invokeAndWait(new Runnable() {
+                @Override
+                public void run() {
+              
+                }
+            });*/
+                  game.repaint();
+        /*} catch (InvocationTargetException ex) {
+            Logger.getLogger(Renderer2D.class.getName()).log(Level.SEVERE, null, ex);
         }*/
-        
-        game.repaint();
     }
     
     public void addAnimation(Animation2D animation) {
@@ -109,7 +122,7 @@ public class Renderer2D {
        
        for(LudoGraphic gr : graphics) {
            //AffineTransform at = new AffineTransform();
-           ///at.shear(-.5, 0);
+           ///at.shear(-1.5, 0);
            //g2.setTransform(at);
            gr.paint(g, squareSize);
        }
