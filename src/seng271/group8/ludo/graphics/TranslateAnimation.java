@@ -26,6 +26,7 @@ public class TranslateAnimation extends Animation2D {
     }
     
     public void start() {
+       super.start();
        this.start = graphic.getPosition(); 
        this.distanceX = this.dest.getX() - start.getX(); 
        this.distanceY = this.dest.getY() - start.getY();

@@ -50,13 +50,13 @@ public class Renderer2D {
         //ScaleAnimation s = new ScaleAnimation(pw, 2,2500);
         //s.chain(new ScaleAnimation(pw,1,2500));
         
-        Animation2DSeries ani = new Animation2DSeries();
+        Animation2DSeries ani = new Animation2DSeries(2);
         TranslateAnimation trans = new TranslateAnimation(pw, new Point(0,6),1000);
         ani.add(trans);
-        //ani.add(new TranslateAnimation(pw, new Point(6,6), 1000));
+       // ani.add(new TranslateAnimation(pw, new Point(6,6), 1000));
         LinkedList<Square> path = game.getBoard().getPaths().get(0);
         for(int i = 0; i < path.size(); i ++) {
-           ani.add(new TranslateAnimation(pw, path.get(i).getPosition(),1000));
+          ani.add(new TranslateAnimation(pw, path.get(i).getPosition(),100));
        
          }
        // trans.repeat();

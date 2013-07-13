@@ -37,9 +37,9 @@ public class GamePanel extends JComponent {
        //super.paintComponent(g);
        
        //System.out.println(javax.swing.SwingUtilities.isEventDispatchThread());
-       long start = System.currentTimeMillis();
+       //long start = System.currentTimeMillis();
        renderer.paint(g);
-       System.out.println(System.currentTimeMillis()-start);
+       //System.out.println(System.currentTimeMillis()-start);
     }
     
     public Renderer2D getRenderer2D() {

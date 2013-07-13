@@ -40,7 +40,7 @@ public class Animation2DSeries implements IAnimatable{
              if(repetitions > 0 || repetitions == -1) {
                  if(repetitions > 0)
                      repetitions--;
-                 next = this.series.get(0);
+                 next = this.series.get((currentInd = 0));
              } 
          }
         return next;
