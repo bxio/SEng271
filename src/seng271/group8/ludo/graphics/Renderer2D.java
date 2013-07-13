@@ -25,16 +25,16 @@ public class Renderer2D {
     // will eventually move the drawing code from game panel here
     // game panel will probably get large handling all the click events
     // for the board
-    private ArrayList<Animation2D> newAnimations;
-    private ArrayList<Animation2D> active;
+    private ArrayList<IAnimatable> newAnimations;
+    private ArrayList<IAnimatable> active;
     private ArrayList<LudoGraphic> graphics;
     private GamePanel game;
     
     public Renderer2D (GamePanel game) {
         this.game = game;
         this.graphics = new ArrayList<LudoGraphic>();
-        this.active = new ArrayList<Animation2D>();
-        this.newAnimations = new ArrayList<Animation2D>();
+        this.active = new ArrayList<IAnimatable>();
+        this.newAnimations = new ArrayList<IAnimatable>();
         
         for(Square s : game.getBoard().getSquareList()) {
           graphics.add(new SquareGraphic(s));
@@ -47,17 +47,21 @@ public class Renderer2D {
          * 
          */
         PawnGraphic pw = new PawnGraphic(null);
-        ScaleAnimation s = new ScaleAnimation(pw, 2,2500);
-       // s.chain(new ScaleAnimation(pw,1,2500));
+        //ScaleAnimation s = new ScaleAnimation(pw, 2,2500);
+        //s.chain(new ScaleAnimation(pw,1,2500));
+        
+        Animation2DSeries ani = new Animation2DSeries();
         TranslateAnimation trans = new TranslateAnimation(pw, new Point(0,6),1000);
+        ani.add(trans);
+        //ani.add(new TranslateAnimation(pw, new Point(6,6), 1000));
         LinkedList<Square> path = game.getBoard().getPaths().get(0);
-        TranslateAnimation temp = trans;
         for(int i = 0; i < path.size(); i ++) {
-            temp = (TranslateAnimation)temp.chain(new TranslateAnimation(pw, path.get(i).getPosition(),1000));
+           ani.add(new TranslateAnimation(pw, path.get(i).getPosition(),1000));
        
          }
+       // trans.repeat();
        // this.addAnimation(s);
-        this.addAnimation(trans);
+        this.addAnimation(ani);
         
         graphics.add(pw);
         
@@ -65,52 +69,28 @@ public class Renderer2D {
     
     public void refresh(long dt) {
         
-        ArrayList<Animation2D> finished = new ArrayList<Animation2D>();
+        ArrayList<IAnimatable> finished = new ArrayList<IAnimatable>();
         
-        Iterator<Animation2D> iter = newAnimations.iterator();
+        Iterator<IAnimatable> iter = newAnimations.iterator();
         while (iter.hasNext()) {
-            Animation2D a = iter.next();
+            IAnimatable a = iter.next();
                 active.add(a);
-                 a.start();
+                a.start();
                 iter.remove();
         }
         
-        for(Animation2D a : active) {
-            if(a.tic(dt)) {
-                if(a.next != null)
-                    newAnimations.add(a.next);
+        for(IAnimatable a : active) {
+            if(a.tic(dt))
                 finished.add(a);
-            }    
         }
         
-        for(Animation2D a : finished)
+        for(IAnimatable a : finished)
             active.remove(a);
-       // try {
-            /* Nicer solution?
-             * 
-             * Iterator<Animation2D> iter = active.iterator();
-            while (iter.hasNext()) {
-                Animation2D a = iter.next();
-                if(a.tic(dt)) {
-                    if(a.next != null)
-                        
-                    iter.remove();
-                }
-            }*/
-            /*
-             EventQueue.invokeAndWait(new Runnable() {
-                @Override
-                public void run() {
-              
-                }
-            });*/
-                  game.repaint();
-        /*} catch (InvocationTargetException ex) {
-            Logger.getLogger(Renderer2D.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+
+        game.repaint();
     }
     
-    public void addAnimation(Animation2D animation) {
+    public void addAnimation(IAnimatable animation) {
         this.newAnimations.add(animation);
     }
     

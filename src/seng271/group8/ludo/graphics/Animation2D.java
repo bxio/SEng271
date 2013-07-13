@@ -1,30 +1,31 @@
 /*
  * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * and open the template in the editor. 
  */
 package seng271.group8.ludo.graphics;
 
-import java.awt.Point;
+import java.util.LinkedList;
 
 /**
  *
  * @author Alastairs
  */
-public abstract class Animation2D {
+public abstract class Animation2D implements IAnimatable {
 
     protected LudoGraphic graphic;
     protected long dur;
-    protected Animation2D next, last;
     protected long elapsed = 0;
+    protected int repeats = 0, seriesRepeat = 0,currentRepeat = 0, currentSeriesRepeat = 0;
     
-    
-    public Animation2D(LudoGraphic g, long dur) {
-        this.graphic = g;
-        this.dur = dur;
+    public Animation2D(LudoGraphic g, long dur) { 
+       this.graphic = g;
+       this.dur = dur;
     }
     
     // update properties to current state before starting
-    public abstract void start();
+    public void start() {
+        this.elapsed = 0;
+    }
 
     public Boolean tic(long dt) {
         Boolean done = false;
@@ -38,16 +39,24 @@ public abstract class Animation2D {
         return done;
     }
     
-    protected Animation2D repeat() {
-        return this;
-    }
-    
-    protected Animation2D chain(Animation2D next) {
-        this.next = next;
-        this.next.last = this;
-        return next;
-    }
+    /**
+     * Repeats this animation n times
+     * @param n 
+     */
+    protected void repeat(int n) {
         
+    }
+   
+    /**
+     * Repeats this animation until canceled.
+     * 
+     * @return 
+     */
+    protected int repeat() {
+        return this.repeats;
+        //this.chain(this.chain.getFirst());
+    }
+     
     /***
      *  For info on these functions see: 
      *  https://github.com/jesusgollonet/processing-penner-easing

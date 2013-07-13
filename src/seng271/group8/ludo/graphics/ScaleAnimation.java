@@ -20,6 +20,7 @@ public class ScaleAnimation extends Animation2D {
     }
     
     public void start() {
+        super.start();
         this.startScale = graphic.getScale();
     }
     
