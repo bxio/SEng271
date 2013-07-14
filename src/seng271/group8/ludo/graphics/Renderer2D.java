@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import seng271.group8.ludo.model.BoardConfig;
 import seng271.group8.ludo.model.Pawn;
+import seng271.group8.ludo.model.Player;
 import seng271.group8.ludo.model.Square;
 import seng271.group8.ludo.ui.GamePanel;
 
@@ -51,7 +52,7 @@ public class Renderer2D {
          * translation moves
          * 
          */
-       /*PawnGraphic pw = new PawnGraphic(null);
+       PawnGraphic pw = new PawnGraphic(new Pawn(new Player(5), game.getBoard().getSquareList().get(0)));
  
 
         
@@ -60,11 +61,11 @@ public class Renderer2D {
         ani.add(trans);
         LinkedList<Square> path = game.getBoard().getPlayer(1).getPath();
         for(int i = 0; i < path.size(); i ++) {
-          ani.add(new TranslateAnimation(pw, path.get(i).getPosition(),100));
+          ani.add(new TranslateAnimation(pw, path.get(i).getPosition(),500));
        
          }
         this.addAnimation(ani);
-        graphics.add(pw);*/
+        graphics.add(pw);
         
     }
     
