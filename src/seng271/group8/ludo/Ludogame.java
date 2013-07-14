@@ -9,7 +9,7 @@ import seng271.group8.ludo.model.Player;
 public class Ludogame {
 	
     public static void main(String[] args) {
-		//initiate the game
+	/*	//initiate the game
 		Player players[] = new Player[4];
         players[0] = new Player();
         players[1] = new Player();
@@ -30,7 +30,7 @@ public class Ludogame {
 		players[1].getPawn(0).start();
 		System.out.println("Pawn at Pos "+players[1].getPawn(0).getPosition());
 		players[1].getPawn(0).move(40);
-		System.out.println("Pawn now at Pos "+players[1].getPawn(0).getPosition());
+		System.out.println("Pawn now at Pos "+players[1].getPawn(0).getPosition());*/
     }
 
 }

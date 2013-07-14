@@ -25,6 +25,7 @@ public class TranslateAnimation extends Animation2D {
         this.dest = dest;
     }
     
+    @Override
     public void start() {
        super.start();
        this.start = graphic.getPosition(); 
@@ -33,6 +34,7 @@ public class TranslateAnimation extends Animation2D {
        System.out.println("des:" + this.dest.getY() + " start: " + this.start.getX() + " Distance: " + this.distanceY);
     }
     
+    @Override
     public Boolean tic(long dt) {
         Boolean done = super.tic(dt);
         double x = Animation2D.easeInEaseOut(elapsed, start.getX(), distanceX, dur);

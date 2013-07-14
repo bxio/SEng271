@@ -11,15 +11,23 @@ import seng271.group8.ludo.model.Square;
  * 
  * Generates and instance of the board based
  * on the constants defined in the BoardConfigClass
+ * 
  */
 public class Board {
     
     private Square[][] squares;
     private ArrayList<Square> squareList;
+    private ArrayList<Pawn> pawnList;
+    private ArrayList<Player> playerList;
     private ArrayList<LinkedList<Square>> paths;
+    private ArrayList<LinkedList<Pawn>> pawns;
     
     public Board() {
-        
+        buildBoard();
+        buildPlayers();
+    }
+    
+    public void buildBoard() {
         squareList = new ArrayList<Square>();
         squares = new Square[BoardConfig.WIDTH][BoardConfig.HEIGHT];
         for( int i = 0; i < BoardConfig.HEIGHT; i ++) {
@@ -29,8 +37,58 @@ public class Board {
                 createSquare(BoardConfig.MAP[i][j], new Point(j,i));
             }
         }
+    }
     
-        buildPaths();
+    public LinkedList<Square> buildPath(int player) {
+        LinkedList<Square> path = new LinkedList<Square>();
+        path.add(getSquareAt(BoardConfig.START_SQUARES[player].x, BoardConfig.START_SQUARES[player].y));
+        Point[] pathVectors = this.rotatePoints(BoardConfig.PATH, BoardConfig.ROTATION_OFFSET*player);
+
+        for(int j = 0; j < pathVectors.length; j++) {
+                addToPath(path, pathVectors[j]);
+        }
+        
+        return path;
+
+    }
+    
+    public ArrayList<Pawn> buildPawns(int playerNum, Player p) {
+        ArrayList<Pawn> pawns = new ArrayList<Pawn>();
+        for(int i = 0; i < BoardConfig.NUM_PAWNS; i++) {
+            int x = BoardConfig.PAWN_HOME[playerNum].x + BoardConfig.PAWN_OFFSETS[i].x; 
+            int y = BoardConfig.PAWN_HOME[playerNum].y + BoardConfig.PAWN_OFFSETS[i].y;
+            Pawn pawn = new Pawn(p,getSquareAt(x,y));
+            pawns.add(pawn);
+            pawnList.add(pawn);
+        }
+        return pawns;
+    }
+    /*
+    public void buildPaths() {
+        this.paths = new ArrayList<LinkedList<Square>>();
+        
+        for(int i = 0; i < BoardConfig.START_SQUARES.length; i++) {
+            LinkedList<Square> path = new LinkedList<Square>();
+            this.paths.add(path);
+            path.add(getSquareAt(BoardConfig.START_SQUARES[i].x, BoardConfig.START_SQUARES[i].y));
+            Point[] pathVectors = this.rotatePoints(BoardConfig.PATH, BoardConfig.ROTATION_OFFSET*i);
+            for(int j = 0; j < pathVectors.length; j++) {
+                    addToPath(path, pathVectors[j]);
+            }
+            
+        }
+    }*/
+    
+    public void buildPlayers() {
+        this.playerList = new ArrayList<Player>();
+        this.pawnList = new ArrayList<Pawn>();
+        
+        for(int i = 0; i < BoardConfig.NUM_PLAYERS; i++) {
+           Player p = new Player(i);
+           this.playerList.add(p);
+           p.setPawns(buildPawns(i,p));
+           p.setPath(buildPath(i));
+        }
     }
     
     public void createSquare(Grid g, Point position) {
@@ -68,22 +126,7 @@ public class Board {
         this.squareList.add(s);
         this.squares[position.x][position.y] = s;
     }
-    
-    public void buildPaths() {
-        this.paths = new ArrayList<LinkedList<Square>>();
         
-        for(int i = 0; i < BoardConfig.START_SQUARES.length; i++) {
-            LinkedList<Square> path = new LinkedList<Square>();
-            this.paths.add(path);
-            path.add(getSquareAt(BoardConfig.START_SQUARES[i].x, BoardConfig.START_SQUARES[i].y));
-            Point[] pathVectors = this.rotatePath(BoardConfig.PATH, BoardConfig.ROTATION_OFFSET*i);
-            for(int j = 0; j < pathVectors.length; j++) {
-                    addToPath(path, pathVectors[j]);
-            }
-            
-        }
-    }
-    
     /****
      * Walks a path from a starting point given a list of vectors
      * Adds these vectors to the specified path
@@ -122,18 +165,23 @@ public class Board {
         }
     }
     
-    public Point[] rotatePath(Point[] path,double rads) {
+    public Point[] rotatePoints(Point[] path,double rads) {
         Point[] rPath = new Point[path.length];
-        int x,y;
         //System.out.println(rads);
         for(int i = 0; i < path.length; i++) {
-            x = path[i].x*(int)Math.cos(rads) - path[i].y*(int)Math.sin(rads);
-            y = path[i].x*(int)Math.sin(rads) + path[i].y*(int)Math.cos(rads);
-            //System.out.println("Old: (" + path[i].x + "," + path[i].y + ") New: (" + x + "," +  y +")");
-            rPath[i] = new Point(x,y);
+            rPath[i] = rotatePoint(path[i], rads);
         }
         
         return rPath;
+    }
+    
+    
+    public Point rotatePoint(Point p, double rads) {
+        int x,y;
+        x = p.x*(int)Math.cos(rads) - p.y*(int)Math.sin(rads);
+        y = p.x*(int)Math.sin(rads) + p.y*(int)Math.cos(rads);
+        //System.out.println("Old: (" + path[i].x + "," + path[i].y + ") New: (" + x + "," +  y +")");
+        return new Point(x,y);
     }
     
     public Square getSquareAt(int row, int column) {
@@ -141,7 +189,7 @@ public class Board {
         try{
             s = this.squares[row][column];
         } catch (Exception e) {
-            
+            System.out.println("Attempted to get square that does not exist error: " +  e.getMessage());
         }
         return s;
     }
@@ -150,8 +198,24 @@ public class Board {
         return this.squareList;
     }
     
+    public ArrayList<Pawn> getPawnList() {
+        return this.pawnList;
+    }
+    
     public ArrayList<LinkedList<Square>> getPaths() {
         return this.paths;
+    }
+    
+    public ArrayList<Player> getPlayers() {
+        return this.playerList;
+    }
+    
+    /**
+     *
+     * @param int num: 1-n 
+     */
+    public Player getPlayer(int num) {
+        return this.playerList.get(num-1);
     }
    
 }

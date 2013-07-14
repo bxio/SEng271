@@ -19,11 +19,13 @@ public class ScaleAnimation extends Animation2D {
        // System.out.println("Target Scale is:" + scale + " Start is : " + this.startScale);
     }
     
+    @Override
     public void start() {
         super.start();
         this.startScale = graphic.getScale();
     }
     
+    @Override
     public Boolean tic(long dt) {
         Boolean done = super.tic(dt);
         this.graphic.setScale((float)Animation2D.sinEaseInOut(elapsed, startScale, 

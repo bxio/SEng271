@@ -1,12 +1,9 @@
 package seng271.group8.ludo.model;
 
-import seng271.group8.ludo.model.Pawn;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import seng271.group8.ludo.strategies.Strategy;
-import seng271.group8.ludo.strategies.MoveFirstStrategy;
-import seng271.group8.ludo.strategies.CautiousStrategy;
-import seng271.group8.ludo.strategies.MoveLastStrategy;
-import seng271.group8.ludo.strategies.AggressiveStrategy;
-import seng271.group8.ludo.strategies.DefensiveStrategy;
 
 /*
  * To change this template, choose Tools | Templates
@@ -18,85 +15,30 @@ import seng271.group8.ludo.strategies.DefensiveStrategy;
  * @author bill
  */
 public class Player {
-	private String colour;
-	private Pawn pawns[];
-	private int start;
-	private int finish[] = new int[4];
+	private Color colour;
 	private Strategy strategy;
-	public void initPlayer(String colour, int strategy, int startingPosition){
-		this.setColour(colour);
-		this.setStrategy(strategy);
-		this.setStartingPosition(startingPosition);
-		for(int i=40;i<44;i++){
-			this.finish[i-40] = this.start + i;
-		}
-
-		this.pawns = new Pawn[4];
-		this.pawns[0] = new Pawn(this,-1);
-		this.pawns[1] = new Pawn(this,-1);
-		this.pawns[2] = new Pawn(this,-1);
-		this.pawns[3] = new Pawn(this,-1);
-		System.out.println(this.colour+" [Start:"+this.start+"|Finish:"+this.finish[0]+"-"+this.finish[3]+ "] ready!");
-	}
-	public Pawn getPawn(int i){
-		return this.pawns[i];
-	}
-	public String getReport(){
-		String result = "{"+this.colour+"-";
-		for(int i=0;i<4;i++){
-			if(this.pawns[i].getPosition() == -1){
-				result = result.concat("["+i+":"+"Home]");
-			}else{
-				result = result.concat("["+i+":"+this.pawns[i].getPosition()+"]");
-			}
-		result = result.concat(" ");//space it out a little, shall we?
-		}
-		return result+"}";
-	}
-	public void setColour(String colour){
-		this.colour = colour;
-	}
-	public String getColour(){
-		return this.colour;
-	}
-	public void setStartingPosition(int position){
-		if(position % 10 == 1){
-			this.start = position;
-		}else{
-			throw new UnsupportedOperationException("Invalid startiong position Given!");
-		}
-	}
-	public int getStartingPosition(){
-		return this.start;
-	}
-	/** Sets the Player's Strategy
-	 * 
-	 * @param option	Number of the strategy (from 1 to 6)
-	 */
-	public void setStrategy(int option){
-		if(option == 1){
-			this.strategy = new AggressiveStrategy();
-		}else if(option == 2){
-			this.strategy = new CautiousStrategy();
-		}else if(option == 3){
-			this.strategy = new DefensiveStrategy();
-		}else if(option == 4){
-			this.strategy = new MoveFirstStrategy();
-		}else if(option == 5){
-			this.strategy = new MoveLastStrategy();
-		}else{
-			throw new UnsupportedOperationException("Invalid Strategy option Given!");
-		}
-	}
-	public String getStrategy(){
-		return this.strategy.getName();
-	}
+        private LinkedList<Square> path;
+        private ArrayList<Pawn> pawns;
+        private int playerNum;
         
-	public void execute(){
-		
-	}
-	
-	public Player passTurn(){
-		return null;
-	}
+       public Player(int num) {
+           this.playerNum = num;
+       }
+       
+       public void setStrategy(Strategy strat) {
+           this. strategy = strat;
+       }
+       
+       public void setPath(LinkedList<Square> path) {
+           this.path = path;
+       }
+       
+       public LinkedList<Square> getPath() {
+           return this.path;
+       }
+       
+       public void setPawns(ArrayList<Pawn> pawns) {
+           this.pawns = pawns;
+       }
+
 }

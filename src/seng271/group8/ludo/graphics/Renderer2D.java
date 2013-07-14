@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import seng271.group8.ludo.model.BoardConfig;
+import seng271.group8.ludo.model.Pawn;
 import seng271.group8.ludo.model.Square;
 import seng271.group8.ludo.ui.GamePanel;
 
@@ -40,30 +41,30 @@ public class Renderer2D {
           graphics.add(new SquareGraphic(s));
         }
         
+        for(Pawn pw : game.getBoard().getPawnList()) {
+           graphics.add(new PawnGraphic(pw));
+        }
+        
         /**
          *  Test animation setup here
          *  you can see animation chaining in action with the scaling and
          * translation moves
          * 
          */
-        PawnGraphic pw = new PawnGraphic(null);
-        //ScaleAnimation s = new ScaleAnimation(pw, 2,2500);
-        //s.chain(new ScaleAnimation(pw,1,2500));
+       /*PawnGraphic pw = new PawnGraphic(null);
+ 
+
         
         Animation2DSeries ani = new Animation2DSeries(2);
         TranslateAnimation trans = new TranslateAnimation(pw, new Point(0,6),1000);
         ani.add(trans);
-       // ani.add(new TranslateAnimation(pw, new Point(6,6), 1000));
-        LinkedList<Square> path = game.getBoard().getPaths().get(0);
+        LinkedList<Square> path = game.getBoard().getPlayer(1).getPath();
         for(int i = 0; i < path.size(); i ++) {
           ani.add(new TranslateAnimation(pw, path.get(i).getPosition(),100));
        
          }
-       // trans.repeat();
-       // this.addAnimation(s);
         this.addAnimation(ani);
-        
-        graphics.add(pw);
+        graphics.add(pw);*/
         
     }
     
@@ -121,6 +122,8 @@ public class Renderer2D {
     
     private Dimension computeSquareSize() {
         int side = Math.min(game.getHeight(), game.getWidth())/BoardConfig.WIDTH;
+        if(side % 2 != 0)
+            side++;
         return new Dimension(side,side);
     }
 }

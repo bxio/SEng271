@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.geom.Point2D;
+import java.util.Observer;
 
 /**
  *
@@ -29,6 +30,11 @@ public abstract class LudoGraphic {
     public void setPosition(Point2D p) {
         //System.out.println("X :" + p.getX() + " Y : " + p.getY());
         this.position = p;
+    }
+    
+    public Point getDrawPosition(Dimension squareSize) {
+        return new Point((int)(squareSize.width*(this.position.getX()+(1-this.xPercent)/2f)), 
+                    (int)(squareSize.width*(this.position.getY()+(1-this.yPercent)/2f)));
     }
     
     public Dimension getDrawSize(Dimension squareSize) {

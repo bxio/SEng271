@@ -14,11 +14,15 @@ import java.awt.Point;
 public class Square {
     protected Grid type;
     protected Point position;
-    private Pawn occupies;
+    private Pawn pawn = null;
 	
     public Square(Grid type, Point position) {
         this.type = type;
         this.position = position;
+    }
+    
+    public void setPawn(Pawn p) {
+        this.pawn = p;
     }
     
     public Color getColor() {

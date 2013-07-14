@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import seng271.group8.ludo.model.Square;
 
 /**
@@ -23,24 +24,24 @@ public class SquareGraphic extends LudoGraphic {
     public SquareGraphic(Square square) {
         super(square.getPosition());
         this.square = square;
+        this.xPercent = this.yPercent = 0.7f;
     }
     
+    @Override
     public void paint(Graphics g, Dimension squareSize) {
         Graphics2D g2 = (Graphics2D)g;
         
-       
-        int x = (int)this.position.getX()*squareSize.width;
-        int y = (int)this.position.getY()*squareSize.width; 
-        
+        Point pos = getDrawPosition(squareSize);
+        Dimension size = getDrawSize(squareSize);
 
         //g2.draw(new Rectangle2D.Double(x,y,squareSize.width,squareSize.height));
         //g2.drawRect(x, y, squareSize.width, squareSize.height);
         
         g2.setColor(square.getColor());
-        g2.fillOval(x+ 10,y+10,squareSize.width - 20,squareSize.height - 20);
+        g2.fillOval(pos.x,pos.y,size.width,size.height);
         g2.setStroke( new BasicStroke (2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
         g2.setColor(Color.BLACK);
-        g2.drawOval(x+ 10,y+10,squareSize.width - 20,squareSize.height - 20);
+        g2.drawOval(pos.x,pos.y,size.width,size.height);
         //drawDebugIndexes(g2, x ,y);
         
     }
