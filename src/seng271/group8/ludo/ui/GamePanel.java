@@ -6,6 +6,7 @@ package seng271.group8.ludo.ui;
 
 import java.awt.Graphics;
 import javax.swing.JComponent;
+import seng271.group8.ludo.GameController;
 import seng271.group8.ludo.graphics.Animator;
 import seng271.group8.ludo.graphics.Renderer2D;
 import seng271.group8.ludo.model.Board;
@@ -19,8 +20,9 @@ public class GamePanel extends JComponent {
     private Board board;
     private Renderer2D renderer;
     private Animator animationThread;
+    private GameController gc;
     
-    public GamePanel(Board b) {
+    public GamePanel(Board b, GameController gc) {
         this.board = b;
         this.setOpaque(true);
         this.renderer = new Renderer2D(this);
@@ -28,7 +30,8 @@ public class GamePanel extends JComponent {
         // make sure the thread stops when the JFrame is closed
         this.animationThread.setDaemon(true);
         this.animationThread.start();
-        this.addMouseListener(new GameMouseListener(this));
+        this.gc = gc;
+        this.addMouseListener(new GameMouseListener(this, gc));
     }
     
     @Override

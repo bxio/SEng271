@@ -11,11 +11,11 @@ package seng271.group8.ludo.model;
  */
 public class Pawn {
     private Player owner;
-    private Square position;
+    private Square square;
     
     public Pawn(Player player, Square pos){
         this.owner = player;
-        this.position  = pos;
+        this.square  = pos;
     }
     
     /** Sets the Pawn's Owner
@@ -39,13 +39,13 @@ public class Pawn {
     * @return the pawn's position
     */
     public Square getPosition(){
-        return this.position;
+        return this.square;
     }
     
     public void setPosition(Square position){
-        if(this.position != null)
-            this.position.setPawn(null);
-        this.position = position;
+        if(this.square != null)
+            this.square.setPawn(null);
+        this.square = position;
     }
 	
     public void move(int spaces){

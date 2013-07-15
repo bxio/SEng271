@@ -58,8 +58,10 @@ public class LudoWindow extends JFrame {
     public void showGameView() {
         removeCurrentView();
         
-        if(gameView == null)
-            gameView = new GameView(); 
+        if(gameView == null) {
+            gameView = new GameView();
+            gameView.start();
+        }
         
         currentView = gameView;
         this.add(currentView);
@@ -68,6 +70,11 @@ public class LudoWindow extends JFrame {
     
     /**
      * TODO: Alastair Refactor switching views
+     * 
+     * I think this will be another panel shown
+     * over top of the GameView
+     * 
+     * TODO: remove
      */
     public void showGameOverView() {
         
