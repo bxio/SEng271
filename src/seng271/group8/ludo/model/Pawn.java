@@ -9,7 +9,7 @@ package seng271.group8.ludo.model;
  *
  * @author bill
  */
-public class Pawn {
+public class Pawn extends GameEntity {
     private Player owner;
     private Square square;
     

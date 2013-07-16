@@ -11,13 +11,13 @@ import seng271.group8.ludo.graphics.LudoGraphic;
  *
  * @author alastair
  */
-public class GameEvent extends EventObject {
+public class GameEvent {
     
     public GameEvent(Object source) {
-        super(source);
+        
     }
     
-    public void run() {
+    public void handle() {
         
     }
 }

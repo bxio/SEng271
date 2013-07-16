@@ -12,5 +12,7 @@ public interface IAnimatable {
     public Boolean tic(long gt);
     //public void repeats();
     //public void reverse();
-    public void start();
+    public void start();  
+    //public void onComplete();
+     
 }

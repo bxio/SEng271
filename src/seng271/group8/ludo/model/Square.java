@@ -11,7 +11,7 @@ import java.awt.Point;
  *
  * @author Alastairs
  */
-public class Square {
+public class Square extends GameEntity {
     protected Grid type;
     protected Point position;
     private Pawn pawn = null;
@@ -23,6 +23,10 @@ public class Square {
     
     public void setPawn(Pawn p) {
         this.pawn = p;
+    }
+    
+    public Pawn getPawn() {
+        return this.pawn;
     }
     
     public Color getColor() {

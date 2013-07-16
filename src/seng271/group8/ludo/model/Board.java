@@ -63,22 +63,7 @@ public class Board {
         }
         return pawns;
     }
-    /*
-    public void buildPaths() {
-        this.paths = new ArrayList<LinkedList<Square>>();
-        
-        for(int i = 0; i < BoardConfig.START_SQUARES.length; i++) {
-            LinkedList<Square> path = new LinkedList<Square>();
-            this.paths.add(path);
-            path.add(getSquareAt(BoardConfig.START_SQUARES[i].x, BoardConfig.START_SQUARES[i].y));
-            Point[] pathVectors = this.rotatePoints(BoardConfig.PATH, BoardConfig.ROTATION_OFFSET*i);
-            for(int j = 0; j < pathVectors.length; j++) {
-                    addToPath(path, pathVectors[j]);
-            }
-            
-        }
-    }*/
-    
+
     public void buildPlayers() {
         this.playerList = new ArrayList<Player>();
         this.pawnList = new ArrayList<Pawn>();

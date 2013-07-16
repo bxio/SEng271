@@ -37,33 +37,33 @@ public class Renderer2D {
         this.graphics = new ArrayList<LudoGraphic>();
         this.active = new ArrayList<IAnimatable>();
         this.newAnimations = new ArrayList<IAnimatable>();
-        
+
         for(Square s : game.getBoard().getSquareList()) {
           graphics.add(new SquareGraphic(s));
         }
-        
+
         for(Pawn pw : game.getBoard().getPawnList()) {
            graphics.add(new PawnGraphic(pw));
         }
-        
+
         /**
          *  Test animation setup here
          *  you can see animation chaining in action with the scaling and
          * translation moves
          * 
          */
-       PawnGraphic pw = new PawnGraphic(new Pawn(new Player(5), game.getBoard().getSquareList().get(0)));
- 
+        PawnGraphic pw = new PawnGraphic(new Pawn(new Player(5), game.getBoard().getSquareList().get(0)));
 
-        
         Animation2DSeries ani = new Animation2DSeries(2);
         TranslateAnimation trans = new TranslateAnimation(pw, new Point(0,6),1000);
         ani.add(trans);
         LinkedList<Square> path = game.getBoard().getPlayer(1).getPath();
+        
         for(int i = 0; i < path.size(); i ++) {
           ani.add(new TranslateAnimation(pw, path.get(i).getPosition(),500));
-       
-         }
+
+        }
+        
         this.addAnimation(ani);
         graphics.add(pw);
         
@@ -103,9 +103,6 @@ public class Renderer2D {
        Dimension squareSize = computeSquareSize();
        
        for(LudoGraphic gr : graphics) {
-           //AffineTransform at = new AffineTransform();
-           ///at.shear(-1.5, 0);
-           //g2.setTransform(at);
            gr.paint(g, squareSize);
        }
        

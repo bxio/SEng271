@@ -54,9 +54,8 @@ public abstract class Animation2D implements IAnimatable {
      */
     protected int repeat() {
         return this.repeats;
-        //this.chain(this.chain.getFirst());
     }
-     
+    
     /***
      *  For info on these functions see: 
      *  https://github.com/jesusgollonet/processing-penner-easing

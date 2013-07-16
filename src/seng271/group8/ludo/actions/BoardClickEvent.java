@@ -4,17 +4,15 @@
  */
 package seng271.group8.ludo.actions;
 
+import java.awt.Point;
+
 /**
  *
  * @author alastair
  */
 public class BoardClickEvent extends GameEvent {
 
-    public BoardClickEvent(Object source) {
+    public BoardClickEvent(Object source, Point coords) {
         super(source);
-    }
-    
-    public void run() {
-        
     }
 }

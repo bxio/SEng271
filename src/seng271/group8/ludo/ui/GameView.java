@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
 import seng271.group8.ludo.GameController;
+import seng271.group8.ludo.GameLogic;
+import seng271.group8.ludo.actions.BoardClickEvent;
+import seng271.group8.ludo.actions.BoardClickHandler;
 import seng271.group8.ludo.model.Board;
 
 /**
@@ -14,8 +17,9 @@ public class GameView extends JPanel {
     
     private GamePanel playArea;
     private GameStatePanel gameState;
-    private GameController gc;
-    private Thread controller;
+    private GameController gameController;
+    private GameLogic gamelogic;
+    private Thread controllerThread;
     
     public GameView() {
         this.setBackground(Color.red);
@@ -23,10 +27,15 @@ public class GameView extends JPanel {
     }
     
     public void start() {
-        gc = new GameController();
-        controller = new Thread(gc);
-        controller.start();
-        playArea = new GamePanel(new Board(), gc);
+        
+        Board board = new Board();
+        gameController = new GameController();
+        gameController.register(BoardClickEvent.class, new BoardClickHandler(board));     
+        
+        controllerThread = new Thread(gameController);
+        controllerThread.setDaemon(true);
+        controllerThread.start();
+        playArea = new GamePanel(board, gameController);
         this.add(playArea);
     }
 }
