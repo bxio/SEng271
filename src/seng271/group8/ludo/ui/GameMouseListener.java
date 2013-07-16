@@ -8,7 +8,7 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import seng271.group8.ludo.GameController;
-import seng271.group8.ludo.actions.KickPawnEvent;
+import seng271.group8.ludo.events.BoardClickEvent;
 import seng271.group8.ludo.graphics.Renderer2D;
 
 /**
@@ -30,7 +30,7 @@ public class GameMouseListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         Point p = playArea.graphicToGridCoords(e.getX(), e.getY());
-        KickPawnEvent bc = new KickPawnEvent(e);         
+        BoardClickEvent bc = new BoardClickEvent(p);         
         gc.put(bc);
     }
 

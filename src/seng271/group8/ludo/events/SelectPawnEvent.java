@@ -2,15 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package seng271.group8.ludo.actions;
+package seng271.group8.ludo.events;
 
 /**
  *
  * @author alastair
  */
-public class KickPawnEvent extends GameEvent {
- 
-    public KickPawnEvent(Object source) {
+public class SelectPawnEvent extends GameEvent {
+    public SelectPawnEvent(Object source) {
         super(source);
     }
 }

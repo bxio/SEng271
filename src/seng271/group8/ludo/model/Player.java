@@ -19,14 +19,23 @@ public class Player {
 	private Strategy strategy;
         private LinkedList<Square> path;
         private ArrayList<Pawn> pawns;
+        private Pawn selected;
         private int playerNum;
         
        public Player(int num) {
            this.playerNum = num;
        }
        
+       public Pawn getSelectedPawn() {
+           return selected;
+       }
+       
+       public void setSelectedPawn(Pawn p) {
+           
+       }
+       
        public void setStrategy(Strategy strat) {
-           this. strategy = strat;
+           this.strategy = strat;
        }
        
        public void setPath(LinkedList<Square> path) {

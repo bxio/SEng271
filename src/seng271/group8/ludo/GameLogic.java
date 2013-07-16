@@ -21,18 +21,25 @@ public class GameLogic {
    private int turn;
    private Pawn selected = null;
    
-   public  void squareClicked(Point p) {
-       Square s = model.getSquareAt(p.x, p.y);
-       
-       /*if(s.) {
-           
-       }
-       
-       else if(s.getPawn() != null) {
-           
-       } else if () {
-           
-       }*/
+   public void squareClicked(Square s) {
+   
+        if(s.getPawn() != null) {
+            if(s.getPawn().getOwner().equals(players.get(turn))) {
+                // Player has clicked one of his own pawns
+                players.get(turn).setSelectedPawn(s.getPawn());
+            } else {
+                if(players.get(turn).getSelectedPawn() != null) {
+                    ArrayList<Square> moves = this.getValidMoves(s.getPawn());
+                    // Player has clicked another players pawn
+                    if(moves.contains(s)) {
+                        // It is a valid move for the current pawn
+                        // Do the move
+                    }
+                }
+            }
+        } else {
+            // could still be a valid move
+        } 
                
    }
    
@@ -44,7 +51,7 @@ public class GameLogic {
     model = b;
    }
    
-   public  ArrayList<Square> getValidMoves() {
+   public  ArrayList<Square> getValidMoves(Pawn p) {
        return null;
    }
    

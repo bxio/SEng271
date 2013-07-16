@@ -47,7 +47,7 @@ public class Pawn extends GameEntity {
             this.square.setPawn(null);
         this.square = position;
     }
-	
+    
     public void move(int spaces){
 
     }

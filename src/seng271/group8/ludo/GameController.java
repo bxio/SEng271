@@ -11,8 +11,8 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import seng271.group8.ludo.actions.GameEvent;
-import seng271.group8.ludo.actions.Handler;
+import seng271.group8.ludo.events.GameEvent;
+import seng271.group8.ludo.handlers.Handler;
 import seng271.group8.ludo.model.*;
 
 /**
@@ -30,13 +30,13 @@ public class GameController implements Runnable {
     BlockingQueue<GameEvent> gameEvents = new LinkedBlockingQueue<GameEvent>();
     private Boolean isRunning = true;
     
-    private final HashMap<Class<? extends GameEvent>,ArrayList<Handler>> map = 
-            new HashMap<Class<? extends GameEvent>,ArrayList<Handler>>();
+    private final HashMap<Class,ArrayList<Handler>> map = 
+            new HashMap<Class,ArrayList<Handler>>();
     
     private LinkedList<Move> history;
     
     public GameController() {
-        
+
     }
 
     @Override
@@ -51,7 +51,7 @@ public class GameController implements Runnable {
        }
     }
     
-    public synchronized <T extends GameEvent> void register(Class<T> evtClass, Handler<T> h) {
+    public synchronized <T> void register(Class<? extends T> evtClass, Handler<T> h) {
         ArrayList<Handler> handlers = map.get(evtClass);
         if(handlers == null) {
             handlers = new ArrayList<Handler>();

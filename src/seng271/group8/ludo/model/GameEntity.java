@@ -4,10 +4,12 @@
  */
 package seng271.group8.ludo.model;
 
+import seng271.group8.ludo.graphics.LudoGraphic;
+
 /**
  *
  * @author alastair
  */
 public class GameEntity {
-    
+    LudoGraphic rendering;
 }
