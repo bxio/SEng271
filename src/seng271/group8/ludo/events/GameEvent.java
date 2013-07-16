@@ -13,7 +13,7 @@ import seng271.group8.ludo.graphics.LudoGraphic;
  */
 public class GameEvent {
     
-    public GameEvent(Object source) {
+    public GameEvent() {
         
     }
     

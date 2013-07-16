@@ -10,7 +10,6 @@ package seng271.group8.ludo.events;
  */
 public class KickPawnEvent extends GameEvent {
  
-    public KickPawnEvent(Object source) {
-        super(source);
+    public KickPawnEvent() {
     }
 }

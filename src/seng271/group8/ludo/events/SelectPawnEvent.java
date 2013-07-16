@@ -9,7 +9,6 @@ package seng271.group8.ludo.events;
  * @author alastair
  */
 public class SelectPawnEvent extends GameEvent {
-    public SelectPawnEvent(Object source) {
-        super(source);
+    public SelectPawnEvent() {
     }
 }
