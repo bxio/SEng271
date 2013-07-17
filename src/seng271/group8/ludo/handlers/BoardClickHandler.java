@@ -15,15 +15,14 @@ import seng271.group8.ludo.model.Square;
  *
  * @author Alastairs
  */
-public class BoardClickHandler implements Handler<BoardClickEvent> {
+public class BoardClickHandler extends BaseHandler<BoardClickEvent> {
     
     private Board board;
-    private GameLogic game;
     private List<Player> players;
     
     public BoardClickHandler(List<Player> players, Board b, GameLogic game) {
+        super(game);
         this.board = b;
-        this.game = game;
         this.players = players;
     }
     
@@ -31,7 +30,7 @@ public class BoardClickHandler implements Handler<BoardClickEvent> {
         // Only handle board clicks for players if it is their turn
         if(players.contains(game.getCurrentPlayer())) {
             Square s = board.getSquareAt(evt.getClick().x, evt.getClick().y);
-            
+            System.out.println("Clicked stuff");
             if(s != null)
                 game.squareClicked(s);
         }

@@ -8,6 +8,6 @@ package seng271.group8.ludo.events;
  *
  * @author alastair
  */
-public class TurnEvent {
+public class TurnEvent extends GameEvent {
     
 }

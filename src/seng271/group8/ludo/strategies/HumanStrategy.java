@@ -1,6 +1,6 @@
 package seng271.group8.ludo.strategies;
 
-import seng271.group8.ludo.model.Pawn;
+import seng271.group8.ludo.model.Move;
 import seng271.group8.ludo.model.Player;
 
 /**
@@ -14,6 +14,8 @@ public class HumanStrategy extends AbstractStrategy {
         }
     
 	public Move getMove(Player player, int roll) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
+            // No move is returned. The move is selected through UI events
+            // by the human player.
+            return null;
+        }
 }

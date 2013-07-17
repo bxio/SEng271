@@ -4,12 +4,16 @@
  */
 package seng271.group8.ludo.events;
 
+import seng271.group8.ludo.model.Move;
+
 /**
  *
  * @author alastair
  */
 public class MoveEvent extends GameEvent {
-    public MoveEvent() {
-
+    private Move move;
+    
+    public MoveEvent(Move m) {
+        move = m;
     }
 }

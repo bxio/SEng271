@@ -1,6 +1,6 @@
 package seng271.group8.ludo.strategies;
 
-import seng271.group8.ludo.model.Pawn;
+import seng271.group8.ludo.model.Move;
 import seng271.group8.ludo.model.Player;
 
 /**

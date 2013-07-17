@@ -54,8 +54,8 @@ public class GameView extends JPanel {
         
         // Wire events
         gameController = new GameController();
-        gameController.register(BoardClickEvent.class, new BoardClickHandler(humans, board, gamelogic));
-        gameController.register(MoveEvent.class, new MoveHandler(gamelogic));
+        GameController.register(BoardClickEvent.class, new BoardClickHandler(humans, board, gamelogic));
+        GameController.register(MoveEvent.class, new MoveHandler(gamelogic));
         
         // Start GameEvents thread
         controllerThread = new Thread(gameController);

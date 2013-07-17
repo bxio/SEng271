@@ -28,10 +28,10 @@ import seng271.group8.ludo.model.*;
  */
 public class GameController implements Runnable {
     
-    BlockingQueue<GameEvent> gameEvents = new LinkedBlockingQueue<GameEvent>();
+    private static BlockingQueue<GameEvent> gameEvents = new LinkedBlockingQueue<GameEvent>();
     private Boolean isRunning = true;
     
-    private final Map<Class,List<Handler>> map = 
+    private static final Map<Class,List<Handler>> map = 
             new HashMap<Class,List<Handler>>();
     
     private List<Move> history;
@@ -52,7 +52,7 @@ public class GameController implements Runnable {
        }
     }
     
-    public synchronized <T> void register(Class<? extends T> evtClass, Handler<T> h) {
+    public static synchronized <T> void register(Class<? extends T> evtClass, Handler<T> h) {
         List<Handler> handlers = map.get(evtClass);
         if(handlers == null) {
             handlers = new ArrayList<Handler>();
@@ -71,9 +71,9 @@ public class GameController implements Runnable {
             System.out.println("No handlers registered for event"  + event.getClass());
     }
     
-    public void put(GameEvent e) {
+    public static void put(GameEvent e) {
         try {
-            this.gameEvents.put(e);
+            GameController.gameEvents.put(e);
         } catch (InterruptedException ex) {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -15,6 +15,6 @@ public class AggressiveStrategy extends AbstractStrategy {
         }
 
 	public Move getMove(Player player, int roll) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            return null;//return new Move();
 	}
 }

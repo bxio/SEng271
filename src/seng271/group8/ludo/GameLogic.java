@@ -6,6 +6,7 @@ package seng271.group8.ludo;
 
 import java.util.ArrayList;
 import java.util.List;
+import seng271.group8.ludo.events.MoveEvent;
 import seng271.group8.ludo.model.Board;
 import seng271.group8.ludo.model.Move;
 import seng271.group8.ludo.model.Path;
@@ -29,8 +30,12 @@ public class GameLogic {
        this.players = b.getPlayers();
    }
    
+   /*public void setController(GameController gc) {
+       this.gc = gc;
+   }*/
+   
    public void squareClicked(Square s) {
-       Player player = players.get(turn);
+       Player player = getCurrentPlayer();
        Pawn selected = player.getSelectedPawn();
        
        if(selected != null) {
@@ -123,7 +128,8 @@ public class GameLogic {
        return move;
    }
    
-   public Player getTurn () {
-       return null;
+   public Move getNextMove() {
+       advanceTurn();
+       return getCurrentPlayer().getMove();
    }
 }
