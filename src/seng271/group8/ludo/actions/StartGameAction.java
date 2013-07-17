@@ -7,22 +7,34 @@ package seng271.group8.ludo.actions;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
+import seng271.group8.ludo.strategies.Strategy;
 import seng271.group8.ludo.ui.LudoWindow;
+import seng271.group8.ludo.ui.PlayerSelectPanel;
 
 /**
  *
  * @author Alastairs
  */
 public class StartGameAction extends AbstractAction {
-    LudoWindow game;
+    private LudoWindow game;
+    private PlayerSelectPanel[] options;
     
-    public StartGameAction(Container game) {
+    public StartGameAction(Container game, PlayerSelectPanel[] options) {
         this.game = (LudoWindow)game;
+        this.options = options;
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.game.showGameView();
+        Strategy[] strategies = new Strategy[4];
+        
+        int i = 0;
+        
+        for(PlayerSelectPanel p : options ) {
+           strategies[i++] = p.getStrategy();
+        }
+        
+        this.game.showGameView(strategies);
     }
     
 }

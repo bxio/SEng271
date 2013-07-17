@@ -12,6 +12,8 @@ import seng271.group8.ludo.handlers.BoardClickHandler;
 import seng271.group8.ludo.handlers.MoveHandler;
 import seng271.group8.ludo.model.Board;
 import seng271.group8.ludo.model.Player;
+import seng271.group8.ludo.strategies.HumanStrategy;
+import seng271.group8.ludo.strategies.Strategy;
 
 /**
  *
@@ -28,24 +30,30 @@ public class GameView extends JPanel {
     
     private Thread controllerThread;
     
-    public GameView() {
+    public GameView(Strategy[] strategies) {
         this.setBackground(Color.red);
         this.setLayout(new BorderLayout());
+       
+        // Create the game model
+        board = new Board(strategies);
+        
+        gamelogic = new GameLogic(board);
     }
     
     public void start() {
         
-        // Create the game model
-        board = new Board();
-        
-        gamelogic = new GameLogic(board);
-        
-        // Temp for now
+          // Temp for now
         ArrayList<Player> players = board.getPlayers();
+        ArrayList<Player> humans = new ArrayList<Player>();
+        
+        for(Player p : players) {
+            if(p.getStrategy().getClass().equals(HumanStrategy.class))
+                humans.add(p);
+        }
         
         // Wire events
         gameController = new GameController();
-        gameController.register(BoardClickEvent.class, new BoardClickHandler(players, board, gamelogic));
+        gameController.register(BoardClickEvent.class, new BoardClickHandler(humans, board, gamelogic));
         gameController.register(MoveEvent.class, new MoveHandler(gamelogic));
         
         // Start GameEvents thread

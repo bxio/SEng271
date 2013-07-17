@@ -3,7 +3,7 @@ package seng271.group8.ludo.model;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import seng271.group8.ludo.model.Square;
+import seng271.group8.ludo.strategies.Strategy;
 
 /**
  *
@@ -22,9 +22,9 @@ public class Board {
     private ArrayList<LinkedList<Square>> paths;
     private ArrayList<LinkedList<Pawn>> pawns;
     
-    public Board() {
+    public Board(Strategy[] strategies) {
         buildBoard();
-        buildPlayers();
+        buildPlayers(strategies);
     }
     
     public void buildBoard() {
@@ -64,12 +64,13 @@ public class Board {
         return pawns;
     }
 
-    public void buildPlayers() {
+    public void buildPlayers(Strategy[] strategies) {
         this.playerList = new ArrayList<Player>();
         this.pawnList = new ArrayList<Pawn>();
         
         for(int i = 0; i < BoardConfig.NUM_PLAYERS; i++) {
            Player p = new Player(i);
+           p.setStrategy(strategies[i]);
            this.playerList.add(p);
            p.setPawns(buildPawns(i,p));
            p.setPath(buildPath(i));

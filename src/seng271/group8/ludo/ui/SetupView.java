@@ -73,7 +73,7 @@ public class SetupView extends JPanel {
         playNow = new JButton("Play Now!");
         this.add(playNow, gbc);
         
-        playNow.addActionListener(new StartGameAction(ludo));
+        playNow.addActionListener(new StartGameAction(ludo, players));
 
     }
 }

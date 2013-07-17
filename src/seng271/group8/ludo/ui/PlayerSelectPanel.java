@@ -15,10 +15,16 @@ import seng271.group8.ludo.strategies.Strategy;
  */
 public class PlayerSelectPanel extends JPanel {
     
+    private JComboBox select;
+    
     public PlayerSelectPanel(String name, Strategy[] strategies) {
         JLabel label = new JLabel(name);
-        JComboBox select = new JComboBox(strategies);
+        select = new JComboBox(strategies);
         this.add(label);
         this.add(select);
+    }
+    
+    public Strategy getStrategy() {
+        return (Strategy)select.getSelectedItem();
     }
 }

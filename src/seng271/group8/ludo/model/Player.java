@@ -34,6 +34,10 @@ public class Player {
            
        }
        
+       public Strategy getStrategy() {
+           return this.strategy;
+       }
+       
        public void setStrategy(Strategy strat) {
            this.strategy = strat;
        }

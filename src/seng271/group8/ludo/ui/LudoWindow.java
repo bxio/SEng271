@@ -4,10 +4,10 @@
  */
 package seng271.group8.ludo.ui;
 
-import java.awt.Color;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import seng271.group8.ludo.strategies.Strategy;
 //import seng271.group8.ludo.BufferStrategyDemo;
 
 /**
@@ -55,11 +55,11 @@ public class LudoWindow extends JFrame {
     /**
      * TODO: Alastair Refactor switching views
      */
-    public void showGameView() {
+    public void showGameView(Strategy[] strategies) {
         removeCurrentView();
         
         if(gameView == null) {
-            gameView = new GameView();
+            gameView = new GameView(strategies);
             gameView.start();
         }
         
