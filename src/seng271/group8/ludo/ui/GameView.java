@@ -3,6 +3,7 @@ package seng271.group8.ludo.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JPanel;
 import seng271.group8.ludo.GameController;
 import seng271.group8.ludo.GameLogic;
@@ -43,8 +44,8 @@ public class GameView extends JPanel {
     public void start() {
         
           // Temp for now
-        ArrayList<Player> players = board.getPlayers();
-        ArrayList<Player> humans = new ArrayList<Player>();
+        List<Player> players = board.getPlayers();
+        List<Player> humans = new ArrayList<Player>();
         
         for(Player p : players) {
             if(p.getStrategy().getClass().equals(HumanStrategy.class))

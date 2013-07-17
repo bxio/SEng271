@@ -12,8 +12,9 @@ import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.List;
 import seng271.group8.ludo.model.BoardConfig;
+import seng271.group8.ludo.model.PathSegment;
 import seng271.group8.ludo.model.Pawn;
 import seng271.group8.ludo.model.Player;
 import seng271.group8.ludo.model.Square;
@@ -27,9 +28,9 @@ public class Renderer2D {
     // will eventually move the drawing code from game panel here
     // game panel will probably get large handling all the click events
     // for the board
-    private ArrayList<IAnimatable> newAnimations;
-    private ArrayList<IAnimatable> active;
-    private ArrayList<LudoGraphic> graphics;
+    private List<IAnimatable> newAnimations;
+    private List<IAnimatable> active;
+    private List<LudoGraphic> graphics;
     private GamePanel game;
     
     public Renderer2D (GamePanel game) {
@@ -54,15 +55,17 @@ public class Renderer2D {
          * translation moves
          * 
          */
-        PawnGraphic pw = new PawnGraphic(new Pawn(new Player(5), game.getBoard().getSquareList().get(0)));
+        PawnGraphic pw = new PawnGraphic(new Pawn(new Player(5), 
+                game.getBoard().getSquareList().get(0)));
 
         Animation2DSeries ani = new Animation2DSeries(2);
         TranslateAnimation trans = new TranslateAnimation(pw, new Point(0,6),1000);
         ani.add(trans);
-        LinkedList<Square> path = game.getBoard().getPlayer(1).getPath();
+        List<PathSegment> path = game.getBoard().getPlayer(1).getPath();
         
         for(int i = 0; i < path.size(); i ++) {
-          ani.add(new TranslateAnimation(pw, path.get(i).getPosition(),500));
+          ani.add(new TranslateAnimation(pw, 
+                  path.get(i).getSquare().getPosition(),500));
 
         }
         
@@ -73,7 +76,7 @@ public class Renderer2D {
     
     public void refresh(long dt) {
         
-        ArrayList<IAnimatable> finished = new ArrayList<IAnimatable>();
+        List<IAnimatable> finished = new ArrayList<IAnimatable>();
         
         Iterator<IAnimatable> iter = newAnimations.iterator();
         while (iter.hasNext()) {

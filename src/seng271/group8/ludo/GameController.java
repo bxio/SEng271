@@ -6,7 +6,8 @@ package seng271.group8.ludo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
@@ -30,10 +31,10 @@ public class GameController implements Runnable {
     BlockingQueue<GameEvent> gameEvents = new LinkedBlockingQueue<GameEvent>();
     private Boolean isRunning = true;
     
-    private final HashMap<Class,ArrayList<Handler>> map = 
-            new HashMap<Class,ArrayList<Handler>>();
+    private final Map<Class,List<Handler>> map = 
+            new HashMap<Class,List<Handler>>();
     
-    private LinkedList<Move> history;
+    private List<Move> history;
     
     public GameController() {
 
@@ -52,7 +53,7 @@ public class GameController implements Runnable {
     }
     
     public synchronized <T> void register(Class<? extends T> evtClass, Handler<T> h) {
-        ArrayList<Handler> handlers = map.get(evtClass);
+        List<Handler> handlers = map.get(evtClass);
         if(handlers == null) {
             handlers = new ArrayList<Handler>();
             map.put(evtClass, handlers);
@@ -61,7 +62,7 @@ public class GameController implements Runnable {
     }
     
     private void dispatch(GameEvent event) {
-        ArrayList<Handler> handlers = map.get(event.getClass());
+        List<Handler> handlers = map.get(event.getClass());
         if(handlers != null)
             for(Handler hd : handlers) {
                 hd.handle(event);

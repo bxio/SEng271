@@ -4,8 +4,6 @@
  */
 package seng271.group8.ludo.graphics;
 
-import java.util.LinkedList;
-
 /**
  *
  * @author Alastairs

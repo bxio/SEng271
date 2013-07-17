@@ -3,6 +3,7 @@ package seng271.group8.ludo.model;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import seng271.group8.ludo.strategies.Strategy;
 
 /**
@@ -16,11 +17,11 @@ import seng271.group8.ludo.strategies.Strategy;
 public class Board {
     
     private Square[][] squares;
-    private ArrayList<Square> squareList;
-    private ArrayList<Pawn> pawnList;
-    private ArrayList<Player> playerList;
-    private ArrayList<LinkedList<Square>> paths;
-    private ArrayList<LinkedList<Pawn>> pawns;
+    private List<Square> squareList;
+    private List<Pawn> pawnList;
+    private List<Player> playerList;
+    private List<List<PathSegment>> paths;
+    private List<List<Pawn>> pawns;
     
     public Board(Strategy[] strategies) {
         buildBoard();
@@ -39,9 +40,11 @@ public class Board {
         }
     }
     
-    public LinkedList<Square> buildPath(int player) {
-        LinkedList<Square> path = new LinkedList<Square>();
-        path.add(getSquareAt(BoardConfig.START_SQUARES[player].x, BoardConfig.START_SQUARES[player].y));
+    public List<PathSegment> buildPath(int player) {
+        LinkedList<PathSegment> path = new LinkedList<PathSegment>();
+        Square s = getSquareAt(BoardConfig.START_SQUARES[player].x, 
+                BoardConfig.START_SQUARES[player].y);
+        path.add(new PathSegment(s));
         Point[] pathVectors = this.rotatePoints(BoardConfig.PATH, BoardConfig.ROTATION_OFFSET*player);
 
         for(int j = 0; j < pathVectors.length; j++) {
@@ -52,8 +55,8 @@ public class Board {
 
     }
     
-    public ArrayList<Pawn> buildPawns(int playerNum, Player p) {
-        ArrayList<Pawn> pawns = new ArrayList<Pawn>();
+    public List<Pawn> buildPawns(int playerNum, Player p) {
+        List<Pawn> pawns = new ArrayList<Pawn>();
         for(int i = 0; i < BoardConfig.NUM_PAWNS; i++) {
             int x = BoardConfig.PAWN_HOME[playerNum].x + BoardConfig.PAWN_OFFSETS[i].x; 
             int y = BoardConfig.PAWN_HOME[playerNum].y + BoardConfig.PAWN_OFFSETS[i].y;
@@ -120,7 +123,7 @@ public class Board {
      * @param path
      * @param vector 
      */
-    public void addToPath(LinkedList<Square> path, Point vector) {
+    public void addToPath(LinkedList<PathSegment> path, Point vector) {
         int xMag = vector.x;
         int yMag = vector.y;
         int xInc = 0;
@@ -131,18 +134,21 @@ public class Board {
         if(yMag != 0)
             yInc = -yMag/Math.abs(yMag);
  
-        Square last = path.getLast();
+        PathSegment last = path.getLast();
        
         while(yMag != 0 || xMag != 0) {
             
-            Square s = this.getSquareAt(last.getPosition().x + xInc, last.getPosition().y + yInc);
+            Square s = this.getSquareAt(last.getSquare().getPosition().x + xInc, 
+                    last.getSquare().getPosition().y + yInc);
            //System.out.println("x:" + (last.getPosition().x + xInc) +" y:" + (last.getPosition().y + yInc));
             yMag += yInc;
             xMag -= xInc;
       
             if(s != null) {
-               path.add(s);
-               last = s;
+               PathSegment next = new PathSegment(s);
+               last.setNext(next);
+               path.add(next);
+               last = next;
             }
             else {
                 // TODO: Throw invalid path exception
@@ -180,19 +186,19 @@ public class Board {
         return s;
     }
     
-    public ArrayList<Square> getSquareList() {
+    public List<Square> getSquareList() {
         return this.squareList;
     }
     
-    public ArrayList<Pawn> getPawnList() {
+    public List<Pawn> getPawnList() {
         return this.pawnList;
     }
     
-    public ArrayList<LinkedList<Square>> getPaths() {
+    public List<List<PathSegment>> getPaths() {
         return this.paths;
     }
     
-    public ArrayList<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return this.playerList;
     }
     

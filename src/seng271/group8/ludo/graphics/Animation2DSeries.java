@@ -5,6 +5,7 @@
 package seng271.group8.ludo.graphics;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Animation2DSeries implements IAnimatable{
     
-    private ArrayList<IAnimatable> series;
+    private List<IAnimatable> series;
     private IAnimatable current;
     private int currentInd = 0;
     private int repetitions = 0;

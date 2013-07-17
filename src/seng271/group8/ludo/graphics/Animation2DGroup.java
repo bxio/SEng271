@@ -5,6 +5,7 @@
 package seng271.group8.ludo.graphics;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Animation2DGroup implements IAnimatable {
     
-    private ArrayList<IAnimatable> group;
+    private List<IAnimatable> group;
     
     public Animation2DGroup() {
         this.group = new ArrayList<IAnimatable>();

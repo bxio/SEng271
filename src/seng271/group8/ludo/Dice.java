@@ -5,8 +5,9 @@ package seng271.group8.ludo;
  */
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.List;
 public class Dice {
-    private ArrayList<Integer> log;
+    private List<Integer> log;
     private int result;
     private Random generator;
     
@@ -28,7 +29,7 @@ public class Dice {
 	 * 
 	 * @return			ArrayList<Integer> of all of the results of the die
 	 */
-    public ArrayList<Integer> getResults(){
+    public List<Integer> getResults(){
         return this.log;
     }
 }

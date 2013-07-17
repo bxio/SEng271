@@ -5,6 +5,7 @@
 package seng271.group8.ludo;
 
 import java.util.ArrayList;
+import java.util.List;
 import seng271.group8.ludo.model.Board;
 import seng271.group8.ludo.model.Move;
 import seng271.group8.ludo.model.Pawn;
@@ -17,8 +18,9 @@ import seng271.group8.ludo.model.Square;
  */
 public class GameLogic {
    private Board model;
-   private ArrayList<Player> players;
+   private List<Player> players;
    private int turn;
+   private int roll;
 
    public GameLogic(Board b) {
        this.model = b;
@@ -33,7 +35,7 @@ public class GameLogic {
                 players.get(turn).setSelectedPawn(s.getPawn());
             } else {
                 if(players.get(turn).getSelectedPawn() != null) {
-                    ArrayList<Square> moves = this.getValidMoves(s.getPawn());
+                    List<Square> moves = this.getValidMoves(s.getPawn());
                     // Player has clicked another players pawn
                     if(moves.contains(s)) {
                         // It is a valid move for the current pawn
@@ -68,7 +70,26 @@ public class GameLogic {
     model = b;
    }
    
-   public ArrayList<Square> getValidMoves(Pawn p) {
+   public List<Square> getValidMoves(Pawn p) {
+       List<Square> moves = new ArrayList<Square>();
+       Player player = p.getOwner();
+       
+       /*
+        * This is totally stupid but I don't want to implement
+        */
+       for(Pawn pw : player.getPawns()) {
+           int i = 0;
+           Boolean startFound = false;
+           /*for(Square s : player.getPath()) {
+               if() {
+                   startFound = true;
+               }
+               if(startFound) {
+                   
+               }
+           }*/
+       }
+       
        return null;
    }
    

@@ -1,8 +1,7 @@
 package seng271.group8.ludo.model;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.List;
 import seng271.group8.ludo.strategies.Strategy;
 
 /*
@@ -17,8 +16,8 @@ import seng271.group8.ludo.strategies.Strategy;
 public class Player {
 	private Color colour;
 	private Strategy strategy;
-        private LinkedList<Square> path;
-        private ArrayList<Pawn> pawns;
+        private List<PathSegment> path;
+        private List<Pawn> pawns;
         private Pawn selected;
         private int playerNum;
         
@@ -46,16 +45,20 @@ public class Player {
            this.strategy.getMove(this, playerNum);
        }
        
-       public void setPath(LinkedList<Square> path) {
+       public void setPath(List<PathSegment> path) {
            this.path = path;
        }
        
-       public LinkedList<Square> getPath() {
+       public List<PathSegment> getPath() {
            return this.path;
        }
        
-       public void setPawns(ArrayList<Pawn> pawns) {
+       public void setPawns(List<Pawn> pawns) {
            this.pawns = pawns;
+       }
+       
+       public List<Pawn> getPawns() {
+           return this.pawns;
        }
 
 }
