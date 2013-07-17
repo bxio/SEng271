@@ -65,5 +65,8 @@ public class GameView extends JPanel {
         // Create the game area
         playArea = new GamePanel(board, gameController);
         this.add(playArea);
+        
+        // Create game state
+        this.add(new GameStatePanel(), BorderLayout.SOUTH);
     }
 }
