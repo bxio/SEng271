@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import seng271.group8.ludo.model.Board;
 import seng271.group8.ludo.model.Move;
+import seng271.group8.ludo.model.Path;
+import seng271.group8.ludo.model.PathSegment;
 import seng271.group8.ludo.model.Pawn;
 import seng271.group8.ludo.model.Player;
 import seng271.group8.ludo.model.Square;
@@ -73,21 +75,17 @@ public class GameLogic {
    public List<Square> getValidMoves(Pawn p) {
        List<Square> moves = new ArrayList<Square>();
        Player player = p.getOwner();
+       Path path = player.getPath();
+       PathSegment start;
        
-       /*
-        * This is totally stupid but I don't want to implement
-        */
        for(Pawn pw : player.getPawns()) {
-           int i = 0;
-           Boolean startFound = false;
-           /*for(Square s : player.getPath()) {
-               if() {
-                   startFound = true;
-               }
-               if(startFound) {
-                   
-               }
-           }*/
+           start = path.getSegment(pw.getPosition());
+           while(start.getNext() != null) {
+               /**
+                * Logic for determining valid moves!
+                */
+               
+           }
        }
        
        return null;

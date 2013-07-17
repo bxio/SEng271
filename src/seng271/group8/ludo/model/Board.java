@@ -20,7 +20,7 @@ public class Board {
     private List<Square> squareList;
     private List<Pawn> pawnList;
     private List<Player> playerList;
-    private List<List<PathSegment>> paths;
+    private List<Path> paths;
     private List<List<Pawn>> pawns;
     
     public Board(Strategy[] strategies) {
@@ -40,8 +40,8 @@ public class Board {
         }
     }
     
-    public List<PathSegment> buildPath(int player) {
-        LinkedList<PathSegment> path = new LinkedList<PathSegment>();
+    public Path buildPath(int player) {
+        Path path = new Path();
         Square s = getSquareAt(BoardConfig.START_SQUARES[player].x, 
                 BoardConfig.START_SQUARES[player].y);
         path.add(new PathSegment(s));
@@ -123,7 +123,7 @@ public class Board {
      * @param path
      * @param vector 
      */
-    public void addToPath(LinkedList<PathSegment> path, Point vector) {
+    public void addToPath(Path path, Point vector) {
         int xMag = vector.x;
         int yMag = vector.y;
         int xInc = 0;
@@ -194,7 +194,7 @@ public class Board {
         return this.pawnList;
     }
     
-    public List<List<PathSegment>> getPaths() {
+    public List<Path> getPaths() {
         return this.paths;
     }
     

@@ -16,7 +16,7 @@ import seng271.group8.ludo.strategies.Strategy;
 public class Player {
 	private Color colour;
 	private Strategy strategy;
-        private List<PathSegment> path;
+        private Path path;
         private List<Pawn> pawns;
         private Pawn selected;
         private int playerNum;
@@ -45,11 +45,11 @@ public class Player {
            this.strategy.getMove(this, playerNum);
        }
        
-       public void setPath(List<PathSegment> path) {
+       public void setPath(Path path) {
            this.path = path;
        }
        
-       public List<PathSegment> getPath() {
+       public Path getPath() {
            return this.path;
        }
        
