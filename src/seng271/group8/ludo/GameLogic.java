@@ -21,7 +21,7 @@ import seng271.group8.ludo.model.Square;
 public class GameLogic {
    private Board model;
    private List<Player> players;
-   private int turn;
+   private int turn = 0; // Player 1 always starts
    private int roll;
 
    public GameLogic(Board b) {
@@ -30,25 +30,26 @@ public class GameLogic {
    }
    
    public void squareClicked(Square s) {
-   
-        if(s.getPawn() != null) {
-            if(s.getPawn().getOwner().equals(players.get(turn))) {
-                // Player has clicked one of his own pawns
-                players.get(turn).setSelectedPawn(s.getPawn());
-            } else {
-                if(players.get(turn).getSelectedPawn() != null) {
-                    List<Square> moves = this.getValidMoves(s.getPawn());
-                    // Player has clicked another players pawn
-                    if(moves.contains(s)) {
-                        // It is a valid move for the current pawn
-                        // Do the move
-                    }
-                }
+       Player player = players.get(turn);
+       Pawn selected = player.getSelectedPawn();
+       
+       if(selected != null) {
+            Move move = this.getValidMove(selected);
+            // Player has clicked another players pawn
+            if(move.equals(s)) {
+                // It is a valid move for the current pawn
+                // TODO: Do the move
             }
-        } else {
-            // could still be a valid move
-        } 
-               
+       } else if(s.getPawn() != null && 
+               s.getPawn().getOwner().equals(player)) {
+           selected = s.getPawn();
+           player.setSelectedPawn(selected);
+           this.getValidMove(selected);
+           // TODO: Highlight valid move square
+       } else {
+           player.clearSelectedPawn();
+           // TODO: Remove Highlight
+       }
    }
    
    public Player getCurrentPlayer() {
@@ -72,26 +73,57 @@ public class GameLogic {
     model = b;
    }
    
-   public List<Square> getValidMoves(Pawn p) {
-       List<Square> moves = new ArrayList<Square>();
-       Player player = p.getOwner();
-       Path path = player.getPath();
-       PathSegment start;
+   /***
+    * Can be used by the strategies.
+    * Will probably move these function into the
+    * AbstractStrategy class
+    * 
+    * @param player
+    * @return 
+    */
+   public List<Move> getValidMoves (Player player) {
+       List<Move> moves = new ArrayList<Move>();
+    
        
        for(Pawn pw : player.getPawns()) {
-           start = path.getSegment(pw.getPosition());
-           while(start.getNext() != null) {
-               /**
-                * Logic for determining valid moves!
-                */
-               
-           }
+           Move m = getValidMove(pw);
        }
        
-       return null;
+       return moves;
    }
    
-   public  Player getTurn () {
+   public Move getValidMove(Pawn pw) {
+       return getValidMove(pw, pw.getOwner());
+   }
+   
+   public Move getValidMove(Pawn pw, Player player) {
+        Move move = null;
+        Path path = player.getPath();
+        PathSegment cur;
+        int steps = 0;
+        cur = path.getSegment(pw.getPosition()).getNext();
+        
+        while(cur.getNext() != null) {
+            /**
+             * Logic for determining valid moves!
+             * 
+             * Is block decides if the pawn can pass or occupy
+             * the square.
+             */
+            if(cur.getSquare().canPass(pw) && steps < roll) {
+                continue;
+            } else if(roll == steps && 
+                    cur.getSquare().canOccupy(pw)) {
+               move = new Move(pw, cur.getSquare(), roll);
+            } else {
+                break;
+            }
+        }
+       
+       return move;
+   }
+   
+   public Player getTurn () {
        return null;
    }
 }

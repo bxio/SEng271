@@ -21,7 +21,7 @@ public class PathSegment {
     }
     
     public PathSegment getNext() {
-        return this.next;
+        return this.next; 
     }
     
     public Square getSquare() {

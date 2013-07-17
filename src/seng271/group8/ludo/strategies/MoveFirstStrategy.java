@@ -1,6 +1,6 @@
 package seng271.group8.ludo.strategies;
 
-import seng271.group8.ludo.model.Pawn;
+import seng271.group8.ludo.model.Move;
 import seng271.group8.ludo.model.Player;
 
 /**
@@ -13,7 +13,7 @@ public class MoveFirstStrategy extends AbstractStrategy {
             this.name = "Move First";
         }
 
-	public Pawn getMove(Player player, int roll) {
+	public Move getMove(Player player, int roll) {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 }

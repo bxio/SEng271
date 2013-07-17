@@ -36,4 +36,12 @@ public class Square extends GameEntity {
     public Point getPosition() {
         return position;
     }
+    
+    public Boolean canPass(Pawn pw) {
+        return true;
+    }
+    
+    public Boolean canOccupy(Pawn pw) {
+        return true;
+    }
 }

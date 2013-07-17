@@ -30,7 +30,11 @@ public class Player {
        }
        
        public void setSelectedPawn(Pawn p) {
-           
+           this.selected = p;
+       }
+       
+       public void clearSelectedPawn() {
+           setSelectedPawn(null);
        }
        
        public Strategy getStrategy() {
@@ -41,8 +45,8 @@ public class Player {
            this.strategy = strat;
        }
        
-       public void getMove() {
-           this.strategy.getMove(this, playerNum);
+       public Move getMove() {
+           return this.strategy.getMove(this, playerNum);
        }
        
        public void setPath(Path path) {
