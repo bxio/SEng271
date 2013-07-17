@@ -9,7 +9,7 @@ import seng271.group8.ludo.model.Player;
  */
 public class HumanStrategy implements Strategy{
 	private String name = "Human";
-	public Pawn getMoves(Player player, int roll) {
+	public Pawn getMove(Player player, int roll) {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 

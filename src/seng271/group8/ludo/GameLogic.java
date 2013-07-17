@@ -4,9 +4,9 @@
  */
 package seng271.group8.ludo;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import seng271.group8.ludo.model.Board;
+import seng271.group8.ludo.model.Move;
 import seng271.group8.ludo.model.Pawn;
 import seng271.group8.ludo.model.Player;
 import seng271.group8.ludo.model.Square;
@@ -19,7 +19,11 @@ public class GameLogic {
    private Board model;
    private ArrayList<Player> players;
    private int turn;
-   private Pawn selected = null;
+
+   public GameLogic(Board b) {
+       this.model = b;
+       this.players = b.getPlayers();
+   }
    
    public void squareClicked(Square s) {
    
@@ -43,6 +47,19 @@ public class GameLogic {
                
    }
    
+   public Player getCurrentPlayer() {
+       return players.get(turn);
+   }
+   
+   public void makeMakeMove(Move m) {
+       
+   }
+   
+   public void moveFinished() {
+       advanceTurn();
+       players.get(turn).getMove();
+   }
+   
    public void advanceTurn() {
        turn = (turn + 1) % players.size();
    }
@@ -51,7 +68,7 @@ public class GameLogic {
     model = b;
    }
    
-   public  ArrayList<Square> getValidMoves(Pawn p) {
+   public ArrayList<Square> getValidMoves(Pawn p) {
        return null;
    }
    

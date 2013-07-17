@@ -2,6 +2,7 @@ package seng271.group8.ludo.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import seng271.group8.ludo.GameController;
 import seng271.group8.ludo.GameLogic;
@@ -10,6 +11,7 @@ import seng271.group8.ludo.events.MoveEvent;
 import seng271.group8.ludo.handlers.BoardClickHandler;
 import seng271.group8.ludo.handlers.MoveHandler;
 import seng271.group8.ludo.model.Board;
+import seng271.group8.ludo.model.Player;
 
 /**
  *
@@ -36,12 +38,15 @@ public class GameView extends JPanel {
         // Create the game model
         board = new Board();
         
-        gamelogic = new GameLogic();
+        gamelogic = new GameLogic(board);
+        
+        // Temp for now
+        ArrayList<Player> players = board.getPlayers();
         
         // Wire events
         gameController = new GameController();
-        gameController.register(BoardClickEvent.class, new BoardClickHandler(board, gamelogic));
-        gameController.register(MoveEvent.class, new MoveHandler());
+        gameController.register(BoardClickEvent.class, new BoardClickHandler(players, board, gamelogic));
+        gameController.register(MoveEvent.class, new MoveHandler(gamelogic));
         
         // Start GameEvents thread
         controllerThread = new Thread(gameController);

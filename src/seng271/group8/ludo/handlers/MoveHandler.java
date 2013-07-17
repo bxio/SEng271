@@ -4,6 +4,7 @@
  */
 package seng271.group8.ludo.handlers;
 
+import seng271.group8.ludo.GameLogic;
 import seng271.group8.ludo.events.MoveEvent;
 
 /**
@@ -12,9 +13,15 @@ import seng271.group8.ludo.events.MoveEvent;
  */
 public class MoveHandler implements Handler<MoveEvent> {
 
+    private GameLogic game;
+    
+    public MoveHandler(GameLogic game) {
+        this.game = game;
+    }
+    
     @Override
     public void handle(MoveEvent evt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        game.makeMakeMove(null);
     }
     
 }

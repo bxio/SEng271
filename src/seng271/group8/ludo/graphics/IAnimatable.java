@@ -4,6 +4,8 @@
  */
 package seng271.group8.ludo.graphics;
 
+import javax.swing.Action;
+
 /**
  *
  * @author alastair
@@ -13,6 +15,6 @@ public interface IAnimatable {
     //public void repeats();
     //public void reverse();
     public void start();  
-    //public void onComplete();
+   // public void onComplete(Action done);
      
 }

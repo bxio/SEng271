@@ -12,7 +12,7 @@ public class CautiousStrategy implements Strategy{
 	//player);
 	private String name = "Cautious";
 
-	public Pawn getMoves(Player player, int roll) {
+	public Pawn getMove(Player player, int roll) {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 	

@@ -16,4 +16,12 @@ public class Move {
         this.pawn = pawn;
         this.roll = roll;
     }
+    
+    public Pawn getPawn() {
+        return this.pawn;
+    }
+    
+    public int getRoll() {
+        return this.roll;
+    }
 }

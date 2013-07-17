@@ -39,11 +39,13 @@ public class Renderer2D {
         this.newAnimations = new ArrayList<IAnimatable>();
 
         for(Square s : game.getBoard().getSquareList()) {
-          graphics.add(new SquareGraphic(s));
+            s.setRendering(new SquareGraphic(s));
+            graphics.add(s.getRendering());
         }
 
         for(Pawn pw : game.getBoard().getPawnList()) {
-           graphics.add(new PawnGraphic(pw));
+            pw.setRendering(new PawnGraphic(pw));
+            graphics.add(pw.getRendering());
         }
 
         /**

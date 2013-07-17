@@ -36,5 +36,10 @@ public class Animation2DGroup implements IAnimatable {
         for(IAnimatable i : group)
             i.start();
     }
+
+    /*@Override
+    public void onComplete(Action done) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }*/
     
 }

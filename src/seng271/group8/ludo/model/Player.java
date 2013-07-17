@@ -38,6 +38,10 @@ public class Player {
            this.strategy = strat;
        }
        
+       public void getMove() {
+           this.strategy.getMove(this, playerNum);
+       }
+       
        public void setPath(LinkedList<Square> path) {
            this.path = path;
        }
