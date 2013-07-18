@@ -6,6 +6,7 @@ package seng271.group8.ludo;
 
 import java.util.ArrayList;
 import java.util.List;
+import seng271.group8.ludo.events.MoveEvent;
 import seng271.group8.ludo.model.Board;
 import seng271.group8.ludo.model.Move;
 import seng271.group8.ludo.model.Path;
@@ -21,7 +22,7 @@ import seng271.group8.ludo.model.Square;
 public class GameLogic {
    private Board model;
    private List<Player> players;
-   private int turn = 1; // Player 1 always starts
+   private int turn = 0; // Player 1 always starts
    private int roll = 6; // Hardcoded for testing
 
    public GameLogic(Board b) {
@@ -41,14 +42,14 @@ public class GameLogic {
        if(selected != null) {
             move = this.getValidMove(selected);
             // Player has clicked another players pawn
-            if(move != null && move.getSquare().equals(s)) {
-                // It is a valid move for the current pawn
-                // TODO: Do the move
-            } else {
+            if(move != null) {
+                if(move.getSquare().equals(s)) {
+                    GameController.put(new MoveEvent(move));     
+                    selected.getRendering().setScale(1);
+                } 
                 move.getSquare().getRendering().setScale(1);
                 selected.getRendering().setScale(1);
                 player.clearSelectedPawn();
-                // TODO: Remove Highlight
             }
        } else if(s.getPawn() != null && 
                s.getPawn().getOwner().equals(player)) {

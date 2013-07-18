@@ -17,7 +17,7 @@ public class MoveHandler implements Handler<MoveEvent> {
     private GameLogic game;
     private Renderer2D renderer;
     
-    public MoveHandler(GameLogic game, Renderer2D renderer) {
+    public MoveHandler(GameLogic game) {
         this.game = game;
     }
     
