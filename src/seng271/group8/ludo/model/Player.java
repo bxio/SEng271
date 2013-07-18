@@ -19,10 +19,10 @@ public class Player {
         private Path path;
         private List<Pawn> pawns;
         private Pawn selected;
-        private int playerNum;
+        private int id;
         
        public Player(int num) {
-           this.playerNum = num;
+           this.id = num;
        }
        
        public Pawn getSelectedPawn() {
@@ -46,7 +46,7 @@ public class Player {
        }
        
        public Move getMove() {
-           return this.strategy.getMove(this, playerNum);
+           return this.strategy.getMove(this, id);
        }
        
        public void setPath(Path path) {
@@ -64,5 +64,8 @@ public class Player {
        public List<Pawn> getPawns() {
            return this.pawns;
        }
-
+       
+       public int getId() {
+           return this.id;
+       }
 }

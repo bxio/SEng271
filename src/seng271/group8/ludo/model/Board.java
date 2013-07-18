@@ -2,7 +2,6 @@ package seng271.group8.ludo.model;
 
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import seng271.group8.ludo.strategies.Strategy;
 
@@ -40,12 +39,22 @@ public class Board {
         }
     }
     
-    public Path buildPath(int player) {
-        Path path = new Path();
-        Square s = getSquareAt(BoardConfig.START_SQUARES[player].x, 
-                BoardConfig.START_SQUARES[player].y);
+    public Path buildPath(Player player) {
+        
+        List<Square> homeSquares = new ArrayList<Square>();
+        
+        for(Pawn pw : player.getPawns()) {
+            homeSquares.add(pw.getPosition());
+        }
+        
+        Path path = new Path(homeSquares);
+        
+        int playerId = player.getId();
+        Square s = getSquareAt(BoardConfig.START_SQUARES[playerId].x, 
+                BoardConfig.START_SQUARES[playerId].y);
         path.add(new PathSegment(s));
-        Point[] pathVectors = this.rotatePoints(BoardConfig.PATH, BoardConfig.ROTATION_OFFSET*player);
+        Point[] pathVectors = this.rotatePoints(BoardConfig.PATH, 
+                BoardConfig.ROTATION_OFFSET*playerId);
 
         for(int j = 0; j < pathVectors.length; j++) {
                 addToPath(path, pathVectors[j]);
@@ -56,15 +65,15 @@ public class Board {
     }
     
     public List<Pawn> buildPawns(int playerNum, Player p) {
-        List<Pawn> pawns = new ArrayList<Pawn>();
+        List<Pawn> playerPawns = new ArrayList<Pawn>();
         for(int i = 0; i < BoardConfig.NUM_PAWNS; i++) {
             int x = BoardConfig.PAWN_HOME[playerNum].x + BoardConfig.PAWN_OFFSETS[i].x; 
             int y = BoardConfig.PAWN_HOME[playerNum].y + BoardConfig.PAWN_OFFSETS[i].y;
             Pawn pawn = new Pawn(p,getSquareAt(x,y));
-            pawns.add(pawn);
+            playerPawns.add(pawn);
             pawnList.add(pawn);
         }
-        return pawns;
+        return playerPawns;
     }
 
     public void buildPlayers(Strategy[] strategies) {
@@ -75,8 +84,8 @@ public class Board {
            Player p = new Player(i);
            p.setStrategy(strategies[i]);
            this.playerList.add(p);
-           p.setPawns(buildPawns(i,p));
-           p.setPath(buildPath(i));
+           p.setPawns(buildPawns(i,p)); 
+           p.setPath(buildPath(p));
         }
     }
     

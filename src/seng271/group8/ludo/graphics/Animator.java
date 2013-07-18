@@ -38,6 +38,7 @@ public class Animator extends Thread {
         this.active = new ArrayList<IAnimatable>();
         this.newAnimations = new ArrayList<IAnimatable>();
         this.events = new HashMap<IAnimatable, GameEvent>();
+        this.setName("Animation Thread");
     }
     
     public void refresh(long dt) {

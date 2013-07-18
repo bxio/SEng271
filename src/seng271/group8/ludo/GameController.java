@@ -37,7 +37,7 @@ public class GameController implements Runnable {
     private List<Move> history;
     
     public GameController() {
-
+       
     }
 
     @Override

@@ -16,6 +16,7 @@ public class Pawn extends GameEntity {
     public Pawn(Player player, Square pos){
         this.owner = player;
         this.square  = pos;
+        pos.setPawn(this);
     }
     
     /** Sets the Pawn's Owner

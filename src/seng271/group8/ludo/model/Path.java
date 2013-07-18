@@ -5,14 +5,18 @@
 package seng271.group8.ludo.model;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
  * @author Alastairs
  */
 public class Path extends LinkedList<PathSegment> {
-    public Path() {
-        
+    
+    private List<Square> homeSquares;
+    
+    public Path(List<Square> startSquares) {
+        this.homeSquares = startSquares;
     }
     
     public PathSegment getSegment(Square s) {
@@ -26,5 +30,21 @@ public class Path extends LinkedList<PathSegment> {
         }
         
         return found;
+    }
+    
+    public Square getHomeSquare(Pawn pw) {
+        Square home = null;
+        
+        for(Square s : homeSquares) {
+                if(pw.getPosition().equals(s)) {
+                    home = s; break;
+                }
+ 
+        }
+        return home;
+    }
+    
+    public List<Square> getHomeSquares() {
+        return this.homeSquares;
     }
 }

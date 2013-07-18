@@ -6,7 +6,6 @@ package seng271.group8.ludo;
 
 import java.util.ArrayList;
 import java.util.List;
-import seng271.group8.ludo.events.MoveEvent;
 import seng271.group8.ludo.model.Board;
 import seng271.group8.ludo.model.Move;
 import seng271.group8.ludo.model.Path;
@@ -22,8 +21,8 @@ import seng271.group8.ludo.model.Square;
 public class GameLogic {
    private Board model;
    private List<Player> players;
-   private int turn = 0; // Player 1 always starts
-   private int roll = 1; // Hardcoded for testing
+   private int turn = 1; // Player 1 always starts
+   private int roll = 6; // Hardcoded for testing
 
    public GameLogic(Board b) {
        this.model = b;
@@ -35,25 +34,30 @@ public class GameLogic {
    }*/
    
    public void squareClicked(Square s) {
+       Move move;
        Player player = getCurrentPlayer();
        Pawn selected = player.getSelectedPawn();
        
        if(selected != null) {
-            Move move = this.getValidMove(selected);
+            move = this.getValidMove(selected);
             // Player has clicked another players pawn
-            if(move.equals(s)) {
+            if(move != null && move.getSquare().equals(s)) {
                 // It is a valid move for the current pawn
                 // TODO: Do the move
+            } else {
+                move.getSquare().getRendering().setScale(1);
+                selected.getRendering().setScale(1);
+                player.clearSelectedPawn();
+                // TODO: Remove Highlight
             }
        } else if(s.getPawn() != null && 
                s.getPawn().getOwner().equals(player)) {
            selected = s.getPawn();
            player.setSelectedPawn(selected);
-           this.getValidMove(selected);
+           move = this.getValidMove(selected);
+           move.getSquare().getRendering().setScale(0.4f);
+           selected.getRendering().setScale(0.2f);
            // TODO: Highlight valid move square
-       } else {
-           player.clearSelectedPawn();
-           // TODO: Remove Highlight
        }
    }
    
@@ -106,25 +110,40 @@ public class GameLogic {
         Path path = player.getPath();
         PathSegment cur;
         int steps = 0;
-        cur = path.getSegment(pw.getPosition()).getNext();
+        Square temp = pw.getPosition();
+        cur = path.getSegment(temp);
         
-        while(cur.getNext() != null) {
-            /**
-             * Logic for determining valid moves!
-             * 
-             * Is block decides if the pawn can pass or occupy
-             * the square.
-             */
-            if(cur.getSquare().canPass(pw) && steps < roll) {
-                continue;
-            } else if(roll == steps && 
-                    cur.getSquare().canOccupy(pw)) {
-               move = new Move(pw, cur.getSquare(), roll);
-            } else {
-                break;
+        if(cur == null) {
+            // Clicked Pawn is not on the Path
+            // Must be on the home squares
+            if(roll == 6) {
+                //Must roll a 6 to enter the board
+                Square s = path.getHomeSquare(pw);
+                if(s != null)
+                    move = new Move(pw, path.getFirst().getSquare() ,roll);
             }
         }
-       
+        else {
+            // Clicked pawn is on the path
+            cur = cur.getNext();
+
+            while(cur.getNext() != null) {
+                /**
+                 * Logic for determining valid moves!
+                 * 
+                 * Is block decides if the pawn can pass or occupy
+                 * the square.
+                 */
+                if(cur.getSquare().canPass(pw) && steps < roll) {
+                    continue;
+                } else if(roll == steps && 
+                        cur.getSquare().canOccupy(pw)) {
+                   move = new Move(pw, cur.getSquare(), roll);
+                } else {
+                    break;
+                }
+            }
+        } 
        return move;
    }
    
