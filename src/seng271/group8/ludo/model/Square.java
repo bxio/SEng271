@@ -15,6 +15,7 @@ public class Square extends GameEntity {
     protected Grid type;
     protected Point position;
     private Pawn pawn = null;
+    private Boolean selected = false;
 	
     public Square(Grid type, Point position) {
         this.type = type;
@@ -35,6 +36,14 @@ public class Square extends GameEntity {
     
     public Point getPosition() {
         return position;
+    }
+    
+    public Boolean isSlected() {
+        return this.selected;
+    }
+    
+    public void setSelected(Boolean selected) {
+        this.selected = selected;
     }
     
     public Boolean canPass(Pawn pw) {

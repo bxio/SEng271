@@ -16,4 +16,8 @@ public class MoveEvent extends GameEvent {
     public MoveEvent(Move m) {
         move = m;
     }
+    
+    public Move getMove() {
+        return this.move;
+    }
 }

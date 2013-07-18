@@ -21,7 +21,7 @@ public class GameMouseListener implements MouseListener {
     private Renderer2D playArea;
     private GameController gc;
     
-    public GameMouseListener(GamePanel game, GameController gc){
+    public GameMouseListener(GamePanel game){
         this.game = game;
         this.gc = gc;
         this.playArea = game.getRenderer2D();
@@ -31,7 +31,7 @@ public class GameMouseListener implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         Point p = playArea.graphicToGridCoords(e.getX(), e.getY());
         BoardClickEvent bc = new BoardClickEvent(p);         
-        gc.put(bc);
+        GameController.put(bc);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class GameMouseListener implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

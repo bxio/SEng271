@@ -23,7 +23,7 @@ public class GameLogic {
    private Board model;
    private List<Player> players;
    private int turn = 0; // Player 1 always starts
-   private int roll;
+   private int roll = 1; // Hardcoded for testing
 
    public GameLogic(Board b) {
        this.model = b;
