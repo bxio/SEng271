@@ -9,6 +9,7 @@ import seng271.group8.ludo.GameController;
 import seng271.group8.ludo.GameLogic;
 import seng271.group8.ludo.events.BoardClickEvent;
 import seng271.group8.ludo.events.MoveEvent;
+import seng271.group8.ludo.graphics.Renderer2D;
 import seng271.group8.ludo.handlers.BoardClickHandler;
 import seng271.group8.ludo.handlers.MoveHandler;
 import seng271.group8.ludo.model.Board;
@@ -28,6 +29,7 @@ public class GameView extends JPanel {
     private GameController gameController;
     private GameLogic gamelogic;
     private Board board;
+    private Renderer2D renderer;
     
     private Thread controllerThread;
     
@@ -37,8 +39,8 @@ public class GameView extends JPanel {
        
         // Create the game model
         board = new Board(strategies);
-        
         gamelogic = new GameLogic(board);
+        renderer = new Renderer2D();
     }
     
     public void start() {
@@ -55,7 +57,7 @@ public class GameView extends JPanel {
         // Wire events
         gameController = new GameController();
         GameController.register(BoardClickEvent.class, new BoardClickHandler(humans, board, gamelogic));
-        GameController.register(MoveEvent.class, new MoveHandler(gamelogic));
+       // GameController.register(MoveEvent.class, new MoveHandler(gamelogic,));
         
         // Start GameEvents thread
         controllerThread = new Thread(gameController);
@@ -63,7 +65,7 @@ public class GameView extends JPanel {
         controllerThread.start();
         
         // Create the game area
-        playArea = new GamePanel(board, gameController);
+        playArea = new GamePanel(board);
         this.add(playArea);
         
         // Create game state
