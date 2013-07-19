@@ -61,7 +61,7 @@ public class BoardConfig {
     // starting at player one (top-right) and rotating clockwise
     public static final double ROTATION_OFFSET = -Math.PI/2;
     // Location of top left home square for each player
-    public static final Point[] PAWN_HOME = {new Point(0,0), new Point(WIDTH-2,0), new Point(0, HEIGHT-2), new Point(WIDTH-2, HEIGHT-2)};
+    public static final Point[] PAWN_HOME = {new Point(0,0), new Point(WIDTH-2,0), new Point(WIDTH-2, HEIGHT-2), new Point(0, HEIGHT-2)};
     // Pawns offset
     public static final Point[] PAWN_OFFSETS =  {new Point(0,0), new Point(0,1), new Point(1,0), new Point(1,1)};
             
