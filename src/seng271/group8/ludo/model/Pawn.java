@@ -1,5 +1,6 @@
 package seng271.group8.ludo.model;
 
+import java.awt.Color;
 import java.awt.Point;
 
 /*

@@ -15,11 +15,11 @@ import java.util.HashMap;
 public class ColorConfig {
 
     // Player colors
-    public static Color P1_COLOR = new Color(12,23,34);
-    public static Color P2_COLOR;
-    public static Color P3_COLOR;
-    public static Color p4_COLOR;
- 
+    public static Color P1_COLOR = new Color(65,105,225);
+    public static Color P2_COLOR =  new Color(255,215,0);
+    public static Color P3_COLOR = new Color(50,205,50);
+    public static Color P4_COLOR = new Color(160,82,45);
+    public static Color[] PLAYER_COLORS = {P1_COLOR, P2_COLOR, P3_COLOR, P4_COLOR};
     
     // Square colors
     public static Color P1_SQ_COLOR = Color.BLUE;

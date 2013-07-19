@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import seng271.group8.ludo.model.ColorConfig;
 import seng271.group8.ludo.model.Pawn;
 
 /**
@@ -33,8 +34,11 @@ public class PawnGraphic extends LudoGraphic{
         Dimension size = this.getDrawSize(squareSize);
         Point pos = this.getDrawPosition(squareSize);
 
-        g2.setColor(Color.BLACK);
+        g2.setColor(ColorConfig.PLAYER_COLORS[pawn.getOwner().getId()]);
         g2.fillOval(pos.x, pos.y, size.width, size.height);
+        g2.setColor(Color.BLACK);
+        g2.drawOval(pos.x, pos.y, size.width-1, size.height-1);
+       
         //System.out.println("Square Size " + squareSize.width + " Pawn s: " + size.width + " Pos :" + pos.x + " " + pos.y);
         //System.out.println("X " + (int)this.position.getX() + " Y " + (int)this.position.getY());
         //g2.setStroke( new BasicStroke (2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
