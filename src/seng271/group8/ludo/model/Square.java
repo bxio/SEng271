@@ -13,8 +13,8 @@ import java.awt.Point;
  */
 public class Square extends GameEntity {
     protected Grid type;
-    private Pawn pawn = null;
-    private Boolean selected = false;
+    protected Pawn pawn = null;
+    protected Boolean selected = false;
 	
     public Square(Grid type, Point position) {
         this.type = type;
@@ -47,6 +47,12 @@ public class Square extends GameEntity {
     }
     
     public Boolean canOccupy(Pawn pw) {
-        return true;
+        Boolean can = true;
+        
+        if(this.pawn != null) {
+            if(this.pawn.getOwner().equals(pw.getOwner()))
+                can = false;
+        }
+        return can;
     }
 }

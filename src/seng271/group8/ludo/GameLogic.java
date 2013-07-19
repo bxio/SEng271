@@ -54,11 +54,12 @@ public class GameLogic {
        } else if(s.getPawn() != null && 
                s.getPawn().getOwner().equals(player)) {
            selected = s.getPawn();
-           player.setSelectedPawn(selected);
            move = this.getValidMove(selected);
-           move.getSquares().getLast().getRendering().setScale(0.4f);
+           if(move != null) {
+            move.getSquares().getLast().getRendering().setScale(0.4f);
            selected.getRendering().setScale(0.2f);
-           // TODO: Highlight valid move square
+           player.setSelectedPawn(selected);
+           }           // TODO: Highlight valid move square
        }
    }
    
@@ -121,9 +122,10 @@ public class GameLogic {
             if(roll == 6) {
                 //Must roll a 6 to enter the board
                 Square s = path.getHomeSquare(pw);
-                if(s != null) {
-                   squares.add(path.getFirst().getSquare());
-                    move = new Move(pw, squares ,roll);
+                Square start = path.getFirst().getSquare();
+                if(s != null && start.canOccupy(pw)) {
+                   squares.add(start);
+                   move = new Move(pw, squares ,roll);
                 }
             }
         }

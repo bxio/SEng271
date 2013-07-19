@@ -33,8 +33,8 @@ public abstract class LudoGraphic {
     }
     
     public Point getDrawPosition(Dimension squareSize) {
-        return new Point((int)(squareSize.width*(this.position.getX()+(1-this.xPercent)/2f)), 
-                    (int)(squareSize.width*(this.position.getY()+(1-this.yPercent)/2f)));
+        return new Point((int)(squareSize.width*(this.position.getX()+(1-this.xPercent*scale)/2f)), 
+                    (int)(squareSize.width*(this.position.getY()+(1-this.yPercent*scale)/2f)));
     }
     
     public Dimension getDrawSize(Dimension squareSize) {

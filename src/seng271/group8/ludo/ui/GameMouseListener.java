@@ -29,6 +29,7 @@ public class GameMouseListener implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        System.out.println("Am I missing clicks?");
         Point p = playArea.graphicToGridCoords(e.getX(), e.getY());
         BoardClickEvent bc = new BoardClickEvent(p);         
         GameController.put(bc);
@@ -36,6 +37,7 @@ public class GameMouseListener implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
+        System.out.println("pressed");
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

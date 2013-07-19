@@ -26,11 +26,14 @@ public class MoveBuilder implements AnimationBuilder {
                 modelPosition.y != graphicPosition.getY()) {
             // Build a move animation
             Animation2DSeries series = new Animation2DSeries();
+            int time = 500;
             for(Square s : pw.getMove().getSquares()) {
                 Animation2DSeries scale = new Animation2DSeries();
-               // Scale Stuff    
+                scale.add(new ScaleAnimation(g.getRendering(),1.5f,time/2));
+                scale.add(new ScaleAnimation(g.getRendering(),1.0f,time/2));
                 Animation2DGroup group = new Animation2DGroup();
-                group.add(new TranslateAnimation(g.getRendering(),s.getPosition(),500));
+                group.add(scale);
+                group.add(new TranslateAnimation(g.getRendering(),s.getPosition(),time));
             
                 series.add(group);
             }

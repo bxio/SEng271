@@ -13,5 +13,13 @@ import java.awt.Point;
 public class Goal extends Square {
     public Goal(Grid type, Point position) {
             super(type, position);
-        }
+    }
+    
+    @Override
+    public Boolean canPass(Pawn pw) {
+        Boolean success = true;
+        if(pawn != null)
+            success = false;
+        return success;
+    }   
 }

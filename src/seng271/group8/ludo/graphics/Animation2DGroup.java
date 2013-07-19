@@ -14,6 +14,7 @@ import java.util.List;
 public class Animation2DGroup implements IAnimatable {
     
     private List<IAnimatable> group;
+    private List<IAnimatable> finished = new ArrayList<IAnimatable>();
     
     public Animation2DGroup() {
         this.group = new ArrayList<IAnimatable>();
@@ -25,10 +26,23 @@ public class Animation2DGroup implements IAnimatable {
 
     @Override
     public Boolean tic(long dt) {
-        Boolean done = true;
+        Boolean done = true, completed;
+        
         for(IAnimatable i : group) {
-            done = done && i.tic(dt);
+            try{
+                completed = i.tic(dt);
+                if(completed)
+                    finished.add(i);
+                done = done && completed;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
+        
+        for(IAnimatable i : finished)
+            group.remove(i);
+        
+        finished.clear();
         return done;
     }
 
