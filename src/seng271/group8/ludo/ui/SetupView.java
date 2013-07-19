@@ -31,13 +31,13 @@ public class SetupView extends JPanel {
     public SetupView(LudoWindow ludo) {
         
         Strategy[] strategies = {
-            new AggressiveStrategy(),
-            new BrutalStrategy(),
-            new CautiousStrategy(),
-            new DefensiveStrategy(),
-            new HumanStrategy(),
-            new MoveFirstStrategy(),
-            new MoveLastStrategy()
+   //         new AggressiveStrategy(),
+//            new BrutalStrategy(),
+//            new CautiousStrategy(),
+//            new DefensiveStrategy(),
+            new HumanStrategy()
+//            new MoveFirstStrategy(),
+//            new MoveLastStrategy()
         };
         
         this.setLayout(new GridBagLayout());

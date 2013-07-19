@@ -20,7 +20,7 @@ public class PawnGraphic extends LudoGraphic{
     private Pawn pawn;
     
     public PawnGraphic(Pawn pawn) {
-        super(pawn.getPosition().getPosition());
+        super(pawn.getSquare().getPosition());
         this.pawn = pawn;
         this.xPercent = this.yPercent = 0.5f;
        

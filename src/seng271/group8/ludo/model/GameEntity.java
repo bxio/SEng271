@@ -4,8 +4,10 @@
  */
 package seng271.group8.ludo.model;
 
+import java.awt.Point;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.Observable;
 import seng271.group8.ludo.graphics.LudoGraphic;
 
 /**
@@ -13,7 +15,9 @@ import seng271.group8.ludo.graphics.LudoGraphic;
  * @author alastair
  */
 public class GameEntity {
-    private LudoGraphic rendering;
+    protected LudoGraphic rendering;
+    protected Point position;
+
     protected final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
     
     public void setRendering(LudoGraphic g) {
@@ -23,6 +27,11 @@ public class GameEntity {
     public LudoGraphic getRendering() {
         return this.rendering;
     }
+   
+    public Point getPosition() {
+        return this.position;
+    }
+    
     
     public void addPropertyChangeListener(PropertyChangeListener listener) {
          this.pcs.addPropertyChangeListener(listener);

@@ -20,12 +20,12 @@ public class Animation2DGroup implements IAnimatable {
     }
     
     public void add(IAnimatable i) {
-        this.add(i);
+        this.group.add(i);
     }
 
     @Override
     public Boolean tic(long dt) {
-        Boolean done = false;
+        Boolean done = true;
         for(IAnimatable i : group) {
             done = done && i.tic(dt);
         }

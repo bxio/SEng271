@@ -44,7 +44,7 @@ public class Board {
         List<Square> homeSquares = new ArrayList<Square>();
         
         for(Pawn pw : player.getPawns()) {
-            homeSquares.add(pw.getPosition());
+            homeSquares.add(pw.getSquare());
         }
         
         Path path = new Path(homeSquares);
@@ -146,9 +146,9 @@ public class Board {
         PathSegment last = path.getLast();
        
         while(yMag != 0 || xMag != 0) {
-            
-            Square s = this.getSquareAt(last.getSquare().getPosition().x + xInc, 
-                    last.getSquare().getPosition().y + yInc);
+            int xtemp = last.getSquare().getPosition().x +xInc;
+            int ytem = last.getSquare().getPosition().y +yInc;
+            Square s = this.getSquareAt(xtemp, ytem);
            //System.out.println("x:" + (last.getPosition().x + xInc) +" y:" + (last.getPosition().y + yInc));
             yMag += yInc;
             xMag -= xInc;

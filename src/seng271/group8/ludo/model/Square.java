@@ -13,7 +13,6 @@ import java.awt.Point;
  */
 public class Square extends GameEntity {
     protected Grid type;
-    protected Point position;
     private Pawn pawn = null;
     private Boolean selected = false;
 	
@@ -31,13 +30,9 @@ public class Square extends GameEntity {
     }
     
     public Color getColor() {
-            return type.getColor();
+        return type.getColor();
     }
-    
-    public Point getPosition() {
-        return position;
-    }
-    
+
     public Boolean isSlected() {
         return this.selected;
     }

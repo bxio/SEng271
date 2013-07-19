@@ -36,7 +36,7 @@ public class Path extends LinkedList<PathSegment> {
         Square home = null;
         
         for(Square s : homeSquares) {
-                if(pw.getPosition().equals(s)) {
+                if(pw.getSquare().equals(s)) {
                     home = s; break;
                 }
  

@@ -99,9 +99,9 @@ public class Animator extends Thread {
             
             //System.out.println("Wait was:" + wait);
             if(wait > 0) {
-               /*try {
+               try {
                     Thread.sleep(wait);
-               } catch (InterruptedException e) {}*/
+               } catch (InterruptedException e) {}
             }
         }
     }

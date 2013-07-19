@@ -4,7 +4,7 @@
  */
 package seng271.group8.ludo;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import seng271.group8.ludo.events.MoveEvent;
 import seng271.group8.ludo.model.Board;
@@ -43,11 +43,11 @@ public class GameLogic {
             move = this.getValidMove(selected);
             // Player has clicked another players pawn
             if(move != null) {
-                if(move.getSquare().equals(s)) {
+                if(move.getSquares().getLast().equals(s)) {
                     GameController.put(new MoveEvent(move));     
                     selected.getRendering().setScale(1);
                 } 
-                move.getSquare().getRendering().setScale(1);
+                move.getSquares().getLast().getRendering().setScale(1);
                 selected.getRendering().setScale(1);
                 player.clearSelectedPawn();
             }
@@ -56,7 +56,7 @@ public class GameLogic {
            selected = s.getPawn();
            player.setSelectedPawn(selected);
            move = this.getValidMove(selected);
-           move.getSquare().getRendering().setScale(0.4f);
+           move.getSquares().getLast().getRendering().setScale(0.4f);
            selected.getRendering().setScale(0.2f);
            // TODO: Highlight valid move square
        }
@@ -67,7 +67,7 @@ public class GameLogic {
    }
    
    public void makeMakeMove(Move m) {
-       
+       m.getPawn().setMove(m);
    }
    
    public void moveFinished() {
@@ -77,6 +77,7 @@ public class GameLogic {
    
    public void advanceTurn() {
        turn = (turn + 1) % players.size();
+       System.out.println(turn);
    }
    
    public void setModel(Board b) {
@@ -91,8 +92,8 @@ public class GameLogic {
     * @param player
     * @return 
     */
-   public List<Move> getValidMoves (Player player) {
-       List<Move> moves = new ArrayList<Move>();
+   public LinkedList<Move> getValidMoves (Player player) {
+       LinkedList<Move> moves = new LinkedList<Move>();
     
        
        for(Pawn pw : player.getPawns()) {
@@ -108,11 +109,11 @@ public class GameLogic {
    
    public Move getValidMove(Pawn pw, Player player) {
         Move move = null;
+        LinkedList<Square> squares = new LinkedList<Square>();
         Path path = player.getPath();
         PathSegment cur;
-        int steps = 0;
-        Square temp = pw.getPosition();
-        cur = path.getSegment(temp);
+        int steps = 1;
+        cur = path.getSegment(pw.getSquare());
         
         if(cur == null) {
             // Clicked Pawn is not on the Path
@@ -120,13 +121,15 @@ public class GameLogic {
             if(roll == 6) {
                 //Must roll a 6 to enter the board
                 Square s = path.getHomeSquare(pw);
-                if(s != null)
-                    move = new Move(pw, path.getFirst().getSquare() ,roll);
+                if(s != null) {
+                   squares.add(path.getFirst().getSquare());
+                    move = new Move(pw, squares ,roll);
+                }
             }
         }
         else {
             // Clicked pawn is on the path
-            cur = cur.getNext();
+            //cur = cur.getNext();
 
             while(cur.getNext() != null) {
                 /**
@@ -135,14 +138,20 @@ public class GameLogic {
                  * Is block decides if the pawn can pass or occupy
                  * the square.
                  */
-                if(cur.getSquare().canPass(pw) && steps < roll) {
-                    continue;
+                PathSegment next = cur.getNext();
+                squares.add(next.getSquare());
+                
+                if(next.getSquare().canPass(pw) && steps < roll) {
+                    steps++;
+                } else if (next.getNext() == null && 
+                            next.getSquare().canOccupy(pw)) {
+                   move = new Move(pw, squares, roll);
                 } else if(roll == steps && 
-                        cur.getSquare().canOccupy(pw)) {
-                   move = new Move(pw, cur.getSquare(), roll);
-                } else {
-                    break;
+                        next.getSquare().canOccupy(pw)) {
+                   move = new Move(pw, squares, roll);
+                   break;
                 }
+                cur = cur.getNext();
             }
         } 
        return move;

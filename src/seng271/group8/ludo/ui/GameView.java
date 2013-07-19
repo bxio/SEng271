@@ -9,9 +9,11 @@ import seng271.group8.ludo.GameController;
 import seng271.group8.ludo.GameLogic;
 import seng271.group8.ludo.events.BoardClickEvent;
 import seng271.group8.ludo.events.MoveEvent;
+import seng271.group8.ludo.events.TurnEvent;
 import seng271.group8.ludo.graphics.Renderer2D;
 import seng271.group8.ludo.handlers.BoardClickHandler;
 import seng271.group8.ludo.handlers.MoveHandler;
+import seng271.group8.ludo.handlers.TurnEventHandler;
 import seng271.group8.ludo.model.Board;
 import seng271.group8.ludo.model.Player;
 import seng271.group8.ludo.strategies.HumanStrategy;
@@ -57,7 +59,8 @@ public class GameView extends JPanel {
         // Wire events
         gameController = new GameController();
         GameController.register(BoardClickEvent.class, new BoardClickHandler(humans, board, gamelogic));
-       // GameController.register(MoveEvent.class, new MoveHandler(gamelogic,));
+        GameController.register(MoveEvent.class, new MoveHandler(gamelogic));
+        GameController.register(TurnEvent.class, new TurnEventHandler(gamelogic));
         
         // Start GameEvents thread
         controllerThread = new Thread(gameController);

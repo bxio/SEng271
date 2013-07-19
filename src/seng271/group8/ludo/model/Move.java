@@ -4,18 +4,20 @@
  */
 package seng271.group8.ludo.model;
 
+import java.util.LinkedList;
+
 /**
  *
  * @author Alastairs
  */
 public class Move {
-    private Square square;
     private Pawn pawn;
     private int roll;
+    private LinkedList<Square> squares;
     
-    public Move(Pawn pawn, Square square, int roll) {
+    public Move(Pawn pawn, LinkedList<Square> squares, int roll) {
         this.pawn = pawn;
-        this.square = square;
+        this.squares = squares;
         this.roll = roll;
     }
     
@@ -27,7 +29,7 @@ public class Move {
         return this.roll;
     }
     
-    public Square getSquare() {
-        return this.square;
+    public LinkedList<Square> getSquares() {
+        return this.squares;
     }
 }
