@@ -17,6 +17,8 @@ import seng271.group8.ludo.graphics.LudoGraphic;
 public class GameEntity {
     protected LudoGraphic rendering;
     protected Point position;
+    protected Boolean selected = false;
+    public static final String SELECTED = "SELECTED";
 
     protected final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
     
@@ -30,6 +32,12 @@ public class GameEntity {
    
     public Point getPosition() {
         return this.position;
+    }
+    
+    public void setSelected(Boolean selected) {
+        Boolean old = this.selected;
+        this.selected = selected;
+        this.pcs.firePropertyChange(SELECTED, old, selected);
     }
     
     

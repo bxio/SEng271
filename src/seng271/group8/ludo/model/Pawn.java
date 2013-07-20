@@ -16,8 +16,8 @@ public class Pawn extends GameEntity {
     private Player owner;
     private Square square;
     private Move move;
+    public int id = 0;
     public static final String MOVE = "MOVE";
-    public static final String SELECTED = "SELECTED";
     
     public Pawn(Player player, Square pos){
         this.owner = player;

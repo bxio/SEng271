@@ -45,10 +45,10 @@ public class GameLogic {
             if(move != null) {
                 if(move.getSquares().getLast().equals(s)) {
                     GameController.put(new MoveEvent(move));     
-                    selected.getRendering().setScale(1);
-                } 
-                move.getSquares().getLast().getRendering().setScale(1);
-                selected.getRendering().setScale(1);
+                    move.getSquares().getLast().setSelected(Boolean.FALSE);
+                }
+                move.getSquares().getLast().setSelected(true);
+                selected.setSelected(false);
                 player.clearSelectedPawn();
             }
        } else if(s.getPawn() != null && 
@@ -56,9 +56,9 @@ public class GameLogic {
            selected = s.getPawn();
            move = this.getValidMove(selected);
            if(move != null) {
-            move.getSquares().getLast().getRendering().setScale(0.4f);
-           selected.getRendering().setScale(0.2f);
-           player.setSelectedPawn(selected);
+                move.getSquares().getLast().setSelected(true);
+                selected.setSelected(true);
+                player.setSelectedPawn(selected);
            }           // TODO: Highlight valid move square
        }
    }

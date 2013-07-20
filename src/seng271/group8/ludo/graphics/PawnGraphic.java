@@ -8,7 +8,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Point2D;
 import seng271.group8.ludo.model.ColorConfig;
 import seng271.group8.ludo.model.Pawn;
 
@@ -19,7 +20,7 @@ import seng271.group8.ludo.model.Pawn;
 public class PawnGraphic extends LudoGraphic{
     
     private Pawn pawn;
-    
+ 
     public PawnGraphic(Pawn pawn) {
         super(pawn.getSquare().getPosition());
         this.pawn = pawn;
@@ -31,18 +32,15 @@ public class PawnGraphic extends LudoGraphic{
     public void paint(Graphics g, Dimension squareSize) {
         Graphics2D g2 = (Graphics2D) g;
         
-        Dimension size = this.getDrawSize(squareSize);
-        Point pos = this.getDrawPosition(squareSize);
-
+        Point2D size = this.getDrawSize(squareSize);
+        Point2D pos = this.getDrawPosition(squareSize);
+        Ellipse2D shape = new Ellipse2D.Double(pos.getX(), pos.getY(), size.getX(), size.getY());
+        
         g2.setColor(ColorConfig.PLAYER_COLORS[pawn.getOwner().getId()]);
-        g2.fillOval(pos.x, pos.y, size.width, size.height);
-        g2.setColor(Color.BLACK);
-        g2.drawOval(pos.x, pos.y, size.width-1, size.height-1);
+        g2.fill(shape);
+        
+//        g2.setColor(Color.gray);
+//        g2.draw(shape);
        
-        //System.out.println("Square Size " + squareSize.width + " Pawn s: " + size.width + " Pos :" + pos.x + " " + pos.y);
-        //System.out.println("X " + (int)this.position.getX() + " Y " + (int)this.position.getY());
-        //g2.setStroke( new BasicStroke (2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-       // g2.setColor(Color.BLACK);
-       // g2.drawOval(x+ 10,y+10,squareSize.width - 20,squareSize.height - 20);*/
     }
 }

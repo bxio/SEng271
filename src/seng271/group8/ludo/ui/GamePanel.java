@@ -11,6 +11,7 @@ import javax.swing.JComponent;
 import seng271.group8.ludo.graphics.Animator;
 import seng271.group8.ludo.graphics.MoveBuilder;
 import seng271.group8.ludo.graphics.PawnGraphic;
+import seng271.group8.ludo.graphics.PulseBuilder;
 import seng271.group8.ludo.graphics.Renderer2D;
 import seng271.group8.ludo.graphics.SquareGraphic;
 import seng271.group8.ludo.model.Board;
@@ -33,24 +34,26 @@ public class GamePanel extends JComponent implements ComponentListener {
         this.board = b;
         this.renderer = new Renderer2D();
         
-        
         this.animationThread = new Animator(this);
         // make sure the thread stops when the JFrame is closed
         this.animationThread.setDaemon(true);
         this.animationThread.start();
         
+        MoveBuilder mb = new MoveBuilder();
+        PulseBuilder pb = new PulseBuilder();
+        
         for(Square s : board.getSquareList()) {
             s.setRendering(new SquareGraphic(s));
+            s.addPropertyChangeListener(new PawnChangeListener(animationThread,
+                    mb,pb));
             renderer.add(s.getRendering());
         }
-
-        MoveBuilder mb = new MoveBuilder();
         
         for(Pawn pw : board.getPawnList()) {
             pw.setRendering(new PawnGraphic(pw));
             renderer.add(pw.getRendering());
             pw.addPropertyChangeListener(new PawnChangeListener(
-                    animationThread,mb));
+                    animationThread,mb, pb));
         }
         
         this.addMouseListener(new GameMouseListener(this));

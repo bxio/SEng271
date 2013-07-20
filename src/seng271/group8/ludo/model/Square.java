@@ -37,11 +37,6 @@ public class Square extends GameEntity {
         return this.selected;
     }
     
-    public void setSelected(Boolean selected) {
-        this.selected = selected;
-        pcs.firePropertyChange("highlight", selected, this.selected);
-    }
-    
     public Boolean canPass(Pawn pw) {
         return true;
     }

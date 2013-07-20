@@ -10,7 +10,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import seng271.group8.ludo.model.Square;
 
 /**
@@ -20,28 +22,37 @@ import seng271.group8.ludo.model.Square;
 public class SquareGraphic extends LudoGraphic {
     
     private Square square;
+    private float outerXPercent = 1f, outerYPercent = 1f;
     
     public SquareGraphic(Square square) {
         super(square.getPosition());
         this.square = square;
-        this.xPercent = this.yPercent = 0.7f;
+        this.xPercent = this.yPercent = 0.65f;
     }
     
     @Override
     public void paint(Graphics g, Dimension squareSize) {
         Graphics2D g2 = (Graphics2D)g;
         
-        Point pos = getDrawPosition(squareSize);
-        Dimension size = getDrawSize(squareSize);
+        Point2D pos = getDrawPosition(squareSize);
+        Point2D size = getDrawSize(squareSize);
 
-        //g2.draw(new Rectangle2D.Double(x,y,squareSize.width,squareSize.height));
-        //g2.drawRect(x, y, squareSize.width, squareSize.height);
-        
+        Rectangle2D bounds = new Rectangle2D.Double(
+                squareSize.width*position.getX(),squareSize.height*position.getY(),
+                squareSize.width, squareSize.height);
+       
+        Ellipse2D shape = new Ellipse2D.Double(pos.getX(), pos.getY(), size.getX(), size.getY());
+        //g2.setColor(new Color(224,195,108));
+        //g2.fill(bounds);
         g2.setColor(square.getColor());
-        g2.fillOval(pos.x,pos.y,size.width,size.height);
+        g2.fill(shape);
+        g2.setColor(new Color(139,137,137));
+        g2.setStroke( new BasicStroke (1.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+        g2.draw(bounds);
         g2.setStroke( new BasicStroke (2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
         g2.setColor(Color.BLACK);
-        g2.drawOval(pos.x,pos.y,size.width,size.height);
+        g2.draw(shape);
+        
         //drawDebugIndexes(g2, x ,y);
         
     }

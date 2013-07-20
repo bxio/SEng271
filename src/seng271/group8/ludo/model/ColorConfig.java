@@ -26,7 +26,7 @@ public class ColorConfig {
     public static Color P2_SQ_COLOR = Color.YELLOW;
     public static Color P3_SQ_COLOR = Color.GREEN;
     public static Color P4_SQ_COLOR = Color.RED;
-    public static Color EMPTY_SQ = Color.GRAY;
+    public static Color EMPTY_SQ = new Color(220,220,220);
     public static Color SQUARE = Color.WHITE;
     
    /* public static EnumMap<Grid, Color> squareColors;

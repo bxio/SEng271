@@ -22,6 +22,8 @@ public abstract class LudoGraphic {
     // scaled to x,y percentage of a grid square
     protected float xPercent = 1;
     protected float yPercent = 1;
+    protected Dimension lastSize;
+    protected Point lastPosition;
      
    public LudoGraphic(Point p) {
         this.position = p;
@@ -32,14 +34,16 @@ public abstract class LudoGraphic {
         this.position = p;
     }
     
-    public Point getDrawPosition(Dimension squareSize) {
-        return new Point((int)(squareSize.width*(this.position.getX()+(1-this.xPercent*scale)/2f)), 
-                    (int)(squareSize.width*(this.position.getY()+(1-this.yPercent*scale)/2f)));
+    public Point2D getDrawPosition(Dimension squareSize) {
+        Point2D p = new Point2D.Double((squareSize.width*(this.position.getX()+(1-this.xPercent*scale)/2f)), 
+                    (squareSize.width*(this.position.getY()+(1-this.yPercent*scale)/2f)));
+        return p;
     }
     
-    public Dimension getDrawSize(Dimension squareSize) {
-        return new Dimension((int)(this.xPercent*squareSize.width*scale), 
-                (int)(this.yPercent*squareSize.height*scale));
+    public Point2D getDrawSize(Dimension squareSize) {
+        Point2D d  = new Point2D.Double((this.xPercent*squareSize.width*scale), 
+                (this.yPercent*squareSize.height*scale));
+        return d;
     }
     
     public void setXPercent(float xPercent) {
