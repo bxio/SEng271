@@ -1,7 +1,7 @@
 package seng271.group8.ludo.strategies;
 
+import java.util.List;
 import seng271.group8.ludo.model.Move;
-import seng271.group8.ludo.model.Player;
 
 /**
  *
@@ -14,7 +14,10 @@ public class AggressiveStrategy extends AbstractStrategy {
             this.name = "Aggressive";
         }
 
-	public Move getMove(Player player, int roll) {
-            return null;//return new Move();
+	public Move getMove(List<Move> moves) {
+            Move bestMove = null;
+            if(!moves.isEmpty())
+                bestMove =  moves.get(0);
+            return bestMove;
 	}
 }

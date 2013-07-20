@@ -44,8 +44,8 @@ public class GamePanel extends JComponent implements ComponentListener {
         
         for(Square s : board.getSquareList()) {
             s.setRendering(new SquareGraphic(s));
-            s.addPropertyChangeListener(new PawnChangeListener(animationThread,
-                    mb,pb));
+//            s.addPropertyChangeListener(new PawnChangeListener(animationThread,
+//                    mb,pb));
             renderer.add(s.getRendering());
         }
         

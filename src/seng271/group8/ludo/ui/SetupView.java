@@ -31,7 +31,7 @@ public class SetupView extends JPanel {
     public SetupView(LudoWindow ludo) {
         
         Strategy[] strategies = {
-   //         new AggressiveStrategy(),
+            new AggressiveStrategy(),
 //            new BrutalStrategy(),
 //            new CautiousStrategy(),
 //            new DefensiveStrategy(),

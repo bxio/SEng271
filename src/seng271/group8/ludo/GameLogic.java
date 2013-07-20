@@ -71,11 +71,6 @@ public class GameLogic {
        m.getPawn().setMove(m);
    }
    
-   public void moveFinished() {
-       advanceTurn();
-       players.get(turn).getMove();
-   }
-   
    public void advanceTurn() {
        turn = (turn + 1) % players.size();
        System.out.println(turn);
@@ -99,6 +94,7 @@ public class GameLogic {
        
        for(Pawn pw : player.getPawns()) {
            Move m = getValidMove(pw);
+           moves.add(m);
        }
        
        return moves;
@@ -161,6 +157,7 @@ public class GameLogic {
    
    public Move getNextMove() {
        advanceTurn();
-       return getCurrentPlayer().getMove();
+       Player p = getCurrentPlayer();
+       return p.getMove(getValidMoves(p));
    }
 }

@@ -35,7 +35,7 @@ public class PawnChangeListener implements PropertyChangeListener {
         if(Pawn.MOVE.equals(propertyName)) {
             ani = moveBuilder.build((Pawn)evt.getSource());               
         } else if (Pawn.SELECTED.equals(propertyName)) {
-            ani = pulseBuilder.build((GameEntity)evt.getSource());
+            //ani = pulseBuilder.build((GameEntity)evt.getSource());
         }
          if(ani != null)
                 animator.addAnimation(ani, new TurnEvent());

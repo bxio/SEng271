@@ -45,8 +45,8 @@ public class Player {
            this.strategy = strat;
        }
        
-       public Move getMove() {
-           return this.strategy.getMove(this, id);
+       public Move getMove(List<Move> moves) {
+           return this.strategy.getMove(moves);
        }
        
        public void setPath(Path path) {
