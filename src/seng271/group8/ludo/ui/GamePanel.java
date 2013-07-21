@@ -5,9 +5,13 @@
 package seng271.group8.ludo.ui;
 
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JComponent;
+import seng271.group8.ludo.graphics.AnimationBuilder;
 import seng271.group8.ludo.graphics.Animator;
 import seng271.group8.ludo.graphics.MoveBuilder;
 import seng271.group8.ludo.graphics.PawnGraphic;
@@ -28,6 +32,7 @@ public class GamePanel extends JComponent implements ComponentListener {
     private Board board;
     private Renderer2D renderer;
     private Animator animationThread;
+    private Map<Class<? extends AnimationBuilder>, AnimationBuilder> animationBuilders;
     
     public GamePanel(Board b) {
         this.setOpaque(true);
@@ -39,13 +44,15 @@ public class GamePanel extends JComponent implements ComponentListener {
         this.animationThread.setDaemon(true);
         this.animationThread.start();
         
-        MoveBuilder mb = new MoveBuilder();
-        PulseBuilder pb = new PulseBuilder();
+        animationBuilders = new HashMap<Class<? extends AnimationBuilder>, 
+                            AnimationBuilder>();
+        animationBuilders.put(MoveBuilder.class, new MoveBuilder());
+        animationBuilders.put(PulseBuilder.class, new PulseBuilder());
         
         for(Square s : board.getSquareList()) {
             s.setRendering(new SquareGraphic(s));
-//            s.addPropertyChangeListener(new PawnChangeListener(animationThread,
-//                    mb,pb));
+            s.addPropertyChangeListener(new PawnChangeListener(animationThread,
+                    animationBuilders));
             renderer.add(s.getRendering());
         }
         
@@ -53,7 +60,7 @@ public class GamePanel extends JComponent implements ComponentListener {
             pw.setRendering(new PawnGraphic(pw));
             renderer.add(pw.getRendering());
             pw.addPropertyChangeListener(new PawnChangeListener(
-                    animationThread,mb, pb));
+                    animationThread,animationBuilders));
         }
         
         this.addMouseListener(new GameMouseListener(this));
@@ -72,6 +79,10 @@ public class GamePanel extends JComponent implements ComponentListener {
        
        renderer.paint(g);
        //System.out.println(System.currentTimeMillis()-start);
+    }
+    
+    public void highlightSquare(Point p) {
+        
     }
     
     public Renderer2D getRenderer2D() {

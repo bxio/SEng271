@@ -6,9 +6,8 @@ package seng271.group8.ludo.graphics;
 
 /**
  *
- * @author Alastairs
+ * @author alastair
  */
-public interface AbstractAnimationBuilder {
-    public IAnimatable build(); 
-   // public void start();
+public abstract class AbstractAnimationBuilder implements AnimationBuilder {
+    
 }

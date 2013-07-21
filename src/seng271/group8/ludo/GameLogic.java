@@ -7,6 +7,7 @@ package seng271.group8.ludo;
 import java.util.LinkedList;
 import java.util.List;
 import seng271.group8.ludo.events.MoveEvent;
+import seng271.group8.ludo.events.TurnEvent;
 import seng271.group8.ludo.model.Board;
 import seng271.group8.ludo.model.Move;
 import seng271.group8.ludo.model.Path;
@@ -23,10 +24,12 @@ public class GameLogic {
    private Board model;
    private List<Player> players;
    private int turn = 0; // Player 1 always starts
-   private int roll = 6; // Hardcoded for testing
+   private int roll = 1; // Hardcoded for testing
+   private Dice dice;
 
-   public GameLogic(Board b) {
+   public GameLogic(Board b, Dice d) {
        this.model = b;
+       this.dice = d;
        this.players = b.getPlayers();
    }
    
@@ -69,6 +72,8 @@ public class GameLogic {
    
    public void makeMakeMove(Move m) {
        m.getPawn().setMove(m);
+       if(roll != 6)
+        advanceTurn();
    }
    
    public void advanceTurn() {
@@ -94,7 +99,8 @@ public class GameLogic {
        
        for(Pawn pw : player.getPawns()) {
            Move m = getValidMove(pw);
-           moves.add(m);
+           if(m != null)
+               moves.add(m);
        }
        
        return moves;
@@ -109,7 +115,7 @@ public class GameLogic {
         LinkedList<Square> squares = new LinkedList<Square>();
         Path path = player.getPath();
         PathSegment cur;
-        int steps = 1;
+        int steps = 0;
         cur = path.getSegment(pw.getSquare());
         
         if(cur == null) {
@@ -133,30 +139,47 @@ public class GameLogic {
                 /**
                  * Logic for determining valid moves!
                  * 
-                 * Is block decides if the pawn can pass or occupy
+                 * Each square decides if the pawn can pass or occupy
                  * the square.
                  */
                 PathSegment next = cur.getNext();
                 squares.add(next.getSquare());
+                steps++;
                 
-                if(next.getSquare().canPass(pw) && steps < roll) {
-                    steps++;
-                } else if (next.getNext() == null && 
-                            next.getSquare().canOccupy(pw)) {
-                   move = new Move(pw, squares, roll);
-                } else if(roll == steps && 
+                if(roll == steps && 
                         next.getSquare().canOccupy(pw)) {
                    move = new Move(pw, squares, roll);
                    break;
+                }      
+                else if (next.getNext() == null && 
+                            next.getSquare().canOccupy(pw)) {
+                   move = new Move(pw, squares, roll);
+                   break;
                 }
-                cur = cur.getNext();
+                
+                cur = next;
             }
         } 
        return move;
    }
    
-   public Move getNextMove() {
-       advanceTurn();
+   public void setRoll(int i) {
+       
+   }
+   
+   public void generateRoll() {
+       this.roll = dice.roll();
+   }
+   
+   public int getRoll() {
+       Player p = getCurrentPlayer();
+       roll = p.getRoll(dice);
+       if(roll != -1)
+           p.setHasRolled(true);
+       return roll;
+   }
+   
+   public Move getNextMove() {    
        Player p = getCurrentPlayer();
        return p.getMove(getValidMoves(p));
    }

@@ -7,6 +7,7 @@ package seng271.group8.ludo.ui;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import seng271.group8.ludo.GameController;
 import seng271.group8.ludo.events.BoardClickEvent;
 import seng271.group8.ludo.graphics.Renderer2D;
@@ -15,15 +16,13 @@ import seng271.group8.ludo.graphics.Renderer2D;
  *
  * @author Alastairs
  */
-public class GameMouseListener implements MouseListener {
+public class GameMouseListener implements MouseListener, MouseMotionListener {
     
     private GamePanel game;
     private Renderer2D playArea;
-    private GameController gc;
     
     public GameMouseListener(GamePanel game){
         this.game = game;
-        this.gc = gc;
         this.playArea = game.getRenderer2D();
     }
 
@@ -54,5 +53,16 @@ public class GameMouseListener implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        Point p = playArea.graphicToGridCoords(e.getX(), e.getY());
+        
     }
 }

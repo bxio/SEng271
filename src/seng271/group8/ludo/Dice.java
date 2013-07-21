@@ -21,9 +21,9 @@ public class Dice {
 	 * @return			An integer between 1 and 6 (as the result of the dice roll.)
 	 */
     public int roll(){
-        this.result = generator.nextInt(5)+1;
+        this.result = generator.nextInt(6)+1;
         log.add(new Integer(result));
-        return this.result;
+        return this.result; 
     }
 	/** returns a log of all of the dice results.
 	 * 

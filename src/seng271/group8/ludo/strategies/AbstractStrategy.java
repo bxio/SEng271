@@ -4,6 +4,8 @@
  */
 package seng271.group8.ludo.strategies;
 
+import seng271.group8.ludo.Dice;
+
 /**
  *
  * @author alastair
@@ -14,5 +16,10 @@ public abstract class AbstractStrategy implements Strategy {
     @Override
     public String toString(){
             return this.name;
+    }
+    
+    @Override
+    public int getRoll(Dice d) {
+        return d.roll();
     }
 }

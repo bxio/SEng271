@@ -2,6 +2,7 @@ package seng271.group8.ludo.model;
 
 import java.awt.Color;
 import java.util.List;
+import seng271.group8.ludo.Dice;
 import seng271.group8.ludo.strategies.Strategy;
 
 /*
@@ -20,6 +21,8 @@ public class Player {
         private List<Pawn> pawns;
         private Pawn selected;
         private int id;
+        private Boolean hasRolled = false;
+        private int roll = 0;
         
        public Player(int num) {
            this.id = num;
@@ -45,6 +48,10 @@ public class Player {
            this.strategy = strat;
        }
        
+       public int getRoll(Dice d) {
+           return this.strategy.getRoll(d);
+       }
+       
        public Move getMove(List<Move> moves) {
            return this.strategy.getMove(moves);
        }
@@ -67,5 +74,17 @@ public class Player {
        
        public int getId() {
            return this.id;
+       }
+       
+       public int getRoll() {
+           return roll;
+       }
+       
+       public Boolean getHasRolled() {
+           return hasRolled;
+       }
+       
+       public void setHasRolled(Boolean hasRolled) {
+            this.hasRolled = hasRolled;
        }
 }

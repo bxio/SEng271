@@ -2,15 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package seng271.group8.ludo.events;
+package seng271.group8.ludo.model;
 
 /**
  *
  * @author alastair
  */
-public class GameEvent {
+public class SquareChangeListener {
     
-    public GameEvent() {
-        
-    }
 }

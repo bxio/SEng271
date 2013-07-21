@@ -28,7 +28,8 @@ public class BoardClickHandler extends BaseHandler<BoardClickEvent> {
     
     public void handle(BoardClickEvent evt) {
         // Only handle board clicks for players if it is their turn
-        if(players.contains(game.getCurrentPlayer())) {
+        if(players.contains(game.getCurrentPlayer()) 
+                && game.getCurrentPlayer().getHasRolled()) {
             Square s = board.getSquareAt(evt.getClick().x, evt.getClick().y);
             System.out.println("Clicked stuff");
             if(s != null)

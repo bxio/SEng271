@@ -1,6 +1,7 @@
 package seng271.group8.ludo.strategies;
 
 import java.util.List;
+import seng271.group8.ludo.Dice;
 import seng271.group8.ludo.model.Move;
 
 /**
@@ -9,4 +10,5 @@ import seng271.group8.ludo.model.Move;
  */
 public interface Strategy {
 	public Move getMove(List<Move> moves);//getMoves calculates all available moves
+        public int getRoll(Dice d);
 }

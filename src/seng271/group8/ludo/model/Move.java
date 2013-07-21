@@ -14,11 +14,24 @@ public class Move {
     private Pawn pawn;
     private int roll;
     private LinkedList<Square> squares;
+    private Boolean human = false;
+    
+    public Move() {
+        
+    }
     
     public Move(Pawn pawn, LinkedList<Square> squares, int roll) {
         this.pawn = pawn;
         this.squares = squares;
         this.roll = roll;
+    }
+    
+    public void setHuman(Boolean b) {
+        this.human = b;
+    }
+    
+    public Boolean isHuman() {
+        return human;
     }
     
     public Pawn getPawn() {

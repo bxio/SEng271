@@ -6,6 +6,7 @@ package seng271.group8.ludo.ui;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import seng271.group8.ludo.actions.DiceRollAction;
 
 /**
  *
@@ -21,6 +22,7 @@ public class GameStatePanel extends JPanel{
     public void setup() {
         
         diceRoll = new JButton("Roll");
+        diceRoll.addActionListener(new DiceRollAction());
         this.add(diceRoll);
     }
 }
