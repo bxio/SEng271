@@ -23,11 +23,16 @@ public class RollHandler extends BaseHandler<RollEvent> {
     
     @Override
     public void handle(RollEvent evt) {
-        System.out.println("Player Rolled, waiting for next roll");      
+        System.out.println("Human playe rolled");
+        if(evt.getRoll() == -1) {
+            game.generateRoll();
+            game.getCurrentPlayer().setHasRolled(true);
+        }
+        
         Move m = game.getNextMove();
-        if(m != null)
-           GameController.put(new MoveEvent(m));
+        if(m != null && !m.isHuman())
+            GameController.put(new MoveEvent(m));
         else if (m == null)
-           GameController.put(new TurnEvent());    
+            GameController.put(new TurnEvent());  
     }
 }

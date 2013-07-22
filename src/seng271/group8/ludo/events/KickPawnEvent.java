@@ -4,12 +4,21 @@
  */
 package seng271.group8.ludo.events;
 
+import seng271.group8.ludo.model.Move;
+
 /**
  *
  * @author alastair
  */
 public class KickPawnEvent extends GameEvent {
  
-    public KickPawnEvent() {
+    private Move kick;
+    
+    public KickPawnEvent(Move kick) {
+        this.kick = kick;
+    }
+    
+    public Move getKickMove() {
+        return this.kick;
     }
 }

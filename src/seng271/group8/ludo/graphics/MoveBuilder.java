@@ -39,7 +39,6 @@ public class MoveBuilder implements AnimationBuilder {
                     series.add(group);
                 }
             }
-            
             animation = series;
         }
         

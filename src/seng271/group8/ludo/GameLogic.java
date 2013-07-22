@@ -4,10 +4,9 @@
  */
 package seng271.group8.ludo;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import seng271.group8.ludo.events.MoveEvent;
-import seng271.group8.ludo.events.TurnEvent;
 import seng271.group8.ludo.model.Board;
 import seng271.group8.ludo.model.Move;
 import seng271.group8.ludo.model.Path;
@@ -33,52 +32,24 @@ public class GameLogic {
        this.players = b.getPlayers();
    }
    
-   /*public void setController(GameController gc) {
-       this.gc = gc;
-   }*/
-   
-   public void squareClicked(Square s) {
-       Move move;
-       Player player = getCurrentPlayer();
-       Pawn selected = player.getSelectedPawn();
-       
-       if(selected != null) {
-            move = this.getValidMove(selected);
-            // Player has clicked another players pawn
-            if(move != null) {
-                if(move.getSquares().getLast().equals(s)) {
-                    GameController.put(new MoveEvent(move));     
-                    move.getSquares().getLast().setSelected(Boolean.FALSE);
-                }
-                move.getSquares().getLast().setSelected(true);
-                selected.setSelected(false);
-                player.clearSelectedPawn();
-            }
-       } else if(s.getPawn() != null && 
-               s.getPawn().getOwner().equals(player)) {
-           selected = s.getPawn();
-           move = this.getValidMove(selected);
-           if(move != null) {
-                move.getSquares().getLast().setSelected(true);
-                selected.setSelected(true);
-                player.setSelectedPawn(selected);
-           }           // TODO: Highlight valid move square
-       }
-   }
-   
    public Player getCurrentPlayer() {
        return players.get(turn);
    }
    
    public void makeMakeMove(Move m) {
        m.getPawn().setMove(m);
+           
        if(roll != 6)
-        advanceTurn();
+           advanceTurn();
+       roll = -1;
+   }
+   
+   public void makeKickMove(Move m) {
+       m.getPawn().setMove(m);
    }
    
    public void advanceTurn() {
        turn = (turn + 1) % players.size();
-       System.out.println(turn);
    }
    
    public void setModel(Board b) {
@@ -95,7 +66,6 @@ public class GameLogic {
     */
    public LinkedList<Move> getValidMoves (Player player) {
        LinkedList<Move> moves = new LinkedList<Move>();
-    
        
        for(Pawn pw : player.getPawns()) {
            Move m = getValidMove(pw);
@@ -103,7 +73,7 @@ public class GameLogic {
                moves.add(m);
        }
        
-       return moves;
+        return moves;
    }
    
    public Move getValidMove(Pawn pw) {
@@ -128,6 +98,7 @@ public class GameLogic {
                 if(s != null && start.canOccupy(pw)) {
                    squares.add(start);
                    move = new Move(pw, squares ,roll);
+                   checkForKick(start, move);
                 }
             }
         }
@@ -149,6 +120,7 @@ public class GameLogic {
                 if(roll == steps && 
                         next.getSquare().canOccupy(pw)) {
                    move = new Move(pw, squares, roll);
+                   checkForKick(next.getSquare(),move);
                    break;
                 }      
                 else if (next.getNext() == null && 
@@ -163,12 +135,36 @@ public class GameLogic {
        return move;
    }
    
+   private void checkForKick(Square s, Move move) {
+        Pawn pw = s.getPawn();
+        
+        if(pw != null) {
+                LinkedList<Square> squares = new LinkedList<Square>();
+            for(Square sq : pw.getOwner().getPath().getHomeSquares()) {
+              if(sq.getPawn() == null) {
+                  squares.add(sq);
+                  pw.setPosition(sq);
+                  break;
+              } 
+          }
+             move.setKickMove(new Move(pw, squares));
+        }
+   }
+   
    public void setRoll(int i) {
        
    }
    
-   public void generateRoll() {
-       this.roll = dice.roll();
+   public int generateRoll() {
+       /*new Timer().schedule(new TimerTask() {          
+            @Override
+            public void run() {
+                System.out.println("LATER");
+             }
+        }, 2000);*/
+       if(roll == -1)
+           this.roll = 6;//dice.roll();
+       return this.roll;
    }
    
    public int getRoll() {
@@ -176,7 +172,7 @@ public class GameLogic {
        roll = p.getRoll(dice);
        if(roll != -1)
            p.setHasRolled(true);
-       return roll;
+           return roll;
    }
    
    public Move getNextMove() {    

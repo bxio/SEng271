@@ -10,13 +10,19 @@ package seng271.group8.ludo.events;
  */
 public class RollEvent extends GameEvent {
     private Boolean deferredRoll = false;
+    private int roll;
     
     public RollEvent() {
         
     }
     
-    public RollEvent(Boolean deferred) {
-        this.deferredRoll = deferred;
+    public RollEvent(int roll) {
+        //this.deferredRoll;
+        this.roll = roll;
+    }
+    
+    public int getRoll() {
+        return this.roll;
     }
     
     public Boolean isDeferred() {

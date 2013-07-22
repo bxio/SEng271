@@ -15,9 +15,15 @@ public class Move {
     private int roll;
     private LinkedList<Square> squares;
     private Boolean human = false;
+    private Boolean kick = false;
+    private Move kickMove;
     
     public Move() {
         
+    }
+    
+    public Move(Pawn pawn, LinkedList<Square> squares) {
+        this(pawn,squares,-1);
     }
     
     public Move(Pawn pawn, LinkedList<Square> squares, int roll) {
@@ -30,6 +36,15 @@ public class Move {
         this.human = b;
     }
     
+    public void setKickMove(Move kick) {
+        this.kick = true;
+        this.kickMove = kick;
+    }
+    
+    public Move getKickMove() {
+        return this.kickMove;
+    }
+    
     public Boolean isHuman() {
         return human;
     }
@@ -40,6 +55,14 @@ public class Move {
     
     public int getRoll() {
         return this.roll;
+    }
+    
+    public Boolean doesKick() {
+        return this.kick;
+    }
+    
+    public Pawn getKicked() {
+        return squares.getLast().getPawn();
     }
     
     public LinkedList<Square> getSquares() {

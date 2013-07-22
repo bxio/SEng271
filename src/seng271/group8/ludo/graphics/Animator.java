@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import seng271.group8.ludo.GameController;
 import seng271.group8.ludo.events.GameEvent;
 import seng271.group8.ludo.ui.GamePanel;
@@ -29,14 +31,14 @@ public class Animator extends Thread {
     private static final int FRAMES = 24;
 
     private Map<IAnimatable, GameEvent> events;
-    private List<IAnimatable> newAnimations;
+    private static BlockingQueue<IAnimatable> newAnimations;
     private List<IAnimatable> active;
     
     public Animator(GamePanel game) {
         super();
         this.game = game;
         this.active = new ArrayList<IAnimatable>();
-        this.newAnimations = new ArrayList<IAnimatable>();
+        this.newAnimations =  new LinkedBlockingQueue<IAnimatable>();
         this.events = new HashMap<IAnimatable, GameEvent>();
         this.setName("Animation Thread");
     }
@@ -65,7 +67,7 @@ public class Animator extends Thread {
             }
         }
         
-        //if(!active.isEmpty())
+        if(!active.isEmpty())
             game.repaint();
     }
     

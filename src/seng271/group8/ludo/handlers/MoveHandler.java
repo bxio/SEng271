@@ -15,7 +15,6 @@ import seng271.group8.ludo.graphics.Renderer2D;
 public class MoveHandler implements Handler<MoveEvent> {
 
     private GameLogic game;
-    private Renderer2D renderer;
     
     public MoveHandler(GameLogic game) {
         this.game = game;
@@ -24,7 +23,6 @@ public class MoveHandler implements Handler<MoveEvent> {
     @Override
     public void handle(MoveEvent evt) {
         game.makeMakeMove(evt.getMove());
-        //renderer.addAnimation();
     }
     
 }
