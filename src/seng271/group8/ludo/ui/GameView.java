@@ -67,7 +67,7 @@ public class GameView extends JPanel {
         GameController.register(MoveEvent.class, new MoveHandler(gamelogic));
         GameController.register(KickPawnEvent.class, new KickPawnEventHandler(gamelogic));
         GameController.register(TurnEvent.class, new TurnEventHandler(gamelogic));
-        GameController.register((RollEvent.class), new RollHandler(gamelogic));
+        GameController.register(RollEvent.class, new RollHandler(gamelogic));
         
         // Start GameEvents thread
         controllerThread = new Thread(gameController);

@@ -163,7 +163,7 @@ public class GameLogic {
              }
         }, 2000);*/
        if(roll == -1)
-           this.roll = 6;//dice.roll();
+           this.roll = dice.roll();
        return this.roll;
    }
    
@@ -172,7 +172,7 @@ public class GameLogic {
        roll = p.getRoll(dice);
        if(roll != -1)
            p.setHasRolled(true);
-           return roll;
+       return roll;
    }
    
    public Move getNextMove() {    

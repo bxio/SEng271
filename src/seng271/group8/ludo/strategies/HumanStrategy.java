@@ -18,8 +18,11 @@ public class HumanStrategy extends AbstractStrategy {
 	public Move getMove(List<Move> moves) {
             // No move is returned. The move is selected through UI events
             // by the human player.
-            Move m = new Move();
-            m.setHuman(true);
+            Move m = null;
+            if(moves.size() > 0) {
+                m = new Move();
+                m.setHuman(true); 
+            }
             return m;
         }
         

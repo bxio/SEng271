@@ -23,16 +23,20 @@ public class RollHandler extends BaseHandler<RollEvent> {
     
     @Override
     public void handle(RollEvent evt) {
-        System.out.println("Human playe rolled");
         if(evt.getRoll() == -1) {
-            game.generateRoll();
+            System.out.println("Human rolled " + game.generateRoll());
             game.getCurrentPlayer().setHasRolled(true);
         }
         
         Move m = game.getNextMove();
+        
+        // If AI has a move do it, otherwise pass on the turn
+        // If the current player is human wait for their input
         if(m != null && !m.isHuman())
             GameController.put(new MoveEvent(m));
-        else if (m == null)
+        else if (m == null) {
+            game.advanceTurn();
             GameController.put(new TurnEvent());  
+        }
     }
 }
