@@ -93,9 +93,9 @@ public class Renderer2D {
        repaintAll = false;
 // Some Debug drawing code
 //      g2.clearRect(0, 0, squareSize.width*11, squareSize.width*11);
-      for (Rectangle.Double ar : regions) {
-          g2.drawRect((int)ar.x, (int)ar.y, (int)( ar.width), (int)( ar.height));
-      }
+//      for (Rectangle.Double ar : regions) {
+//          g2.drawRect((int)ar.x, (int)ar.y, (int)( ar.width), (int)( ar.height));
+//      }
 
     }
     

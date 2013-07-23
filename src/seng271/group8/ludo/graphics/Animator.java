@@ -61,6 +61,9 @@ public class Animator extends Thread {
                 finished.add(a);
         }
         
+        if(!active.isEmpty())
+            game.repaint();
+        
         for(IAnimatable a : finished) {
             active.remove(a);
             if(events.containsKey(a)) {
@@ -68,8 +71,6 @@ public class Animator extends Thread {
             }
         }
         
-        if(!active.isEmpty())
-            game.repaint();
     }
     
     public void addAnimation(IAnimatable animation) {

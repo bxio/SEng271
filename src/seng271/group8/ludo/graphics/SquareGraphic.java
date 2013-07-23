@@ -27,7 +27,7 @@ public class SquareGraphic extends LudoGraphic {
     public SquareGraphic(Square square) {
         super(square.getPosition());
         this.gameEntity = this.square = square;
-        this.xPercent = this.yPercent = 1f;
+        this.xPercent = this.yPercent = 0.65f;
     }
     
     @Override
