@@ -40,7 +40,7 @@ public class GameView extends JPanel {
     private Thread controllerThread;
     
     public GameView(Strategy[] strategies) {
-        this.setBackground(Color.red);
+        //this.setBackground(Color.red);
         this.setLayout(new BorderLayout());
        
         // Create the game model

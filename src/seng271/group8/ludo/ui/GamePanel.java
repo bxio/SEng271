@@ -8,6 +8,8 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JComponent;
@@ -29,7 +31,7 @@ import seng271.group8.ludo.model.Square;
  *
  * @author Alastairs
  */
-public class GamePanel extends JComponent implements ComponentListener {
+public class GamePanel extends JComponent implements ComponentListener, FocusListener {
     
     private Board board;
     private Renderer2D renderer;
@@ -79,8 +81,9 @@ public class GamePanel extends JComponent implements ComponentListener {
     
     @Override
     protected void paintComponent(Graphics g) {
-       //g.clearRect(0, 0, this.getWidth(), this.getHeight());
-       //super.paintComponent(g);
+       
+       super.paintComponent(g);
+       g.clearRect(0, 0, this.getWidth(), this.getHeight());
        
        //System.out.println(javax.swing.SwingUtilities.isEventDispatchThread());
        //long start = System.currentTimeMillis();
@@ -108,16 +111,26 @@ public class GamePanel extends JComponent implements ComponentListener {
 
     @Override
     public void componentMoved(ComponentEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        renderer.resize(this.getSize());    
     }
 
     @Override
     public void componentShown(ComponentEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        renderer.resize(this.getSize());
     }
 
     @Override
     public void componentHidden(ComponentEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void focusGained(FocusEvent e) {
+        renderer.resize(this.getSize());
+    }
+
+    @Override
+    public void focusLost(FocusEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

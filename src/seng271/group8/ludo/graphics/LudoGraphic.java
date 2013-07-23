@@ -26,6 +26,7 @@ public abstract class LudoGraphic {
     protected Dimension lastSize;
     protected Boolean dirty = true;
     protected GameEntity gameEntity;
+    protected Point2D bounds;
      
    public LudoGraphic(Point p) {
         this.lastPosition = this.position = p;
@@ -51,8 +52,16 @@ public abstract class LudoGraphic {
         return d;
     }
     
+    public Point2D getBounds(Dimension squareSize) {
+        return new Point2D.Double(squareSize.width*position.getX(), squareSize.height*position.getY());
+    }
+    
+    public Point2D getLastBounds(Dimension squareSize) {
+        return new Point2D.Double(squareSize.width*lastPosition.getX(), squareSize.height*lastPosition.getY());
+    }
+    
     public Point2D getLastDrawPosition(Dimension squareSize) {
-        return this.lastPosition;//computeDrawPosition(squareSize, this.lastPosition);
+        return this.lastPosition;
     }
     
     public Point2D computeDrawPosition(Dimension squareSize, Point2D position) {

@@ -40,6 +40,8 @@ public class SquareGraphic extends LudoGraphic {
         Rectangle2D bounds = new Rectangle2D.Double(
                 squareSize.width*position.getX(),squareSize.height*position.getY(),
                 squareSize.width, squareSize.height);
+        g2.setColor(new Color(139,137,137));
+        g2.fill(bounds);
        
         Ellipse2D shape = new Ellipse2D.Double(pos.getX(), pos.getY(), size.getX(), size.getY());
         //g2.setColor(new Color(224,195,108));

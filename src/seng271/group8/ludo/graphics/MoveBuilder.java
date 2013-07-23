@@ -26,7 +26,7 @@ public class MoveBuilder implements AnimationBuilder {
                 modelPosition.y != graphicPosition.getY()) {
             // Build a move animation
             Animation2DSeries series = new Animation2DSeries();
-            int time = 50;
+            int time = 500;
             for(Square s : pw.getMove().getSquares()) {
                 if(s.getPawn() == null || s.getPawn().equals(pw)) {    
                     Animation2DSeries scale = new Animation2DSeries();
