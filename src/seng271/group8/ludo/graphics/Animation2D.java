@@ -23,15 +23,18 @@ public abstract class Animation2D implements IAnimatable {
     // update properties to current state before starting
     public void start() {
         this.elapsed = 0;
+        this.graphic.setDirty(true);
     }
 
     public Boolean tic(long dt) {
         Boolean done = false;
+        this.graphic.setDirty(true);
         
         elapsed+=dt;
         if(elapsed >= dur) {
             elapsed = dur;
             done = true;
+            graphic.setDirty(false);
         }
         
         return done;

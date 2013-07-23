@@ -19,6 +19,7 @@ import seng271.group8.ludo.ui.GamePanel;
  *
  * @author Alastairs
  */
+
 public class Animator extends Thread {
     
     private GamePanel game;

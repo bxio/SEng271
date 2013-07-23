@@ -22,9 +22,9 @@ public class PawnGraphic extends LudoGraphic{
     private Pawn pawn;
  
     public PawnGraphic(Pawn pawn) {
-        super(pawn.getSquare().getPosition());
-        this.pawn = pawn;
-        this.xPercent = this.yPercent = 0.5f;
+        super(pawn.getSquare().getPosition());  
+        this.gameEntity = this.pawn = pawn;
+        this.xPercent = this.yPercent =0.5f;
        
     }
 
@@ -35,7 +35,7 @@ public class PawnGraphic extends LudoGraphic{
         Point2D size = this.getDrawSize(squareSize);
         Point2D pos = this.getDrawPosition(squareSize);
         Ellipse2D shape = new Ellipse2D.Double(pos.getX(), pos.getY(), size.getX(), size.getY());
-        
+        this.setLastDrawPositin(pos);
         float[] rgb = new float[3];
         ColorConfig.PLAYER_COLORS[pawn.getOwner().getId()].getRGBColorComponents(rgb);
         g2.setColor(new Color(rgb[0],rgb[1],rgb[2],0.5f));
@@ -45,4 +45,9 @@ public class PawnGraphic extends LudoGraphic{
 //        g2.draw(shape);
        
     }
+    
+//    @Override
+//    public void setDirty(Boolean dirty) {
+//        this.dirty = true;
+//    }
 }

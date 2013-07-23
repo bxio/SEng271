@@ -13,12 +13,14 @@ import java.util.Map;
 import javax.swing.JComponent;
 import seng271.group8.ludo.graphics.AnimationBuilder;
 import seng271.group8.ludo.graphics.Animator;
+import seng271.group8.ludo.graphics.Layer;
 import seng271.group8.ludo.graphics.MoveBuilder;
 import seng271.group8.ludo.graphics.PawnGraphic;
 import seng271.group8.ludo.graphics.PulseBuilder;
 import seng271.group8.ludo.graphics.Renderer2D;
 import seng271.group8.ludo.graphics.SquareGraphic;
 import seng271.group8.ludo.model.Board;
+import seng271.group8.ludo.model.BoardConfig;
 import seng271.group8.ludo.model.Pawn;
 import seng271.group8.ludo.model.PawnChangeListener;
 import seng271.group8.ludo.model.Square;
@@ -49,12 +51,18 @@ public class GamePanel extends JComponent implements ComponentListener {
         animationBuilders.put(MoveBuilder.class, new MoveBuilder());
         animationBuilders.put(PulseBuilder.class, new PulseBuilder());
         
+        
+        Layer squareLayer = new Layer(BoardConfig.WIDTH, BoardConfig.HEIGHT);
+        
         for(Square s : board.getSquareList()) {
             s.setRendering(new SquareGraphic(s));
             s.addPropertyChangeListener(new PawnChangeListener(animationThread,
                     animationBuilders));
             renderer.add(s.getRendering());
+            //squareLayer.add(s.getRendering(), s.getPosition().x, s.getPosition().y);
         }
+        
+        //renderer.addLayer(squareLayer);
         
         for(Pawn pw : board.getPawnList()) {
             pw.setRendering(new PawnGraphic(pw));
@@ -63,15 +71,15 @@ public class GamePanel extends JComponent implements ComponentListener {
                     animationThread,animationBuilders));
         }
         
-        this.addMouseListener(new GameMouseListener(this));
+        GameMouseListener gl = new GameMouseListener(this);
+        this.addMouseListener(gl);
+        this.addMouseMotionListener(gl);
         this.addComponentListener(this);
     }
     
-    
-    
     @Override
     protected void paintComponent(Graphics g) {
-       g.clearRect(0, 0, this.getWidth(), this.getHeight());
+       //g.clearRect(0, 0, this.getWidth(), this.getHeight());
        //super.paintComponent(g);
        
        //System.out.println(javax.swing.SwingUtilities.isEventDispatchThread());

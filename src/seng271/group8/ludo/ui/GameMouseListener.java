@@ -63,6 +63,6 @@ public class GameMouseListener implements MouseListener, MouseMotionListener {
     @Override
     public void mouseMoved(MouseEvent e) {
         Point p = playArea.graphicToGridCoords(e.getX(), e.getY());
-        
+       // System.out.println(p.x);
     }
 }

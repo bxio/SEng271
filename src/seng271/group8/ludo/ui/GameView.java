@@ -36,7 +36,6 @@ public class GameView extends JPanel {
     private GameController gameController;
     private GameLogic gamelogic;
     private Board board;
-    private Renderer2D renderer;
     
     private Thread controllerThread;
     
@@ -47,7 +46,6 @@ public class GameView extends JPanel {
         // Create the game model
         board = new Board(strategies);
         gamelogic = new GameLogic(board, new Dice());
-        renderer = new Renderer2D();
     }
     
     public void start() {

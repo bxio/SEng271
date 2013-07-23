@@ -8,7 +8,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.geom.Point2D;
-import java.util.Observer;
+import seng271.group8.ludo.model.GameEntity;
 
 /**
  *
@@ -16,6 +16,7 @@ import java.util.Observer;
  */
 public abstract class LudoGraphic {
     protected Point2D position;
+    protected Point2D lastPosition;
     protected float scale = 1;
     
     // Indicate the graphic should be
@@ -23,27 +24,41 @@ public abstract class LudoGraphic {
     protected float xPercent = 1;
     protected float yPercent = 1;
     protected Dimension lastSize;
-    protected Point lastPosition;
+    protected Boolean dirty = true;
+    protected GameEntity gameEntity;
      
    public LudoGraphic(Point p) {
-        this.position = p;
+        this.lastPosition = this.position = p;
     }
     
     public void setPosition(Point2D p) {
         //System.out.println("X :" + p.getX() + " Y : " + p.getY());
+//        this.lastPosition = this.position;
         this.position = p;
     }
     
+    public void setLastDrawPositin(Point2D p) {
+        this.lastPosition = p;
+    }
+    
     public Point2D getDrawPosition(Dimension squareSize) {
-        Point2D p = new Point2D.Double((squareSize.width*(this.position.getX()+(1-this.xPercent*scale)/2f)), 
-                    (squareSize.width*(this.position.getY()+(1-this.yPercent*scale)/2f)));
-        return p;
+        return computeDrawPosition(squareSize, this.position);
     }
     
     public Point2D getDrawSize(Dimension squareSize) {
         Point2D d  = new Point2D.Double((this.xPercent*squareSize.width*scale), 
                 (this.yPercent*squareSize.height*scale));
         return d;
+    }
+    
+    public Point2D getLastDrawPosition(Dimension squareSize) {
+        return this.lastPosition;//computeDrawPosition(squareSize, this.lastPosition);
+    }
+    
+    public Point2D computeDrawPosition(Dimension squareSize, Point2D position) {
+        Point2D p = new Point2D.Double((squareSize.width*(position.getX()+(1-this.xPercent*scale)/2f)), 
+                    (squareSize.width*(position.getY()+(1-this.yPercent*scale)/2f)));
+        return p;
     }
     
     public void setXPercent(float xPercent) {
@@ -72,6 +87,18 @@ public abstract class LudoGraphic {
     
     public Point2D getPosition() {
         return this.position;
+    }
+    
+    public void setDirty(Boolean dirty) {
+        this.dirty = dirty;
+    }
+    
+    public Boolean getDirty() {
+        return this.dirty;
+    }
+    
+    public GameEntity getGameEntity() {
+        return this.gameEntity;
     }
     
     public abstract void paint(Graphics g, Dimension squareSize);
