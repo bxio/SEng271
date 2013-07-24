@@ -55,25 +55,28 @@ public class GamePanel extends JComponent implements ComponentListener, FocusLis
         animationBuilders.put(PulseBuilder.class, new PulseBuilder());
         
         
-        Layer squareLayer = new Layer(BoardConfig.WIDTH, BoardConfig.HEIGHT);
+        Layer squareLayer = new Layer();
         
         for(Square s : board.getSquareList()) {
             s.setRendering(new SquareGraphic(s));
             s.addPropertyChangeListener(new PawnChangeListener(animationThread,
                     animationBuilders));
-            renderer.add(s.getRendering());
+            squareLayer.add(s.getRendering());
             //squareLayer.add(s.getRendering(), s.getPosition().x, s.getPosition().y);
         }
         
-        //renderer.addLayer(squareLayer);
+        renderer.addLayer(squareLayer);
+        Layer pawnLayer = new Layer();
         
         for(Pawn pw : board.getPawnList()) {
             pw.setRendering(new PawnGraphic(pw));
-            renderer.add(pw.getRendering());
+            pawnLayer.add(pw.getRendering());
             pw.addPropertyChangeListener(new PawnChangeListener(
                     animationThread,animationBuilders));
         }
         
+        renderer.addLayer(pawnLayer);
+        Layer uiLayer = new Layer();
        // renderer.add(new MessageGraphic(new Point(0,0), "Game started"));
         
         GameMouseListener gl = new GameMouseListener(this);
