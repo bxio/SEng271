@@ -17,7 +17,7 @@ public class PulseBuilder implements AnimationBuilder {
         // Loop forever
         Animation2DSeries series = new Animation2DSeries(-1);
         LudoGraphic graphic = g.getRendering();
-        series.add(new ScaleAnimation(graphic, 1.5f,1000));
+        series.add(new ScaleAnimation(graphic, 1.45f,1000));
         series.add(new ScaleAnimation(graphic, 1.0f,1000));
         return series;
     }

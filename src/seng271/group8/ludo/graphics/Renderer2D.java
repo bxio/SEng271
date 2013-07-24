@@ -30,6 +30,7 @@ public class Renderer2D {
     private Boolean repaintAll = true;
     private BufferedImage scene;
     private Graphics2D g2d;
+    private int viewSize;
     
     public Renderer2D () {
         this.graphics = new ArrayList<LudoGraphic>();
@@ -58,7 +59,7 @@ public class Renderer2D {
         // If the view size has changed need to recompute the entire view
         // All drawing is done to a buffered image which is then copied to the 
         // Panel area
-         int viewSize = (int)Math.min(panelSize.getWidth(),panelSize.getHeight());
+         viewSize = (int)Math.min(panelSize.getWidth(),panelSize.getHeight());
          if(scene == null 
                  || scene.getWidth() != viewSize ) {
              scene = new BufferedImage(viewSize, viewSize, BufferedImage.TYPE_INT_ARGB);
@@ -94,7 +95,7 @@ public class Renderer2D {
         }
         
         // Center board in panel
-        g2.translate((panelSize.width-viewSize)/2, 0);
+        g2.translate(computeOffset(), 0);
         // Draw the buffered image to the panel
         g2.drawImage(scene, g2d.getTransform(), null);
         repaintAll = false;
@@ -162,8 +163,12 @@ public class Renderer2D {
     }
     
     public Point graphicToGridCoords(double x, double y) {
-        Point p = new Point((int)x/squareSize.width, (int)y/squareSize.height);
+        Point p = new Point((int)(x - computeOffset())/squareSize.width, (int)y/squareSize.height);
         return p;
+    }
+    
+    private int computeOffset(){
+        return (int)(panelSize.width-viewSize)/2;
     }
     
     private void computeSquareSize(Dimension panelSize) {
