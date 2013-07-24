@@ -25,6 +25,7 @@ public class GameLogic {
    private int turn = 0; // Player 1 always starts
    private int roll = 1; // Hardcoded for testing
    private Dice dice;
+   private String stateMessage;
 
    public GameLogic(Board b, Dice d) {
        this.model = b;

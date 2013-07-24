@@ -33,10 +33,10 @@ public class RollHandler extends BaseHandler<RollEvent> {
         // If AI has a move do it, otherwise pass on the turn
         // If the current player is human wait for their input
         if(m != null && !m.isHuman())
-            GameController.put(new MoveEvent(m));
+            GameController.publish(new MoveEvent(m));
         else if (m == null) {
             game.advanceTurn();
-            GameController.put(new TurnEvent());  
+            GameController.publish(new TurnEvent());  
         }
     }
 }

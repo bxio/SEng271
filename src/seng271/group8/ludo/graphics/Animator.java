@@ -67,7 +67,7 @@ public class Animator extends Thread {
         for(IAnimatable a : finished) {
             active.remove(a);
             if(events.containsKey(a)) {
-                GameController.put(events.remove(a));
+                GameController.publish(events.remove(a));
             }
         }
         

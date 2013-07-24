@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
@@ -71,11 +73,29 @@ public class GameController implements Runnable {
             System.out.println("No handlers registered for event"  + event.getClass());
     }
     
-    public static void put(GameEvent e) {
+    public static void publish(GameEvent e) {
+        if(e.getDefer() > 0) {
+            GameController.publish(e, e.getDefer());
+        } else {
+            GameController.put(e);
+        }
+            
+    }
+    
+    private static void put(GameEvent e) {
         try {
             GameController.gameEvents.put(e);
         } catch (InterruptedException ex) {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public static void publish(final GameEvent e, long delay) {
+        new Timer().schedule(new TimerTask() {          
+            @Override
+            public void run() {
+                GameController.put(e);
+             }
+        }, delay);
     }
 }

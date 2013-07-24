@@ -13,7 +13,7 @@ import seng271.group8.ludo.model.GameEntity;
 public class PulseBuilder implements AnimationBuilder {
 
     @Override
-    public IAnimatable build(GameEntity g) {
+    public IAnimatable build(GameEntity g, long postDelay, long preDelay) {
         // Loop forever
         Animation2DSeries series = new Animation2DSeries(-1);
         LudoGraphic graphic = g.getRendering();

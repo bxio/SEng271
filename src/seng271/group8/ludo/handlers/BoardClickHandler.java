@@ -68,7 +68,7 @@ public class BoardClickHandler extends BaseHandler<BoardClickEvent> {
     
     public void queueMove(Square s) {
         if(move.getSquares().getLast().equals(s)) {
-                    GameController.put(new MoveEvent(move));     
+                    GameController.publish(new MoveEvent(move));     
                     move.getSquares().getLast().setSelected(Boolean.FALSE);
         }
         selected.setSelected(false);

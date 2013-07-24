@@ -16,6 +16,7 @@ import javax.swing.JComponent;
 import seng271.group8.ludo.graphics.AnimationBuilder;
 import seng271.group8.ludo.graphics.Animator;
 import seng271.group8.ludo.graphics.Layer;
+import seng271.group8.ludo.graphics.MessageGraphic;
 import seng271.group8.ludo.graphics.MoveBuilder;
 import seng271.group8.ludo.graphics.PawnGraphic;
 import seng271.group8.ludo.graphics.PulseBuilder;
@@ -72,6 +73,8 @@ public class GamePanel extends JComponent implements ComponentListener, FocusLis
             pw.addPropertyChangeListener(new PawnChangeListener(
                     animationThread,animationBuilders));
         }
+        
+       // renderer.add(new MessageGraphic(new Point(0,0), "Game started"));
         
         GameMouseListener gl = new GameMouseListener(this);
         this.addMouseListener(gl);

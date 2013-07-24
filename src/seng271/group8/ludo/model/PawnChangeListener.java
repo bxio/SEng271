@@ -33,13 +33,16 @@ public class PawnChangeListener extends AbstractChangeListener {
         GameEvent ge = null;
         if(Pawn.MOVE.equals(propertyName)) {
             Pawn p = (Pawn)evt.getSource();
-            ani = builders.get(MoveBuilder.class).build(p);
-            if(p.getMove().doesKick())
-                ge = new KickPawnEvent(p.getMove().getKickMove());
-            else
-                ge = new TurnEvent();
+            if(p.getMove().doesKick()) {
+                ge = new KickPawnEvent(p.getMove().getKickMove(),50);
+                ani = builders.get(MoveBuilder.class).build(p,0,0);
+            }
+            else {
+                ge = new TurnEvent(400);
+                ani = builders.get(MoveBuilder.class).build(p,0,0);
+            }
         } else if (Pawn.SELECTED.equals(propertyName)) {
-            ani = builders.get(PulseBuilder.class).build((GameEntity)evt.getSource());
+            ani = builders.get(PulseBuilder.class).build((GameEntity)evt.getSource(),0,0);
         }
          if(ani != null && ge != null)
             animator.addAnimation(ani, ge);

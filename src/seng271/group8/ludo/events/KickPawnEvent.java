@@ -15,7 +15,13 @@ public class KickPawnEvent extends GameEvent {
     private Move kick;
     
     public KickPawnEvent(Move kick) {
-        this.kick = kick;
+        this(kick, 0);
+    }
+    
+    public KickPawnEvent(Move kick, long defer) {
+        super(defer);
+        this.kick = kick;    
+        
     }
     
     public Move getKickMove() {

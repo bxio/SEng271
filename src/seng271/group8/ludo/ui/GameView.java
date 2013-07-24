@@ -81,6 +81,6 @@ public class GameView extends JPanel {
         this.add(new GameStatePanel(), BorderLayout.SOUTH);
         
         // Start the game
-        GameController.put(new TurnEvent());
+        GameController.publish(new TurnEvent());
     }
 }

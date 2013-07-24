@@ -16,7 +16,7 @@ import seng271.group8.ludo.model.Square;
  */
 public class MoveBuilder implements AnimationBuilder {
     
-    public IAnimatable build(GameEntity g) {
+    public IAnimatable build(GameEntity g, long preDelay, long postDelay) {
         IAnimatable animation = null;
         Pawn pw = (Pawn) g; 
         Point modelPosition = pw.getPosition();
@@ -27,6 +27,10 @@ public class MoveBuilder implements AnimationBuilder {
             // Build a move animation
             Animation2DSeries series = new Animation2DSeries();
             int time = 500;
+            
+            if(preDelay > 0)
+                series.add(new NOPAnimation(g.getRendering(), preDelay));
+            
             for(Square s : pw.getMove().getSquares()) {
                 if(s.getPawn() == null || s.getPawn().equals(pw)) {    
                     Animation2DSeries scale = new Animation2DSeries();
@@ -39,6 +43,9 @@ public class MoveBuilder implements AnimationBuilder {
                     series.add(group);
                 }
             }
+            
+            if(postDelay > 0)
+                series.add(new NOPAnimation(g.getRendering(), postDelay));
             animation = series;
         }
         

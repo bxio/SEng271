@@ -25,7 +25,7 @@ public class TurnEventHandler extends BaseHandler<TurnEvent> {
         int roll = game.getRoll(); 
         System.out.println("They rolled " + roll);
         if(roll != -1) {
-            GameController.put(new RollEvent(roll));
+            GameController.publish(new RollEvent(roll));
         }
     }
 }

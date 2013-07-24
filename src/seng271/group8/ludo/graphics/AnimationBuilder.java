@@ -11,5 +11,5 @@ import seng271.group8.ludo.model.GameEntity;
  * @author Alastairs
  */
 public interface AnimationBuilder {
-    public IAnimatable build(GameEntity g);
+    public IAnimatable build(GameEntity g, long preDelay, long postDelay);
 }

@@ -31,7 +31,7 @@ public class GameMouseListener implements MouseListener, MouseMotionListener {
         System.out.println("Am I missing clicks?");
         Point p = playArea.graphicToGridCoords(e.getX(), e.getY());
         BoardClickEvent bc = new BoardClickEvent(p);         
-        GameController.put(bc);
+        GameController.publish(bc);
     }
 
     @Override

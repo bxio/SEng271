@@ -17,7 +17,7 @@ public class DiceRollAction extends AbstractAction {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        GameController.put(new RollEvent(-1));
+        GameController.publish(new RollEvent(-1));
     }
     
 }
