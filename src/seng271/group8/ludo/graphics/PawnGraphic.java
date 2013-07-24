@@ -36,7 +36,7 @@ public class PawnGraphic extends LudoGraphic{
         Point2D pos = this.getDrawPosition(squareSize);
         Ellipse2D shape = new Ellipse2D.Double(pos.getX(), pos.getY(), size.getX(), size.getY());
         this.setLastDrawPositin(position);
-        g2.setColor(Color.red);
+//        g2.setColor(Color.red);
 //        g2.drawRect((int)lastPosition.getX(), (int)lastPosition.getY(), squareSize.width, squareSize.height);
         float[] rgb = new float[3];
         ColorConfig.PLAYER_COLORS[pawn.getOwner().getId()].getRGBColorComponents(rgb);
