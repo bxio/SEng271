@@ -17,7 +17,11 @@ public class RollEvent extends GameEvent {
     }
     
     public RollEvent(int roll) {
-        //this.deferredRoll;
+        this.roll = roll;
+    }
+    
+    public RollEvent(int roll, long defer) {
+        super(defer);
         this.roll = roll;
     }
     

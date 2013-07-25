@@ -39,10 +39,6 @@ public class GameLogic {
    
    public void makeMakeMove(Move m) {
        m.getPawn().setMove(m);
-           
-       if(roll != 6)
-           advanceTurn();
-       roll = -1;
    }
    
    public void makeKickMove(Move m) {
@@ -50,7 +46,12 @@ public class GameLogic {
    }
    
    public void advanceTurn() {
+       Player last = players.get(turn);
+       last.setSelected(Boolean.FALSE);
        turn = (turn + 1) % players.size();
+       Player cur = players.get(turn);
+       cur.setSelected(Boolean.TRUE);
+       
    }
    
    public void setModel(Board b) {

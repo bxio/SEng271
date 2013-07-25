@@ -21,11 +21,14 @@ public class TurnEventHandler extends BaseHandler<TurnEvent> {
     
     @Override
     public void handle(TurnEvent evt) {
+        if(game.getRoll() != 6)
+           game.advanceTurn();
+        game.setRoll(-1);
         System.out.println("It is now the next players turn");
         int roll = game.getRoll(); 
         System.out.println("They rolled " + roll);
         if(roll != -1) {
-            GameController.publish(new RollEvent(roll));
+            GameController.publish(new RollEvent(roll,400));
         }
     }
 }

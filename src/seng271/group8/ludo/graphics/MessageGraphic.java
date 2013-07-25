@@ -45,7 +45,6 @@ public class MessageGraphic extends LudoGraphic {
         g2.setColor(Color.WHITE);
         g2.drawChars(message.toCharArray(), 0, message.length(), (int)(pos.getX()+3)-(stringSize/2), (int)(pos.getY() + 3));
 
-        System.out.println("I was reprinted");
     }
     
 }

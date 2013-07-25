@@ -29,6 +29,8 @@ import seng271.group8.ludo.graphics.TranslateAnimation;
 import seng271.group8.ludo.model.Board;
 import seng271.group8.ludo.model.Pawn;
 import seng271.group8.ludo.model.PawnChangeListener;
+import seng271.group8.ludo.model.Player;
+import seng271.group8.ludo.model.PlayerChangeListener;
 import seng271.group8.ludo.model.Square;
 
 /**
@@ -43,6 +45,10 @@ public class GamePanel extends JComponent implements ComponentListener, FocusLis
     private Map<Class<? extends AnimationBuilder>, AnimationBuilder> animationBuilders;
     
     public GamePanel(Board b) {
+        /*
+         * Todo: A lof of code is ending up here for setup. Refactor eventually...
+         * Low priority
+         */
         this.setOpaque(true);
         this.board = b;
         this.renderer = new Renderer2D();
@@ -56,6 +62,11 @@ public class GamePanel extends JComponent implements ComponentListener, FocusLis
                             AnimationBuilder>();
         animationBuilders.put(MoveBuilder.class, new MoveBuilder());
         animationBuilders.put(PulseBuilder.class, new PulseBuilder());
+        
+        for(Player p : board.getPlayers()) {
+            p.addPropertyChangeListener(new PlayerChangeListener(animationThread, 
+                    animationBuilders));
+        }
         
         
         Layer squareLayer = new Layer();
