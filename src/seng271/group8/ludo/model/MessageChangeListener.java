@@ -35,11 +35,12 @@ public class MessageChangeListener extends AbstractChangeListener {
         GameEvent ge = null;
         if (BoardMessage.MESSAGE.equals(propertyName)) {
             MessageGraphic g = (MessageGraphic)b.getRendering();
+            g.setScale(0);
             g.setMessage((String)evt.getNewValue());
             g.setPosition(new Point(5,5));
             Animation2DSeries series = new Animation2DSeries();
-            ScaleAnimation sc = new ScaleAnimation(g, 1.5f,150, "bounce");
-            TranslateAnimation ts = new TranslateAnimation(g,new Point(5,0),150);
+            ScaleAnimation sc = new ScaleAnimation(g, 1.5f,400, "easeInOut");
+            TranslateAnimation ts = new TranslateAnimation(g,new Point(5,-1),600);
             series.add(sc);
             series.add(ts);
             ani = series;

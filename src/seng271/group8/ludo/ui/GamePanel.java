@@ -73,7 +73,7 @@ public class GamePanel extends JComponent implements ComponentListener, FocusLis
         
         for(Square s : board.getSquareList()) {
             s.setRendering(new SquareGraphic(s));
-            s.addPropertyChangeListener(new PawnChangeListener(animationThread,
+            s.addPropertyChangeListener(new SquareChangeListener(animationThread,
                     animationBuilders));
             squareLayer.add(s.getRendering());
             //squareLayer.add(s.getRendering(), s.getPosition().x, s.getPosition().y);
@@ -85,7 +85,7 @@ public class GamePanel extends JComponent implements ComponentListener, FocusLis
         for(Pawn pw : board.getPawnList()) {
             pw.setRendering(new PawnGraphic(pw));
             pawnLayer.add(pw.getRendering());
-            pw.addPropertyChangeListener(new SquareChangeListener(
+            pw.addPropertyChangeListener(new PawnChangeListener(
                     animationThread,animationBuilders));
         }
         
@@ -93,10 +93,10 @@ public class GamePanel extends JComponent implements ComponentListener, FocusLis
         
         Layer uiLayer = new Layer();
         LudoGraphic mes = new MessageGraphic(new Point(5,5), "Game started");
-//        BoardMessage bmes = board.getMessage();
-//        bmes.setRendering(mes);
-//        bmes.addPropertyChangeListener(new MessageChangeListener(animationThread,
-//                animationBuilders));
+        BoardMessage bmes = board.getMessage();
+        bmes.setRendering(mes);
+        bmes.addPropertyChangeListener(new MessageChangeListener(animationThread,
+                animationBuilders));
        
         uiLayer.add(mes);
         
