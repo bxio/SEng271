@@ -14,7 +14,7 @@ import seng271.group8.ludo.strategies.Strategy;
  *
  * @author bill
  */
-public class Player {
+public class Player extends GameEntity {
 	private Color colour;
 	private Strategy strategy;
         private Path path;

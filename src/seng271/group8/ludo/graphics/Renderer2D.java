@@ -4,6 +4,7 @@
  */
 package seng271.group8.ludo.graphics;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -23,7 +24,7 @@ import seng271.group8.ludo.model.BoardConfig;
  */
 public class Renderer2D {
     
-
+    private List<Layer> layers;
     private List<LudoGraphic> graphics;
     private Dimension panelSize = new Dimension(100,100);
     private Dimension squareSize = new Dimension(100,100);
@@ -33,6 +34,7 @@ public class Renderer2D {
     private int viewSize;
     
     public Renderer2D () {
+        this.layers = new ArrayList<Layer>();
         this.graphics = new ArrayList<LudoGraphic>();
         
     }
@@ -42,7 +44,7 @@ public class Renderer2D {
     }
     
     public void addLayer(Layer l) {
-
+        layers.add(l);
     }
     
     public void resize( Dimension panelSize) {
@@ -60,59 +62,58 @@ public class Renderer2D {
         // All drawing is done to a buffered image which is then copied to the 
         // Panel area
          viewSize = (int)Math.min(panelSize.getWidth(),panelSize.getHeight());
-         if(scene == null 
-                 || scene.getWidth() != viewSize ) {
-             scene = new BufferedImage(viewSize, viewSize, BufferedImage.TYPE_INT_ARGB);
-             g2d = scene.createGraphics();
-             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-             g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-             g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-         }
-
-        List<Rectangle.Double> regions = computeDirtyRegions();
-        if(!repaintAll){
-            // Clear all dirty areas
-           for (Rectangle.Double ar : regions) {
-                g2d.clearRect((int)ar.x, (int)ar.y, (int)( ar.width), (int)( ar.height));
-           }
-        } else {
-            // Clear entire board (window as resized)
-            g2d.clearRect(0, 0, squareSize.width*11, squareSize.width*11);
+         if(repaintAll) {
+             for(Layer l : layers) {
+                 l.create(viewSize);
+             }
         }
-        
-        // Now redraw all dirty graphics
-        for(LudoGraphic gr : graphics) {
+         // Center board in panel
+         g2.translate(computeOffset(), 0);
+         int i = 0;
+         for(Layer l : layers) {
+            Graphics2D g2l = l.getContext();
+            List<Rectangle.Double> regions = computeDirtyRegions(l.getGraphics());
             if(!repaintAll){
-                if(gr.getDirty()) {
-                     gr.paint(g2d, squareSize);
-                     gr.setDirty(false);
-                 }
+                // Clear all dirty areas
+               for (Rectangle.Double ar : regions) {
+                    g2l.clearRect((int)ar.x, (int)ar.y, (int)( ar.width), (int)( ar.height));
+               }
+            } else {
+                // Clear entire board (window as resized)
+                g2l.clearRect(0, 0, squareSize.width*11, squareSize.width*11);
             }
-            else {
-                // otherwise redraw entire board
-                gr.paint(g2d, squareSize);
-            }
-        }
-        
-        // Center board in panel
-        g2.translate(computeOffset(), 0);
-        // Draw the buffered image to the panel
-        g2.drawImage(scene, g2d.getTransform(), null);
-        repaintAll = false;
-// Some Debug drawing code
-//      g2.clearRect(0, 0, squareSize.width*11, squareSize.width*11);
-//      for (Rectangle.Double ar : regions) {
-//          g2.drawRect((int)ar.x, (int)ar.y, (int)( ar.width), (int)( ar.height));
-//      }
 
+            // Now redraw all dirty graphics
+            for(LudoGraphic gr : l.getGraphics()) {
+                if(!repaintAll){
+                    if(gr.getDirty()) {
+                         gr.paint(g2l, squareSize);
+                         gr.setDirty(false);
+                         i++;
+                     }
+                }
+                else {
+                    // otherwise redraw entire board
+                    gr.paint(g2l, squareSize);
+                }
+            }
+            
+            // Some Debug drawing code (Shows regions which are being repainted)
+//            for (Rectangle.Double ar : regions) {
+//              g2.drawRect((int)ar.x, (int)ar.y, (int)( ar.width), (int)( ar.height));
+//            }
+            // Draw the buffered image to the panel
+            g2.drawImage(l.getImage(), g2l.getTransform(), null);
+        }
+        repaintAll = false;
     }
     
-    public List<Rectangle.Double> computeDirtyRegions() {
+    public List<Rectangle.Double> computeDirtyRegions(List<LudoGraphic> layerGraphics) {
         List<LudoGraphic> dirty = new ArrayList<LudoGraphic>();
         List<Rectangle.Double> regions = new ArrayList<Rectangle.Double>();
 
         // Find all dirty graphics
-        for(LudoGraphic gr : graphics) {
+        for(LudoGraphic gr : layerGraphics) {
           if(gr.getDirty()) {
              dirty.add(gr);
           }  
@@ -120,21 +121,23 @@ public class Renderer2D {
         
         // Compute any other graphics that may overlap with them
         // They will need to be redrawn as well
-        findRedrawAreas(dirty, regions);          
+        findRedrawAreas(dirty, layerGraphics, regions);          
         return regions;
     }
     
-    public void findRedrawAreas(List<LudoGraphic> dirty, List<Rectangle.Double> dirtyRegions) {
+    public void findRedrawAreas(List<LudoGraphic> dirty, List<LudoGraphic> layerGraphics, List<Rectangle.Double> dirtyRegions) {
         Point2D size = new Point2D.Double(squareSize.width,squareSize.height);
             
         // For each Dirty graphic check its last and new position
-        // Find other graphics whose bounds overlap
+        // Find other graphics whose bounds overlap un the same layer
         // These regions need to be redrawn
         for(LudoGraphic dr : dirty) {
             Point2D paCur = dr.getBounds(squareSize);
             Point2D paOld = dr.getLastBounds(squareSize);              
-            
-            for(LudoGraphic ov : graphics) {
+            dirtyRegions.add(new Rectangle.Double(paCur.getX(),paCur.getY(), size.getX(), size.getY()));
+            dirtyRegions.add(new Rectangle.Double(paOld.getX(),paOld.getY(), size.getX(), size.getY()));
+    
+            for(LudoGraphic ov : layerGraphics) {
                 Point2D pbCur = ov.getBounds(squareSize);            
 
                 if(checkForOverlap(paCur, pbCur, size, size)

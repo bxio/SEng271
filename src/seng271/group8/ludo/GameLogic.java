@@ -4,7 +4,6 @@
  */
 package seng271.group8.ludo;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import seng271.group8.ludo.model.Board;
@@ -23,7 +22,7 @@ public class GameLogic {
    private Board model;
    private List<Player> players;
    private int turn = 0; // Player 1 always starts
-   private int roll = 1; // Hardcoded for testing
+   private int roll = 6; // Hardcoded for testing
    private Dice dice;
    private String stateMessage;
 
@@ -39,10 +38,6 @@ public class GameLogic {
    
    public void makeMakeMove(Move m) {
        m.getPawn().setMove(m);
-           
-       if(roll != 6)
-           advanceTurn();
-       roll = -1;
    }
    
    public void makeKickMove(Move m) {
@@ -50,7 +45,12 @@ public class GameLogic {
    }
    
    public void advanceTurn() {
+       Player last = players.get(turn);
+       last.setSelected(Boolean.FALSE);
        turn = (turn + 1) % players.size();
+       Player cur = players.get(turn);
+       cur.setSelected(Boolean.TRUE);
+       
    }
    
    public void setModel(Board b) {
@@ -169,10 +169,16 @@ public class GameLogic {
    }
    
    public int getRoll() {
+       return this.roll;
+   }
+   
+   public int makeRoll() {
        Player p = getCurrentPlayer();
        roll = p.getRoll(dice);
-       if(roll != -1)
+       if(roll != -1) {
            p.setHasRolled(true);
+           model.setMessage("Player " + (p.getId()+1) + " rolled " + roll +"!");
+       }
        return roll;
    }
    

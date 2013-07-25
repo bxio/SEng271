@@ -16,6 +16,7 @@ import javax.swing.JComponent;
 import seng271.group8.ludo.graphics.AnimationBuilder;
 import seng271.group8.ludo.graphics.Animator;
 import seng271.group8.ludo.graphics.Layer;
+import seng271.group8.ludo.graphics.LudoGraphic;
 import seng271.group8.ludo.graphics.MessageGraphic;
 import seng271.group8.ludo.graphics.MoveBuilder;
 import seng271.group8.ludo.graphics.PawnGraphic;
@@ -23,10 +24,14 @@ import seng271.group8.ludo.graphics.PulseBuilder;
 import seng271.group8.ludo.graphics.Renderer2D;
 import seng271.group8.ludo.graphics.SquareGraphic;
 import seng271.group8.ludo.model.Board;
-import seng271.group8.ludo.model.BoardConfig;
+import seng271.group8.ludo.model.BoardMessage;
+import seng271.group8.ludo.model.MessageChangeListener;
 import seng271.group8.ludo.model.Pawn;
 import seng271.group8.ludo.model.PawnChangeListener;
+import seng271.group8.ludo.model.Player;
+import seng271.group8.ludo.model.PlayerChangeListener;
 import seng271.group8.ludo.model.Square;
+import seng271.group8.ludo.model.SquareChangeListener;
 
 /**
  *
@@ -40,6 +45,10 @@ public class GamePanel extends JComponent implements ComponentListener, FocusLis
     private Map<Class<? extends AnimationBuilder>, AnimationBuilder> animationBuilders;
     
     public GamePanel(Board b) {
+        /*
+         * Todo: A lof of code is ending up here for setup. Refactor eventually...
+         * Low priority
+         */
         this.setOpaque(true);
         this.board = b;
         this.renderer = new Renderer2D();
@@ -54,27 +63,44 @@ public class GamePanel extends JComponent implements ComponentListener, FocusLis
         animationBuilders.put(MoveBuilder.class, new MoveBuilder());
         animationBuilders.put(PulseBuilder.class, new PulseBuilder());
         
+        for(Player p : board.getPlayers()) {
+            p.addPropertyChangeListener(new PlayerChangeListener(animationThread, 
+                    animationBuilders));
+        }
         
-        Layer squareLayer = new Layer(BoardConfig.WIDTH, BoardConfig.HEIGHT);
+        
+        Layer squareLayer = new Layer();
         
         for(Square s : board.getSquareList()) {
             s.setRendering(new SquareGraphic(s));
-            s.addPropertyChangeListener(new PawnChangeListener(animationThread,
+            s.addPropertyChangeListener(new SquareChangeListener(animationThread,
                     animationBuilders));
-            renderer.add(s.getRendering());
+            squareLayer.add(s.getRendering());
             //squareLayer.add(s.getRendering(), s.getPosition().x, s.getPosition().y);
         }
         
-        //renderer.addLayer(squareLayer);
+        renderer.addLayer(squareLayer);
+        Layer pawnLayer = new Layer();
         
         for(Pawn pw : board.getPawnList()) {
             pw.setRendering(new PawnGraphic(pw));
-            renderer.add(pw.getRendering());
+            pawnLayer.add(pw.getRendering());
             pw.addPropertyChangeListener(new PawnChangeListener(
                     animationThread,animationBuilders));
         }
         
-       // renderer.add(new MessageGraphic(new Point(0,0), "Game started"));
+        renderer.addLayer(pawnLayer);
+        
+        Layer uiLayer = new Layer();
+        LudoGraphic mes = new MessageGraphic(new Point(5,5), "Game started");
+        BoardMessage bmes = board.getMessage();
+        bmes.setRendering(mes);
+        bmes.addPropertyChangeListener(new MessageChangeListener(animationThread,
+                animationBuilders));
+       
+        uiLayer.add(mes);
+        
+        renderer.addLayer(uiLayer);
         
         GameMouseListener gl = new GameMouseListener(this);
         this.addMouseListener(gl);

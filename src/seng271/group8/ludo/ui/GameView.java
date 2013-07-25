@@ -80,7 +80,7 @@ public class GameView extends JPanel {
         // Create game state
         this.add(new GameStatePanel(), BorderLayout.SOUTH);
         
-        // Start the game
-        GameController.publish(new TurnEvent());
+        // Start the game (after 5 seconds)
+        GameController.publish(new TurnEvent(5000));
     }
 }

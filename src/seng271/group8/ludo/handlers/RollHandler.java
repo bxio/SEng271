@@ -35,8 +35,7 @@ public class RollHandler extends BaseHandler<RollEvent> {
         if(m != null && !m.isHuman())
             GameController.publish(new MoveEvent(m));
         else if (m == null) {
-            game.advanceTurn();
-            GameController.publish(new TurnEvent());  
+            GameController.publish(new TurnEvent(500));  
         }
     }
 }

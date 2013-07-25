@@ -14,9 +14,13 @@ public class ScaleAnimation extends Animation2D {
     float startScale;
     
     public ScaleAnimation(LudoGraphic g, float scale, long dur) {
-        super(g, dur);
-        this.targetScale = scale;
+        this(g,scale,dur,"easeInOut");
        // System.out.println("Target Scale is:" + scale + " Start is : " + this.startScale);
+    }
+    
+    public ScaleAnimation(LudoGraphic g, float scale, long dur, String easing) {
+        super(g, dur, easing);
+        this.targetScale = scale;
     }
     
     @Override
@@ -28,7 +32,7 @@ public class ScaleAnimation extends Animation2D {
     @Override
     public Boolean tic(long dt) {
         Boolean done = super.tic(dt);
-        this.graphic.setScale((float)Animation2D.sinEaseInOut(elapsed, startScale, 
+        this.graphic.setScale(ease.tic(elapsed, startScale, 
                targetScale - startScale, dur));
 
         return done;
