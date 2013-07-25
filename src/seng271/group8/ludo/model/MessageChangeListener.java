@@ -13,6 +13,7 @@ import seng271.group8.ludo.graphics.AnimationBuilder;
 import seng271.group8.ludo.graphics.Animator;
 import seng271.group8.ludo.graphics.IAnimatable;
 import seng271.group8.ludo.graphics.MessageGraphic;
+import seng271.group8.ludo.graphics.NOPAnimation;
 import seng271.group8.ludo.graphics.ScaleAnimation;
 import seng271.group8.ludo.graphics.TranslateAnimation;
 
@@ -42,6 +43,7 @@ public class MessageChangeListener extends AbstractChangeListener {
             ScaleAnimation sc = new ScaleAnimation(g, 1.5f,400, "easeInOut");
             TranslateAnimation ts = new TranslateAnimation(g,new Point(5,-1),600);
             series.add(sc);
+            series.add(new NOPAnimation(g,300));
             series.add(ts);
             ani = series;
         }
