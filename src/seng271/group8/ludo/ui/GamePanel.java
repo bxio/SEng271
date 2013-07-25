@@ -32,6 +32,7 @@ import seng271.group8.ludo.model.PawnChangeListener;
 import seng271.group8.ludo.model.Player;
 import seng271.group8.ludo.model.PlayerChangeListener;
 import seng271.group8.ludo.model.Square;
+import seng271.group8.ludo.model.SquareChangeListener;
 
 /**
  *
@@ -85,7 +86,7 @@ public class GamePanel extends JComponent implements ComponentListener, FocusLis
         for(Pawn pw : board.getPawnList()) {
             pw.setRendering(new PawnGraphic(pw));
             pawnLayer.add(pw.getRendering());
-            pw.addPropertyChangeListener(new PawnChangeListener(
+            pw.addPropertyChangeListener(new SquareChangeListener(
                     animationThread,animationBuilders));
         }
         
