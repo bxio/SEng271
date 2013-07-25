@@ -15,14 +15,19 @@ public class Square extends GameEntity {
     protected Grid type;
     protected Pawn pawn = null;
     protected Boolean selected = false;
-	
+    protected Color c; 
+    public static final String PAWNLANDED = "PAWNLANDED";
+    
     public Square(Grid type, Point position) {
         this.type = type;
+        this.c = this.type.getColor();
         this.position = position;
     }
     
     public void setPawn(Pawn p) {
+        Pawn oldPawn = this.pawn;
         this.pawn = p;
+        this.pcs.firePropertyChange(PAWNLANDED, oldPawn, this.pawn);
     }
     
     public Pawn getPawn() {
@@ -30,7 +35,15 @@ public class Square extends GameEntity {
     }
     
     public Color getColor() {
-        return type.getColor();
+        return c;
+    }
+    
+    public Color getDefaultColor() {
+        return this.type.getColor();
+    }
+    
+    public void setColor(Color c) {
+        this.c = c;
     }
 
     public Boolean isSlected() {

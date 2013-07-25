@@ -31,10 +31,14 @@ public class SquareChangeListener extends AbstractChangeListener {
         String propertyName = evt.getPropertyName();
         IAnimatable ani = null;
         GameEvent ge = null;
+        Square s = (Square)evt.getSource();
 
         if (Square.SELECTED.equals(propertyName)) {
-            ani = builders.get(PulseBuilder.class).build((Square)evt.getSource(),0,0);
+            ani = builders.get(PulseBuilder.class).build(s,0,0);
+        } else if(Square.PAWNLANDED.equals(propertyName)) {
+            
         }
+        
          if(ani != null && ge != null)
             animator.addAnimation(ani, ge);
          else if(ani != null)
