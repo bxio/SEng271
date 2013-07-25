@@ -24,9 +24,8 @@ public class TurnEventHandler extends BaseHandler<TurnEvent> {
         if(game.getRoll() != 6)
            game.advanceTurn();
         game.setRoll(-1);
-        System.out.println("It is now the next players turn");
         int roll = game.makeRoll(); 
-        System.out.println("They rolled " + roll);
+        System.out.println("Player " + game.getCurrentPlayer().getId() + " rolled: " + roll);
         if(roll != -1) {
             GameController.publish(new RollEvent(roll,1000));
         }
