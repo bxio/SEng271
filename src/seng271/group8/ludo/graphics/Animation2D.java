@@ -14,10 +14,13 @@ public abstract class Animation2D implements IAnimatable {
     protected long dur;
     protected long elapsed = 0;
     protected int repeats = 0, seriesRepeat = 0,currentRepeat = 0, currentSeriesRepeat = 0;
+    protected IEasing ease = Easing.get("linear");
     
-    public Animation2D(LudoGraphic g, long dur) { 
+    public Animation2D(LudoGraphic g, long dur, String easing) { 
        this.graphic = g;
        this.dur = dur;
+       if(Easing.get(easing) != null)
+           ease = Easing.get(easing);
     }
     
     // update properties to current state before starting

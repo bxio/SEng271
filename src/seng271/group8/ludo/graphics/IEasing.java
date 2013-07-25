@@ -8,8 +8,6 @@ package seng271.group8.ludo.graphics;
  *
  * @author alastair
  */
-public class NOPAnimation extends Animation2D {
-    public NOPAnimation(LudoGraphic g, long dur) {
-        super(g, dur, "linear");
-    }
+public interface IEasing {
+    public float tic(float t, float b, float c, float d);
 }

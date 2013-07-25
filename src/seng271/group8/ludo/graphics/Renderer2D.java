@@ -69,6 +69,7 @@ public class Renderer2D {
         }
          // Center board in panel
          g2.translate(computeOffset(), 0);
+         int i = 0;
          for(Layer l : layers) {
             Graphics2D g2l = l.getContext();
             List<Rectangle.Double> regions = computeDirtyRegions(l.getGraphics());
@@ -88,6 +89,7 @@ public class Renderer2D {
                     if(gr.getDirty()) {
                          gr.paint(g2l, squareSize);
                          gr.setDirty(false);
+                         i++;
                      }
                 }
                 else {
@@ -96,7 +98,7 @@ public class Renderer2D {
                 }
             }
             
-            // Some Debug drawing code
+            // Some Debug drawing code (Shows regions which are being repainted)
 //            for (Rectangle.Double ar : regions) {
 //              g2.drawRect((int)ar.x, (int)ar.y, (int)( ar.width), (int)( ar.height));
 //            }
@@ -127,7 +129,7 @@ public class Renderer2D {
         Point2D size = new Point2D.Double(squareSize.width,squareSize.height);
             
         // For each Dirty graphic check its last and new position
-        // Find other graphics whose bounds overlap
+        // Find other graphics whose bounds overlap un the same layer
         // These regions need to be redrawn
         for(LudoGraphic dr : dirty) {
             Point2D paCur = dr.getBounds(squareSize);

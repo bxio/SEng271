@@ -20,8 +20,15 @@ public class TranslateAnimation extends Animation2D {
     }
     
     public TranslateAnimation(LudoGraphic g, Point dest, long dur) {
-        super(g, dur);
-       
+        this(g, dest, dur, "easeInOut");
+    }
+    
+    public TranslateAnimation(LudoGraphic g, Square s, long dur, String easing) {
+        this(g, s.getPosition(),dur, easing);
+    }
+    
+    public TranslateAnimation(LudoGraphic g, Point dest, long dur, String easing) {
+        super(g, dur, easing);
         this.dest = dest;
     }
     
@@ -37,8 +44,8 @@ public class TranslateAnimation extends Animation2D {
     @Override
     public Boolean tic(long dt) {
         Boolean done = super.tic(dt);
-        double x = Animation2D.easeInEaseOut(elapsed, start.getX(), distanceX, dur);
-        double y = Animation2D.easeInEaseOut(elapsed, start.getY(), distanceY, dur);
+        double x = ease.tic(elapsed, (float)start.getX(), (float)distanceX, dur);
+        double y = ease.tic(elapsed, (float)start.getY(), (float)distanceY, dur);
         graphic.setPosition(new Point2D.Double(x,y));
         return done;
     }
