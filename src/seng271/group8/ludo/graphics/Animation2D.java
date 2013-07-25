@@ -37,7 +37,6 @@ public abstract class Animation2D implements IAnimatable {
         if(elapsed >= dur) {
             elapsed = dur;
             done = true;
-            graphic.setDirty(false);
         }
         
         return done;
