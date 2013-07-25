@@ -13,7 +13,6 @@ import java.awt.event.FocusListener;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JComponent;
-import seng271.group8.ludo.graphics.Animation2DSeries;
 import seng271.group8.ludo.graphics.AnimationBuilder;
 import seng271.group8.ludo.graphics.Animator;
 import seng271.group8.ludo.graphics.Layer;
@@ -23,10 +22,10 @@ import seng271.group8.ludo.graphics.MoveBuilder;
 import seng271.group8.ludo.graphics.PawnGraphic;
 import seng271.group8.ludo.graphics.PulseBuilder;
 import seng271.group8.ludo.graphics.Renderer2D;
-import seng271.group8.ludo.graphics.ScaleAnimation;
 import seng271.group8.ludo.graphics.SquareGraphic;
-import seng271.group8.ludo.graphics.TranslateAnimation;
 import seng271.group8.ludo.model.Board;
+import seng271.group8.ludo.model.BoardMessage;
+import seng271.group8.ludo.model.MessageChangeListener;
 import seng271.group8.ludo.model.Pawn;
 import seng271.group8.ludo.model.PawnChangeListener;
 import seng271.group8.ludo.model.Player;
@@ -91,17 +90,17 @@ public class GamePanel extends JComponent implements ComponentListener, FocusLis
         }
         
         renderer.addLayer(pawnLayer);
+        
         Layer uiLayer = new Layer();
         LudoGraphic mes = new MessageGraphic(new Point(5,5), "Game started");
+//        BoardMessage bmes = board.getMessage();
+//        bmes.setRendering(mes);
+//        bmes.addPropertyChangeListener(new MessageChangeListener(animationThread,
+//                animationBuilders));
+       
         uiLayer.add(mes);
-        renderer.addLayer(uiLayer);
-        Animation2DSeries series = new Animation2DSeries();
-        ScaleAnimation sc = new ScaleAnimation(mes, 1.5f,1000, "bounce");
-        TranslateAnimation ts = new TranslateAnimation(mes,new Point(5,0),1000);
-        series.add(sc);
-        series.add(ts);
         
-        animationThread.addAnimation(series);
+        renderer.addLayer(uiLayer);
         
         GameMouseListener gl = new GameMouseListener(this);
         this.addMouseListener(gl);

@@ -40,11 +40,11 @@ public class PlayerChangeListener extends AbstractChangeListener {
                 
             Animation2DGroup group = new Animation2DGroup();
             for(Square hs : p.getPath().getHomeSquares()) {
-                ScaleAnimation ss = new ScaleAnimation(hs.getRendering(),scale,400l);
+                ScaleAnimation ss = new ScaleAnimation(hs.getRendering(),scale,400l, "linear");
                 group.add(ss);
                 if(hs.getPawn() != null) {
-                     ScaleAnimation sp = new ScaleAnimation(hs.getPawn().getRendering(),scale,400l);
-                     group.add(sp);
+                     //ScaleAnimation sp = new ScaleAnimation(hs.getPawn().getRendering(),scale,400l, "linear");
+                     //group.add(sp);
                 }      
             }
             ani = group;

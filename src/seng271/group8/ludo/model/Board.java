@@ -21,6 +21,7 @@ public class Board {
     private List<Player> playerList;
     private List<Path> paths;
     private List<List<Pawn>> pawns;
+    private BoardMessage message;
     
     public Board(Strategy[] strategies) {
         buildBoard();
@@ -28,6 +29,7 @@ public class Board {
     }
     
     public void buildBoard() {
+        message = new BoardMessage("Game Started!");
         squareList = new ArrayList<Square>();
         squares = new Square[BoardConfig.WIDTH][BoardConfig.HEIGHT];
         for( int i = 0; i < BoardConfig.HEIGHT; i ++) {
@@ -62,6 +64,14 @@ public class Board {
         
         return path;
 
+    }
+    
+    public BoardMessage getMessage() {
+        return this.message;
+    }
+    
+    public void setMessage(String message){
+        this.message.setMessage(message);
     }
     
     public List<Pawn> buildPawns(int playerNum, Player p) {

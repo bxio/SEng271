@@ -172,8 +172,10 @@ public class GameLogic {
    public int getRoll() {
        Player p = getCurrentPlayer();
        roll = p.getRoll(dice);
-       if(roll != -1)
+       if(roll != -1) {
            p.setHasRolled(true);
+           model.setMessage("Player rolled " + roll +"!");
+       }
        return roll;
    }
    
