@@ -3,12 +3,11 @@ package seng271.group8.ludo.strategies;
 import java.util.List;
 import seng271.group8.ludo.model.Move;
 
-/**
+/** Give preference to moving the foremost pawn;
  *
  * @author bill
  */
 public class MoveFirstStrategy extends AbstractStrategy {
-	//(4)Move-first: Give preference to moving the foremost pawn;
 	public MoveFirstStrategy() {
             this.name = "Move First";
         }

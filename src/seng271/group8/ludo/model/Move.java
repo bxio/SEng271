@@ -31,11 +31,17 @@ public class Move {
         this.squares = squares;
         this.roll = roll;
     }
-    
+    /** Sets whether the pawn's human boolean
+	 * 
+	 * @param b whether this pawn belongs to a human or not
+	 */
     public void setHuman(Boolean b) {
         this.human = b;
     }
-    
+    /** 
+	 * 
+	 * @param kick The kicked pawn's move
+	 */
     public void setKickMove(Move kick) {
         this.kick = true;
         this.kickMove = kick;
@@ -53,7 +59,7 @@ public class Move {
     }
     /** 
 	 * 
-	 * @return the pawn to be moved
+	 * @return			the pawn to be moved
 	 */
     public Pawn getPawn() {
         return this.pawn;
@@ -80,6 +86,8 @@ public class Move {
         return squares.getLast().getPawn();
     }
     /** 
+	 * Squares is a list of squares that the Pawn passes through as it moves. 
+	 * This method returns them so that they can be animated by the game UI.
 	 * 
 	 * @return the squares to be animated
 	 */

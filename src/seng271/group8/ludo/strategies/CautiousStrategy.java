@@ -5,16 +5,15 @@ import java.util.List;
 import java.util.Random;
 import seng271.group8.ludo.model.Move;
 
-/**
+/**Give low priority to a move that kicks a pawn (so as not to anger the other player);
  *
  * @author bill
  */
 public class CautiousStrategy extends AbstractStrategy {
-	//(2)Cautious: Give low priority to a move that kicks a pawn (so as not to anger the other
-	//player);
+
 	public CautiousStrategy() {
-            this.name = "Cautious";
-        }
+		this.name = "Cautious";
+	}
 
 	public Move getMove(List<Move> moves) {
 		List<Move> nonkickmoves = new ArrayList<Move>(), kickmoves = new ArrayList<Move>();
@@ -42,6 +41,5 @@ public class CautiousStrategy extends AbstractStrategy {
 			}
 			return bestMove;
 		}
-
 	}
 }

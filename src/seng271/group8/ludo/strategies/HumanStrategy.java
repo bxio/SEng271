@@ -4,17 +4,18 @@ import java.util.List;
 import seng271.group8.ludo.Dice;
 import seng271.group8.ludo.model.Move;
 
-/**
- *
+/**Human Strategy
+ * The human strategy doesn't actually calculate anything, as the human needs to 
+ * choose the move they want to perform on another level.
  * @author bill
  */
 public class HumanStrategy extends AbstractStrategy {
 
-        public HumanStrategy() {
-            this.name = "Human Player";
-        }
+	public HumanStrategy() {
+		this.name = "Human Player";
+	}
     
-        @Override
+	@Override
 	public Move getMove(List<Move> moves) {
             // No move is returned. The move is selected through UI events
             // by the human player.
@@ -26,8 +27,8 @@ public class HumanStrategy extends AbstractStrategy {
             return m;
         }
         
-        @Override
-        public int getRoll(Dice d) {
-            return -1;
-        }
+	@Override
+	public int getRoll(Dice d) {
+		return -1;
+	}
 }

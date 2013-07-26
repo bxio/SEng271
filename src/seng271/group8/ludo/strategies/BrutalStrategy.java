@@ -3,7 +3,7 @@ package seng271.group8.ludo.strategies;
 import java.util.List;
 import seng271.group8.ludo.model.Move;
 
-/**
+/** An All-out, merciless, completely heuristic strategy to crush opponents.
  *
  * @author bill
  */
