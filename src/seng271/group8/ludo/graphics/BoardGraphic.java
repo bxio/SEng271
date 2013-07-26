@@ -10,9 +10,10 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-import seng271.group8.ludo.model.Board;
 import seng271.group8.ludo.model.BoardConfig;
 
 /**
@@ -41,9 +42,22 @@ public class BoardGraphic extends LudoGraphic {
        int boardWidth = (int)squareSize.getWidth()*BoardConfig.WIDTH;
        int boardHeight = (int)squareSize.getHeight()*BoardConfig.HEIGHT;
        
-       for(int x = 0; x < boardWidth; x+=boardBackground.getWidth()) {
-           for(int y = 0; y < boardHeight; y+=boardBackground.getHeight()) {
-               g2.drawImage(boardBackground, x, y, null);
+       BufferedImage resized;
+       
+       double size = Math.min(boardBackground.getWidth(), 2*squareSize.width);
+       
+       resized = new BufferedImage((int)size, 
+               (int)size, BufferedImage.TYPE_INT_ARGB);
+       
+       AffineTransform at = new AffineTransform();
+       double imScale = size/boardBackground.getWidth();
+       at.scale(imScale, imScale);
+       AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+       resized = op.filter(boardBackground, resized);
+               
+       for(int x = 0; x < boardWidth; x+=resized.getWidth()) {
+           for(int y = 0; y < boardHeight; y+=resized.getHeight()) {
+               g2.drawImage(resized, x, y, null);
            }
        }
        
