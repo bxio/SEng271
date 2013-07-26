@@ -32,6 +32,7 @@ public class Renderer2D {
     private BufferedImage scene;
     private Graphics2D g2d;
     private int viewSize;
+    private int side;
     
     public Renderer2D () {
         this.layers = new ArrayList<Layer>();
@@ -61,14 +62,14 @@ public class Renderer2D {
         // If the view size has changed need to recompute the entire view
         // All drawing is done to a buffered image which is then copied to the 
         // Panel area
-         viewSize = (int)Math.min(panelSize.getWidth(),panelSize.getHeight());
+         viewSize = (int)Math.min(panelSize.getWidth()-30,panelSize.getHeight()-30);
          if(repaintAll) {
              for(Layer l : layers) {
                  l.create(viewSize);
              }
         }
          // Center board in panel
-         g2.translate(computeOffset(), 0);
+         g2.translate(computeOffsetX(), computeOffsetY());
          int i = 0;
          for(Layer l : layers) {
             Graphics2D g2l = l.getContext();
@@ -166,16 +167,20 @@ public class Renderer2D {
     }
     
     public Point graphicToGridCoords(double x, double y) {
-        Point p = new Point((int)(x - computeOffset())/squareSize.width, (int)y/squareSize.height);
+        Point p = new Point((int)(x - computeOffsetX())/squareSize.width, (int)(y - computeOffsetY())/squareSize.height);
         return p;
     }
     
-    private int computeOffset(){
+    private int computeOffsetX(){
         return (int)(panelSize.width-viewSize)/2;
     }
     
+    private int computeOffsetY() {
+        return (int)(panelSize.height-viewSize)/2;
+    }
+    
     private void computeSquareSize(Dimension panelSize) {
-        int side = Math.min(panelSize.width, panelSize.height)/BoardConfig.WIDTH;
+        side = Math.min(panelSize.width-30, panelSize.height-30)/BoardConfig.WIDTH;
         this.squareSize.setSize(side, side);
     }
 }

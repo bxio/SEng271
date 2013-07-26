@@ -4,17 +4,23 @@
  */
 package seng271.group8.ludo.ui;
 
+import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
+import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import seng271.group8.ludo.graphics.AnimationBuilder;
 import seng271.group8.ludo.graphics.Animator;
+import seng271.group8.ludo.graphics.BoardGraphic;
 import seng271.group8.ludo.graphics.Layer;
 import seng271.group8.ludo.graphics.LudoGraphic;
 import seng271.group8.ludo.graphics.MessageGraphic;
@@ -43,6 +49,7 @@ public class GamePanel extends JComponent implements ComponentListener, FocusLis
     private Renderer2D renderer;
     private Animator animationThread;
     private Map<Class<? extends AnimationBuilder>, AnimationBuilder> animationBuilders;
+    private BufferedImage background;
     
     public GamePanel(Board b) {
         /*
@@ -50,6 +57,7 @@ public class GamePanel extends JComponent implements ComponentListener, FocusLis
          * Low priority
          */
         this.setOpaque(true);
+        this.setBackground(new Color(51,0,0));
         this.board = b;
         this.renderer = new Renderer2D();
         
@@ -68,6 +76,11 @@ public class GamePanel extends JComponent implements ComponentListener, FocusLis
                     animationBuilders));
         }
         
+        Layer backgroundLayer = new Layer();
+
+        backgroundLayer.add(new BoardGraphic(new Point(0,0)));
+        
+        renderer.addLayer(backgroundLayer);
         
         Layer squareLayer = new Layer();
         
@@ -102,6 +115,14 @@ public class GamePanel extends JComponent implements ComponentListener, FocusLis
         
         renderer.addLayer(uiLayer);
         
+                
+        try{
+            background = ImageIO.read(Renderer2D.class.getResource("diagonal.png"));
+        } catch (Exception e) {
+            System.out.println("Board background didn't load: " + e.getMessage());
+        }
+        
+        
         GameMouseListener gl = new GameMouseListener(this);
         this.addMouseListener(gl);
         this.addMouseMotionListener(gl);
@@ -111,9 +132,19 @@ public class GamePanel extends JComponent implements ComponentListener, FocusLis
     @Override
     protected void paintComponent(Graphics g) {
        
-       super.paintComponent(g);
+       super.paintComponent(g);      
+       Graphics2D g2 = (Graphics2D) g;
        g.clearRect(0, 0, this.getWidth(), this.getHeight());
-       
+       g.setColor(new Color(64,42,13));
+       g.fillRect(0, 0, this.getWidth(), this.getHeight());
+       float opacity = 0.1f;
+       g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
+        for(int x = 0; x < this.getWidth(); x+=background.getWidth()) {
+           for(int y = 0; y < this.getHeight(); y+=background.getHeight()) {
+               g2.drawImage(background, x, y, null);
+           }
+       }
+       g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
        //System.out.println(javax.swing.SwingUtilities.isEventDispatchThread());
        //long start = System.currentTimeMillis();
        

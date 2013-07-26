@@ -30,6 +30,10 @@ public class Square extends GameEntity {
         this.pcs.firePropertyChange(PAWNLANDED, oldPawn, this.pawn);
     }
     
+    public Grid getType() {
+        return this.type;
+    }
+    
     public Pawn getPawn() {
         return this.pawn;
     }

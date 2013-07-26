@@ -13,6 +13,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import seng271.group8.ludo.model.Grid;
 import seng271.group8.ludo.model.Square;
 
 /**
@@ -34,6 +35,11 @@ public class SquareGraphic extends LudoGraphic {
     public void paint(Graphics g, Dimension squareSize) {
         Graphics2D g2 = (Graphics2D)g;
         
+        // Temporary hack to avoid drawing the blank squares
+        // These draw methods are all pretty ugly right now
+        // Experimenting with a few different things...
+        if(square.getType() == Grid.EMP_SQ)
+            return;
         Point2D pos = getDrawPosition(squareSize);
         Point2D size = getDrawSize(squareSize);
 
@@ -42,15 +48,17 @@ public class SquareGraphic extends LudoGraphic {
                 squareSize.width, squareSize.height);
         g2.setColor(new Color(139,137,137));
         //g2.fill(bounds);
-       
+        
         Ellipse2D shape = new Ellipse2D.Double(pos.getX(), pos.getY(), size.getX(), size.getY());
         //g2.setColor(new Color(224,195,108));
         //g2.fill(bounds);
-        g2.setColor(square.getColor());
+        float[] rgb = new float[3]; // TODO: get rid of this sort of code
+        square.getColor().getColorComponents(rgb); // and this
+        g2.setColor(new Color(rgb[0], rgb[1], rgb[2], 0.7f)); // and this
         g2.fill(shape);
         g2.setColor(new Color(139,137,137));
         g2.setStroke( new BasicStroke (1.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-        g2.draw(bounds);
+        //g2.draw(bounds);
         g2.setStroke( new BasicStroke (2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
         g2.setColor(Color.BLACK);
         g2.draw(shape);

@@ -4,7 +4,6 @@
  */
 package seng271.group8.ludo.graphics;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -40,7 +39,8 @@ public class PawnGraphic extends LudoGraphic{
 //        g2.drawRect((int)lastPosition.getX(), (int)lastPosition.getY(), squareSize.width, squareSize.height);
         float[] rgb = new float[3];
         ColorConfig.PLAYER_COLORS[pawn.getOwner().getId()].getRGBColorComponents(rgb);
-        g2.setColor(new Color(rgb[0],rgb[1],rgb[2],0.5f));
+        g2.setColor(ColorConfig.PLAYER_COLORS[pawn.getOwner().getId()]);
+        //g2.setColor(new Color(rgb[0],rgb[1],rgb[2],0.5f));
         g2.fill(shape);
         
 //        g2.setColor(Color.gray);
