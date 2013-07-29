@@ -24,9 +24,26 @@ public class Player extends GameEntity {
     private Boolean hasRolled = false;
     private int roll = 0;
     private Boolean human = false;
+    private Boolean finished = false;
     
     public Player(int num) {
         this.id = num;
+    }
+    
+    public Boolean getIsFinished() {
+        return this.finished;
+    }
+    
+    public Boolean checkIsFinished() {
+        for(Pawn pw : this.pawns) {
+            if(pw.isOnGoal()) {
+                finished = true;
+            } else {
+                finished = false;
+                break;
+            }
+        }
+        return finished;
     }
 
     public Pawn getSelectedPawn() {

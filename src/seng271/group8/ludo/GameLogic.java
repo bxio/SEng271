@@ -20,7 +20,7 @@ import seng271.group8.ludo.model.Square;
  */
 public class GameLogic {
    private Board model;
-   private List<Player> players;
+   private List<Player> players, rankings;
    private int turn = 0; // Player 1 always starts
    private int roll = 6; // Hardcoded for testing
    private Dice dice;
@@ -31,6 +31,7 @@ public class GameLogic {
        this.model = b;
        this.dice = d;
        this.players = b.getPlayers();
+       this.rankings = new LinkedList<Player>();
    }
    
    public Player getCurrentPlayer() {
@@ -42,6 +43,27 @@ public class GameLogic {
        m.getPawn().setMove(m);
    }
    
+   public Boolean checkForWin() {
+       Boolean gameOver = true;
+       for(Player p : this.players) {
+           if(p.getIsFinished() && !rankings.contains(p)) {
+               rankings.add(p);
+           } else {
+               gameOver = false;
+           }         
+       }
+       
+       return gameOver;
+   }
+   
+   /**
+    * 
+    * @return The player rankings from 1st-4th place 
+    */
+   public List<Player> getGameResults() {
+       return this.rankings;
+   }
+   
    public void makeKickMove(Move m) {
        m.getPawn().setMove(m);
    }
@@ -50,9 +72,12 @@ public class GameLogic {
        Player last = players.get(turn);
        last.setSelected(Boolean.FALSE);
        turn = (turn + 1) % players.size();
-       Player cur = players.get(turn);
-       cur.setSelected(Boolean.TRUE);
-       
+       if(this.getCurrentPlayer().getIsFinished()) {
+           this.advanceTurn();
+       } else {
+            Player cur = players.get(turn);
+            cur.setSelected(Boolean.TRUE);
+       }
    }
    
    public void setModel(Board b) {
