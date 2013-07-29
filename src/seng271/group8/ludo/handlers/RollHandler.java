@@ -4,12 +4,14 @@
  */
 package seng271.group8.ludo.handlers;
 
+import java.util.List;
 import seng271.group8.ludo.GameController;
 import seng271.group8.ludo.GameLogic;
 import seng271.group8.ludo.events.MoveEvent;
 import seng271.group8.ludo.events.RollEvent;
 import seng271.group8.ludo.events.TurnEvent;
 import seng271.group8.ludo.model.Move;
+import seng271.group8.ludo.model.Player;
 
 /**
  *
@@ -24,7 +26,7 @@ public class RollHandler extends BaseHandler<RollEvent> {
     @Override
     public void handle(RollEvent evt) {
         if(evt.getRoll() == -1) {
-            System.out.println("Human rolled " + game.generateRoll());
+            System.out.println("Human rolled " + game.generateRoll());      
             game.getCurrentPlayer().setHasRolled(true);
         }
         

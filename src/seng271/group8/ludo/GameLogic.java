@@ -25,6 +25,7 @@ public class GameLogic {
    private int roll = 6; // Hardcoded for testing
    private Dice dice;
    private String stateMessage;
+   private Boolean shouldBlock;
 
    public GameLogic(Board b, Dice d) {
        this.model = b;
@@ -37,6 +38,7 @@ public class GameLogic {
    }
    
    public void makeMakeMove(Move m) {
+       this.getCurrentPlayer().setHasRolled(false);
        m.getPawn().setMove(m);
    }
    
@@ -157,15 +159,17 @@ public class GameLogic {
    }
    
    public int generateRoll() {
-       /*new Timer().schedule(new TimerTask() {          
-            @Override
-            public void run() {
-                System.out.println("LATER");
-             }
-        }, 2000);*/
        if(roll == -1)
            this.roll = dice.roll();
        return this.roll;
+   }
+   
+   public void setBlockInput(Boolean block) {
+       this.shouldBlock = block;
+   }
+   
+   public Boolean shouldBlockInput() {
+       return false;
    }
    
    public int getRoll() {

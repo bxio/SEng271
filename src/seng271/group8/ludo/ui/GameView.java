@@ -56,12 +56,12 @@ public class GameView extends JPanel {
         
         for(Player p : players) {
             if(p.getStrategy().getClass().equals(HumanStrategy.class))
-                humans.add(p);
+                p.setHuman(true);
         }
         
         // Wire events
         gameController = new GameController();
-        GameController.register(BoardClickEvent.class, new BoardClickHandler(humans, board, gamelogic));
+        GameController.register(BoardClickEvent.class, new BoardClickHandler(board, gamelogic));
         GameController.register(MoveEvent.class, new MoveHandler(gamelogic));
         GameController.register(KickPawnEvent.class, new KickPawnEventHandler(gamelogic));
         GameController.register(TurnEvent.class, new TurnEventHandler(gamelogic));
@@ -78,7 +78,7 @@ public class GameView extends JPanel {
         this.add(playArea);
         
         // Create game state
-        this.add(new GameStatePanel(), BorderLayout.SOUTH);
+        this.add(new GameStatePanel(gamelogic), BorderLayout.SOUTH);
         
         // Start the game (after 5 seconds)
         GameController.publish(new TurnEvent(5000));

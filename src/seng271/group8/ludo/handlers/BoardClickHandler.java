@@ -22,25 +22,23 @@ import seng271.group8.ludo.model.Square;
 public class BoardClickHandler extends BaseHandler<BoardClickEvent> {
     
     private Board board;
-    private List<Player> players;
     private enum ClickStates {
         Selected,
         Rolled
     }
     private Pawn selected;
-    private Player player;
     private Move move;
+    private Player player;
     
-    public BoardClickHandler(List<Player> players, Board b, GameLogic game) {
+    public BoardClickHandler(Board b, GameLogic game) {
         super(game);
         this.board = b;
-        this.players = players;
     }
     
     public void handle(BoardClickEvent evt) {
         // Only handle board clicks for players if it is their turn
         // and they have already rolled
-        if(players.contains(game.getCurrentPlayer()) 
+        if(game.getCurrentPlayer().isHuman()
                 && game.getCurrentPlayer().getHasRolled()) {
             Square s = board.getSquareAt(evt.getClick().x, evt.getClick().y);
             System.out.println("Clicked Square:" + s.getPosition().x + " " + s.getPosition().y);

@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import seng271.group8.ludo.GameLogic;
 
 import seng271.group8.ludo.actions.DiceRollAction;
 import seng271.group8.ludo.actions.QuitGameAction;
@@ -27,8 +28,10 @@ public class GameStatePanel extends JPanel{
     private JButton restart;
     private JButton options;
     private JButton quit;
+    private GameLogic game;
     
-    public GameStatePanel() {
+    public GameStatePanel(GameLogic game) {
+        this.game = game;
         this.setup();
     }
     
@@ -44,7 +47,7 @@ public class GameStatePanel extends JPanel{
         
         diceRoll = new JButton("Roll");
         diceRoll.setPreferredSize(new Dimension(80, 60));
-        diceRoll.addActionListener(new DiceRollAction());
+        diceRoll.addActionListener(new DiceRollAction(game));
         this.add(diceRoll);
         this.add(diceRoll, gbc);
         
