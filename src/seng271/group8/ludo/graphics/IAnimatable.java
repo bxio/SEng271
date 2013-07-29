@@ -15,6 +15,7 @@ public interface IAnimatable {
     //public void repeats();
     //public void reverse();
     public void start();  
+    public void cancelRepeats();
    // public void onComplete(Action done);
      
 }

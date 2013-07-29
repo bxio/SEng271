@@ -20,6 +20,7 @@ import seng271.group8.ludo.graphics.PulseBuilder;
  * @author alastair
  */
 public class SquareChangeListener extends AbstractChangeListener {
+    private IAnimatable active = null;
     
     public SquareChangeListener(Animator animator, 
             Map<Class<? extends AnimationBuilder>,AnimationBuilder> builders) {
@@ -34,15 +35,23 @@ public class SquareChangeListener extends AbstractChangeListener {
         Square s = (Square)evt.getSource();
 
         if (Square.SELECTED.equals(propertyName)) {
-            ani = builders.get(PulseBuilder.class).build(s,0,0);
+            Boolean selected = (Boolean)evt.getNewValue();
+            if(selected) {
+                ani = builders.get(PulseBuilder.class).build(s,0,0);
+            }
+            else if(active != null) {
+                active.cancelRepeats();
+            }
         } else if(Square.PAWNLANDED.equals(propertyName)) {
             
         }
         
-         if(ani != null && ge != null)
-            animator.addAnimation(ani, ge);
-         else if(ani != null)
-            animator.addAnimation(ani); 
+        active = ani;
+        
+        if(ani != null && ge != null)
+           animator.addAnimation(ani, ge);
+        else if(ani != null)
+           animator.addAnimation(ani); 
     }
 }
 

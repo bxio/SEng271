@@ -15,6 +15,7 @@ public abstract class Animation2D implements IAnimatable {
     protected long elapsed = 0;
     protected int repeats = 0, seriesRepeat = 0,currentRepeat = 0, currentSeriesRepeat = 0;
     protected IEasing ease = Easing.get("linear");
+    protected Boolean cancelRepeats = false;
     
     public Animation2D(LudoGraphic g, long dur, String easing) { 
        this.graphic = g;
@@ -24,11 +25,18 @@ public abstract class Animation2D implements IAnimatable {
     }
     
     // update properties to current state before starting
+    @Override
     public void start() {
         this.elapsed = 0;
         this.graphic.setDirty(true);
     }
+    
+    @Override
+    public void cancelRepeats() {
+        cancelRepeats = true;
+    }
 
+    @Override
     public Boolean tic(long dt) {
         Boolean done = false;
         this.graphic.setDirty(true);

@@ -17,6 +17,7 @@ public class Animation2DSeries implements IAnimatable{
     private IAnimatable current;
     private int currentInd = 0;
     private int repetitions = 0;
+    protected Boolean cancelRepeats = false;
     
     public Animation2DSeries(int reps) {
         this();
@@ -37,13 +38,13 @@ public class Animation2DSeries implements IAnimatable{
         IAnimatable next = null;
         if(++currentInd < series.size())
              next = series.get(currentInd);
-         else {
+        else if(!cancelRepeats) {
              if(repetitions > 0 || repetitions == -1) {
                  if(repetitions > 0)
                      repetitions--;
                  next = this.series.get((currentInd = 0));
              } 
-         }
+        }
         return next;
     }
 
@@ -63,5 +64,10 @@ public class Animation2DSeries implements IAnimatable{
     @Override
     public void start() {
        current.start();
+    }
+
+    @Override
+    public void cancelRepeats() {
+        cancelRepeats = true;
     }
 }

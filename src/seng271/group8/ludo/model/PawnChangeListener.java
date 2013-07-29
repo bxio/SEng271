@@ -20,6 +20,8 @@ import seng271.group8.ludo.graphics.PulseBuilder;
  * @author Alastairs
  */
 public class PawnChangeListener extends AbstractChangeListener {
+    private IAnimatable active = null;
+    
     
     public PawnChangeListener(Animator animator, 
             Map<Class<? extends AnimationBuilder>,AnimationBuilder> builders) {
@@ -42,7 +44,12 @@ public class PawnChangeListener extends AbstractChangeListener {
                 ani = builders.get(MoveBuilder.class).build(p,0,0);
             }
         } else if (Pawn.SELECTED.equals(propertyName)) {
-            ani = builders.get(PulseBuilder.class).build((GameEntity)evt.getSource(),0,0);
+            Boolean selected = (Boolean) evt.getNewValue();
+            if(selected) {
+               active = ani = builders.get(PulseBuilder.class).build((GameEntity)evt.getSource(),0,0);
+            } else if(active != null) {
+               active.cancelRepeats();
+            }
         }
          if(ani != null && ge != null)
             animator.addAnimation(ani, ge);

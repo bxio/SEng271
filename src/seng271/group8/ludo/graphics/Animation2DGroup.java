@@ -15,6 +15,7 @@ public class Animation2DGroup implements IAnimatable {
     
     private List<IAnimatable> group;
     private List<IAnimatable> finished = new ArrayList<IAnimatable>();
+    protected Boolean cancelRepeats = false;
     
     public Animation2DGroup() {
         this.group = new ArrayList<IAnimatable>();
@@ -56,5 +57,10 @@ public class Animation2DGroup implements IAnimatable {
     public void onComplete(Action done) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }*/
+
+    @Override
+    public void cancelRepeats() {
+        cancelRepeats = true;
+    }
     
 }
