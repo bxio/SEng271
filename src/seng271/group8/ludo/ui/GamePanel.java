@@ -43,7 +43,8 @@ import seng271.group8.ludo.model.SquareChangeListener;
  *
  * @author Alastairs
  */
-public class GamePanel extends JComponent implements ComponentListener, FocusListener {
+public class GamePanel extends JComponent implements ComponentListener, 
+        FocusListener {
     
     private Board board;
     private Renderer2D renderer;
@@ -129,6 +130,11 @@ public class GamePanel extends JComponent implements ComponentListener, FocusLis
         this.addComponentListener(this);
     }
     
+    private void resize() {
+        renderer.resize(this.getSize());
+        this.repaint();
+    }
+    
     @Override
     protected void paintComponent(Graphics g) {
        
@@ -166,17 +172,17 @@ public class GamePanel extends JComponent implements ComponentListener, FocusLis
 
     @Override
     public void componentResized(ComponentEvent e) {
-        renderer.resize(this.getSize());
+        this.resize();
     }
 
     @Override
     public void componentMoved(ComponentEvent e) {
-        renderer.resize(this.getSize());    
+        this.resize();
     }
 
     @Override
     public void componentShown(ComponentEvent e) {
-        renderer.resize(this.getSize());
+        this.resize();
     }
 
     @Override
@@ -186,7 +192,7 @@ public class GamePanel extends JComponent implements ComponentListener, FocusLis
 
     @Override
     public void focusGained(FocusEvent e) {
-        renderer.resize(this.getSize());
+        this.resize();
     }
 
     @Override
