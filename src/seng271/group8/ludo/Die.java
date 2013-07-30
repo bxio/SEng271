@@ -6,12 +6,15 @@ package seng271.group8.ludo;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
-public class Dice {
+
+import seng271.group8.ludo.model.GameEntity;
+public class Die extends GameEntity {
     private List<Integer> log;
     private int result;
     private Random generator;
+    public static final String ROLL = "ROLL";
     
-    public Dice(){
+    public Die(){
         generator = new Random();
         log = new ArrayList<Integer>();
     }
@@ -20,9 +23,11 @@ public class Dice {
 	 * 
 	 * @return			An integer between 1 and 6 (as the result of the dice roll.)
 	 */
-    public int roll(){
+    public int roll() {
+    	int oldResult = this.result;
         this.result = generator.nextInt(6)+1;
         log.add(new Integer(result));
+        this.pcs.firePropertyChange(ROLL, oldResult, this.result);
         return this.result; 
     }
 	/** returns a log of all of the dice results.

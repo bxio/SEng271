@@ -2,7 +2,7 @@ package seng271.group8.ludo.model;
 
 import java.awt.Color;
 import java.util.List;
-import seng271.group8.ludo.Dice;
+import seng271.group8.ludo.Die;
 import seng271.group8.ludo.strategies.Strategy;
 
 /*
@@ -48,7 +48,7 @@ public class Player extends GameEntity {
            this.strategy = strat;
        }
        
-       public int getRoll(Dice d) {
+       public int getRoll(Die d) {
            return this.strategy.getRoll(d);
        }
        

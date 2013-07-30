@@ -57,8 +57,6 @@ public class SquareGraphic extends LudoGraphic {
         g2.setColor(new Color(rgb[0], rgb[1], rgb[2], 0.7f)); // and this
         g2.fill(shape);
         g2.setColor(new Color(139,137,137));
-        g2.setStroke( new BasicStroke (1.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-        //g2.draw(bounds);
         g2.setStroke( new BasicStroke (2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
         g2.setColor(Color.BLACK);
         g2.draw(shape);

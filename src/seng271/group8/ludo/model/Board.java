@@ -3,6 +3,7 @@ package seng271.group8.ludo.model;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
+
 import seng271.group8.ludo.strategies.Strategy;
 
 /**
@@ -193,6 +194,10 @@ public class Board {
         y = p.x*(int)Math.sin(rads) + p.y*(int)Math.cos(rads);
         //System.out.println("Old: (" + path[i].x + "," + path[i].y + ") New: (" + x + "," +  y +")");
         return new Point(x,y);
+    }
+    
+    public Point getCentrePoint() {
+    	return new Point(BoardConfig.HEIGHT/2, BoardConfig.WIDTH/2);
     }
     
     public Square getSquareAt(int row, int column) {
