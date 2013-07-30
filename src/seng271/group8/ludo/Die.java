@@ -52,10 +52,10 @@ public class Die extends GameEntity {
 	 */
     public int roll(){
 		if(this.cheat){
-			
 			int oldResult = this.result;
 			if(rig.isEmpty()){
 				this.result = generator.nextInt(6)+1;
+				System.out.println("Cheater list empty. RNG'd result:"+this.result);
 			}else{
 				this.result = rig.get(0);
 				rig.remove(0);

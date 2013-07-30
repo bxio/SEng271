@@ -45,7 +45,7 @@ public class MoveLastStrategy extends AbstractStrategy {
 			}else{
 				//I rolled a 6 and my home is empty
 				//return the first move that moves a pawn NOT on the list
-				System.out.println("6 was rolled and home empty.");
+				//System.out.println("6 was rolled and home empty.");
 				for(int i=0;i<moves.size();i++){
 					if(!placement.contains(moves.get(i).getPawn())){
 						return moves.get(i);
