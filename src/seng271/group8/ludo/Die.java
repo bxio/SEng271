@@ -15,7 +15,7 @@ public class Die extends GameEntity {
     private int result;
     private Random generator;
     public static final String ROLL = "ROLL";
-	private boolean cheat = true;
+	private boolean cheat = false;
 	private List<Integer> rig;
     
     public Die(){
@@ -27,7 +27,8 @@ public class Die extends GameEntity {
 			//add the results you want the rigged dice to return.
 			//blue
 			rig.add(6);
-			rig.add(5);
+			rig.add(6);
+			rig.add(3);
 			//yellow
 			rig.add(6);
 			rig.add(1);
@@ -51,26 +52,21 @@ public class Die extends GameEntity {
 	 * @return			An integer between 1 and 6 (as the result of the dice roll.)
 	 */
     public int roll(){
+		int oldResult = this.result;
 		if(this.cheat){
-			int oldResult = this.result;
 			if(rig.isEmpty()){
 				this.result = generator.nextInt(6)+1;
 				System.out.println("Cheater list empty. RNG'd result:"+this.result);
 			}else{
 				this.result = rig.get(0);
 				rig.remove(0);
-			}
-			log.add(new Integer(result));
-			this.pcs.firePropertyChange(ROLL, oldResult, this.result);
-			return this.result;  
-			
+			}					
 		}else{
-			int oldResult = this.result;
 			this.result = generator.nextInt(6)+1;
-			log.add(new Integer(result));
-			this.pcs.firePropertyChange(ROLL, oldResult, this.result);
-			return this.result; 
 		}
+		log.add(new Integer(this.result));
+		this.pcs.firePropertyChange(ROLL, oldResult, this.result);
+		return this.result; 
     }
 	/** returns a log of all of the dice results.
 	 * 
