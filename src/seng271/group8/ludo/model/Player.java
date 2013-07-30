@@ -15,19 +15,33 @@ import seng271.group8.ludo.strategies.Strategy;
  * @author bill
  */
 public class Player extends GameEntity {
-	private Color colour;
-	private Strategy strategy;
+		private Color colour;
+		private Strategy strategy;
         private Path path;
         private List<Pawn> pawns;
         private Pawn selected;
         private int id;
         private Boolean hasRolled = false;
         private int roll = 0;
+		private Boolean human = false;
+		private Boolean finished = false;
+
         
        public Player(int num) {
            this.id = num;
        }
-       
+	   public Boolean getIsFinished() {
+		   return this.finished;
+	   }
+	   
+	   public void setHuman(Boolean human) {
+		   this.human = human;
+	   }
+	   
+	   public Boolean isHuman(){
+		   return this.human;
+	   }
+	   
        public Pawn getSelectedPawn() {
            return selected;
        }
