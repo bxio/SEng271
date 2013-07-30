@@ -12,7 +12,7 @@ import java.util.LinkedList;
  */
 public class Move {
     private Pawn pawn;///< the pawn to be moved
-    private int roll;///< the number it 
+    private int roll;///< the number rolled
     private LinkedList<Square> squares;///< the squares that the pawn pass through. We need this in order to animate the moves on the board.
     private Boolean human = false;///< used in RollHandler to make the human strategy asychronous
     private Boolean kick = false;///< whether the move will kick another pawn
