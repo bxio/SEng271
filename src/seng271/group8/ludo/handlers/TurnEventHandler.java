@@ -27,6 +27,8 @@ public class TurnEventHandler extends BaseHandler<TurnEvent> {
             return;
         }
         
+        game.getCurrentPlayer().setHasRolled(false);
+        
         if(game.getRoll() != 6)
            game.advanceTurn();
         game.setRoll(-1);

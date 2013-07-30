@@ -13,7 +13,6 @@ import seng271.group8.ludo.model.PathSegment;
 import seng271.group8.ludo.model.Pawn;
 import seng271.group8.ludo.model.Player;
 import seng271.group8.ludo.model.Square;
-import seng271.group8.ludo.model.SquareChangeListener;
 
 /**
  *
@@ -184,12 +183,6 @@ public class GameLogic {
        
    }
    
-   public int generateRoll() {
-       if(roll == -1)
-           this.roll = dice.roll();
-       return this.roll;
-   }
-   
    public void setBlockInput(Boolean block) {
        this.shouldBlock = block;
    }
@@ -202,14 +195,26 @@ public class GameLogic {
        return this.roll;
    }
    
+   public int generateRoll() {
+       if(roll == -1) {
+           this.roll = dice.roll();
+           setMessage(getCurrentPlayer(),roll);
+       }
+       return this.roll;
+   }
+   
    public int makeRoll() {
        Player p = getCurrentPlayer();
        roll = p.getRoll(dice);
        if(roll != -1) {
-           p.setHasRolled(true);
-           model.setMessage("Player " + (p.getId()+1) + " rolled " + roll +"!");
+           this.setMessage(p,roll );
        }
        return roll;
+   }
+   
+   private void setMessage(Player p, int roll) {
+           p.setHasRolled(true);
+           model.setMessage("Player " + (p.getId()+1) + " rolled " + roll +"!");
    }
    
    public Move getNextMove() {    
