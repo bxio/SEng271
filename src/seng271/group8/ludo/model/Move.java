@@ -22,6 +22,7 @@ public class Move {
         
     }
     
+    //Squares passed for animation
     public Move(Pawn pawn, LinkedList<Square> squares) {
         this(pawn,squares,-1);
     }

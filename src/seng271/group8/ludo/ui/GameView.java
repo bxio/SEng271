@@ -5,7 +5,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
-import seng271.group8.ludo.Dice;
+import seng271.group8.ludo.Die;
 import seng271.group8.ludo.GameController;
 import seng271.group8.ludo.GameLogic;
 import seng271.group8.ludo.events.BoardClickEvent;
@@ -13,6 +13,7 @@ import seng271.group8.ludo.events.KickPawnEvent;
 import seng271.group8.ludo.events.MoveEvent;
 import seng271.group8.ludo.events.RollEvent;
 import seng271.group8.ludo.events.TurnEvent;
+import seng271.group8.ludo.graphics.DieGraphic;
 import seng271.group8.ludo.graphics.Renderer2D;
 import seng271.group8.ludo.handlers.BoardClickHandler;
 import seng271.group8.ludo.handlers.KickPawnEventHandler;
@@ -20,6 +21,7 @@ import seng271.group8.ludo.handlers.MoveHandler;
 import seng271.group8.ludo.handlers.RollHandler;
 import seng271.group8.ludo.handlers.TurnEventHandler;
 import seng271.group8.ludo.model.Board;
+import seng271.group8.ludo.model.DieChangeListener;
 import seng271.group8.ludo.model.Player;
 import seng271.group8.ludo.strategies.HumanStrategy;
 import seng271.group8.ludo.strategies.Strategy;
@@ -36,6 +38,7 @@ public class GameView extends JPanel {
     private GameController gameController;
     private GameLogic gamelogic;
     private Board board;
+    private Die die;
     
     private Thread controllerThread;
     
@@ -45,7 +48,10 @@ public class GameView extends JPanel {
        
         // Create the game model
         board = new Board(strategies);
-        gamelogic = new GameLogic(board, new Dice());
+        die = new Die();
+        //d.addPropertyChangeListener(new DieChangeListener())
+        //d.setRendering(new DieGraphic(board.getCentrePoint()));
+        gamelogic = new GameLogic(board, die);
     }
     
     public void start() {
@@ -74,7 +80,7 @@ public class GameView extends JPanel {
         controllerThread.start();
         
         // Create the game area
-        playArea = new GamePanel(board);
+        playArea = new GamePanel(board, die);
         this.add(playArea);
         
         // Create game state

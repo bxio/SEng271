@@ -18,9 +18,12 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
+
+import seng271.group8.ludo.Die;
 import seng271.group8.ludo.graphics.AnimationBuilder;
 import seng271.group8.ludo.graphics.Animator;
 import seng271.group8.ludo.graphics.BoardGraphic;
+import seng271.group8.ludo.graphics.DieGraphic;
 import seng271.group8.ludo.graphics.Layer;
 import seng271.group8.ludo.graphics.LudoGraphic;
 import seng271.group8.ludo.graphics.MessageGraphic;
@@ -31,6 +34,7 @@ import seng271.group8.ludo.graphics.Renderer2D;
 import seng271.group8.ludo.graphics.SquareGraphic;
 import seng271.group8.ludo.model.Board;
 import seng271.group8.ludo.model.BoardMessage;
+import seng271.group8.ludo.model.DieChangeListener;
 import seng271.group8.ludo.model.MessageChangeListener;
 import seng271.group8.ludo.model.Pawn;
 import seng271.group8.ludo.model.PawnChangeListener;
@@ -52,9 +56,9 @@ public class GamePanel extends JComponent implements ComponentListener,
     private Map<Class<? extends AnimationBuilder>, AnimationBuilder> animationBuilders;
     private BufferedImage background;
     
-    public GamePanel(Board b) {
+    public GamePanel(Board b, Die d) {
         /*
-         * Todo: A lof of code is ending up here for setup. Refactor eventually...
+         * Todo: A lot of code is ending up here for setup. Refactor eventually...
          * Low priority
          */
         this.setOpaque(true);
@@ -102,11 +106,16 @@ public class GamePanel extends JComponent implements ComponentListener,
             pw.addPropertyChangeListener(new PawnChangeListener(
                     animationThread,animationBuilders));
         }
+
+        d.setRendering(new DieGraphic(board.getCentrePoint()));
+        d.addPropertyChangeListener(new DieChangeListener(
+                    animationThread,animationBuilders));
+        pawnLayer.add(d.getRendering());
         
         renderer.addLayer(pawnLayer);
         
         Layer uiLayer = new Layer();
-        LudoGraphic mes = new MessageGraphic(new Point(5,5), "Game started");
+        LudoGraphic mes = new MessageGraphic(board.getCentrePoint(), "Game started");
         BoardMessage bmes = board.getMessage();
         bmes.setRendering(mes);
         bmes.addPropertyChangeListener(new MessageChangeListener(animationThread,

@@ -1,7 +1,7 @@
 package seng271.group8.ludo.strategies;
 
 import java.util.List;
-import seng271.group8.ludo.Dice;
+import seng271.group8.ludo.Die;
 import seng271.group8.ludo.model.Move;
 
 /**Human Strategy
@@ -27,8 +27,8 @@ public class HumanStrategy extends AbstractStrategy {
             return m;
         }
         
-	@Override
-	public int getRoll(Dice d) {
-		return -1;
-	}
+        @Override
+        public int getRoll(Die d) {
+            return -1;
+        }
 }

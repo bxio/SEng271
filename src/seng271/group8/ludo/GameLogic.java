@@ -13,6 +13,7 @@ import seng271.group8.ludo.model.PathSegment;
 import seng271.group8.ludo.model.Pawn;
 import seng271.group8.ludo.model.Player;
 import seng271.group8.ludo.model.Square;
+import seng271.group8.ludo.model.SquareChangeListener;
 
 /**
  *
@@ -23,11 +24,11 @@ public class GameLogic {
    private List<Player> players, rankings;
    private int turn = 0; // Player 1 always starts
    private int roll = 6; // Hardcoded for testing
-   private Dice dice;
+   private Die dice;
    private String stateMessage;
    private Boolean shouldBlock;
 
-   public GameLogic(Board b, Dice d) {
+   public GameLogic(Board b, Die d) {
        this.model = b;
        this.dice = d;
        this.players = b.getPlayers();

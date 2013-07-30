@@ -38,7 +38,7 @@ public abstract class LudoGraphic {
         this.position = p;
     }
     
-    public void setLastDrawPositin(Point2D p) {
+    public void setLastDrawPosition(Point2D p) {
         this.lastPosition = p;
     }
     

@@ -1,6 +1,6 @@
 package seng271.group8.ludo.strategies;
 
-import seng271.group8.ludo.Dice;
+import seng271.group8.ludo.Die;
 
 /**
  *
@@ -15,7 +15,7 @@ public abstract class AbstractStrategy implements Strategy {
     }
     
     @Override
-    public int getRoll(Dice d) {
+    public int getRoll(Die d) {
         return d.roll();
     }
 }
