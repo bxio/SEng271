@@ -35,9 +35,9 @@ public class SetupView extends JPanel {
 //            new BrutalStrategy(),
 //            new CautiousStrategy(),
 //            new DefensiveStrategy(),
-            new HumanStrategy()
-//            new MoveFirstStrategy(),
-//            new MoveLastStrategy()
+            new HumanStrategy(),
+            new MoveFirstStrategy(),
+            new MoveLastStrategy()
         };
         
         this.setLayout(new GridBagLayout());

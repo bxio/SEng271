@@ -13,6 +13,8 @@ public class MoveLastStrategy extends AbstractStrategy {
         }
 
 	public Move getMove(List<Move> moves) {
+		//iterate through the board and move my pawn that is furthest behind
+
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 }

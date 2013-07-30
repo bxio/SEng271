@@ -13,7 +13,7 @@ public class Dice {
     private List<Integer> log;
     private int result;
     private Random generator;
-	private boolean debug = false;
+	private boolean cheat = true;
 	private List<Integer> rig;
 =======
 
@@ -28,6 +28,28 @@ public class Die extends GameEntity {
     public Die(){
         generator = new Random();
         log = new ArrayList<Integer>();
+		rig = new ArrayList<Integer>();
+		if(cheat){
+			System.out.println("We're using the cheater die.");
+			//add the results you want the rigged dice to return.
+			//blue
+			rig.add(6);
+			rig.add(5);
+			//yellow
+			rig.add(6);
+			rig.add(1);
+			//green
+			rig.add(6);
+			rig.add(1);
+			//red
+			rig.add(6);
+			rig.add(1);
+			//blue again
+			rig.add(6);
+			rig.add(2);
+		}
+		
+		
     }
 	/** Rolls the dice and returns the result. 
 	 * Also adds the result to the dice log.
@@ -37,8 +59,16 @@ public class Die extends GameEntity {
 	 */
 <<<<<<< HEAD:src/seng271/group8/ludo/Dice.java
     public int roll(){
-		if(this.debug){
-			return 4;
+		if(this.cheat){
+			if(rig.isEmpty()){
+				this.result = generator.nextInt(6)+1;
+			}else{
+				this.result = rig.get(0);
+				rig.remove(0);
+			}
+			log.add(new Integer(result));
+			return this.result; 
+			
 		}else{
 			this.result = generator.nextInt(6)+1;
 			log.add(new Integer(result));
