@@ -5,7 +5,7 @@ import java.util.Random;
 import seng271.group8.ludo.model.Move;
 
 /** A derpy strategy that returns a random move, always.
- *
+ * TODO: Bill actually make this work.
  * @author bill
  */
 public class RandomStrategy extends AbstractStrategy{
