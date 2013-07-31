@@ -15,17 +15,16 @@ public class MoveLastStrategy extends AbstractStrategy {
             this.name = "Move Last";
         }
 
-	public Move getMove(List<Move> moves) {
-		//iterate through the board and move my pawn that is furthest behind
-		//TODO: Bill prioritize pawns leaving home.
+		public Move getMove(List<Move> moves) {
 		if(moves.isEmpty()){
 			return null;
 		}else if(moves.size() == 1){
 			return moves.get(0);
 		}else{
+			//iterate through the board and move my pawn that is furthest ahead			
 			List<Pawn> placement = new ArrayList<Pawn>();
 			
-			PathSegment path = moves.get(0).getPawn().getOwner().getPath().getFirst();
+			PathSegment path = moves.get(0).getPlayer().getPath().getFirst();
 			while(path != null){
 				//if pawn is not null and not in goal, add to list
 				if(path.getSquare().getPawn() != null && !path.getSquare().getPawn().isOnGoal()){
@@ -34,20 +33,18 @@ public class MoveLastStrategy extends AbstractStrategy {
 				path = path.getNext();
 			}
 			
-			//check if home is empty. If it is, and roll is 6, prioritize pawns leaving home.			
-			if(moves.get(0).getRoll() != 6 || moves.get(0).getPawn().getOwner().getPath().getFirst().getSquare().getPawn() != null){
-				//I didn't roll 6 or my home is full.
-				for(int i=0;i<moves.size();i++){
-					if(placement.get(0) == moves.get(i).getPawn()){
-						return moves.get(i);
+			if((moves.get(0).getRoll() == 6 && moves.get(0).getPlayer().shouldPrioritizeMovingOutOfHome()) || placement.isEmpty()){
+				//I rolled 6 and I should move out.
+				List<Pawn> pawnsAtHome = moves.get(0).getPlayer().getPawnsAtHome();
+				for(Move m : moves){
+					if(pawnsAtHome.contains(m.getPawn())){
+						return m;
 					}
 				}
 			}else{
-				//I rolled a 6 and my home is empty
-				//return the first move that moves a pawn NOT on the list
-				//System.out.println("6 was rolled and home empty.");
+				//I didn't roll 6 or I shouldn't move out
 				for(int i=0;i<moves.size();i++){
-					if(!placement.contains(moves.get(i).getPawn())){
+					if(placement.get(0) == moves.get(i).getPawn()){
 						return moves.get(i);
 					}
 				}
