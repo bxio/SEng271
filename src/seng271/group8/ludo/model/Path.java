@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Path extends LinkedList<PathSegment> {
     
-    private List<Square> homeSquares;
+	private List<Square> homeSquares;
     
     public Path(List<Square> startSquares) {
         this.homeSquares = startSquares;
@@ -28,7 +28,6 @@ public class Path extends LinkedList<PathSegment> {
                break;
            }
         }
-        
         return found;
     }
     
@@ -38,10 +37,9 @@ public class Path extends LinkedList<PathSegment> {
         Square home = null;
 
         for(Square s : homeSquares) {
-                if(pw.getSquare().equals(s)) {
-                    home = s; break;
-                }
- 
+			if(pw.getSquare().equals(s)) {
+				home = s; break;
+			}
         }
         return home;
     }

@@ -12,57 +12,57 @@ import java.awt.Point;
  * @author Alastairs
  */
 public class Square extends GameEntity {
-    protected Grid type;
-    protected Pawn pawn = null;
-    protected Boolean selected = false;
-    protected Color c; 
-    public static final String PAWNLANDED = "PAWNLANDED";
-    
-    public Square(Grid type, Point position) {
-        this.type = type;
-        this.c = this.type.getColor();
-        this.position = position;
-    }
-    
-    public void setPawn(Pawn p) {
-        Pawn oldPawn = this.pawn;
-        this.pawn = p;
-        this.pcs.firePropertyChange(PAWNLANDED, oldPawn, this.pawn);
-    }
-    
-    public Grid getType() {
-        return this.type;
-    }
-    
-    public Pawn getPawn() {
-        return this.pawn;
-    }
-    
-    public Color getColor() {
-        return c;
-    }
-    
-    public Color getDefaultColor() {
-        return this.type.getColor();
-    }
-    
-    public void setColor(Color c) {
-        this.c = c;
-    }
+	protected Grid type;
+	protected Pawn pawn = null;
+	protected Boolean selected = false;
+	protected Color c; 
+	public static final String PAWNLANDED = "PAWNLANDED";
+	
+	public Square(Grid type, Point position) {
+		this.type = type;
+		this.c = this.type.getColor();
+		this.position = position;
+	}
+	
+	public void setPawn(Pawn p) {
+		Pawn oldPawn = this.pawn;
+		this.pawn = p;
+		this.pcs.firePropertyChange(PAWNLANDED, oldPawn, this.pawn);
+	}
+	
+	public Grid getType() {
+		return this.type;
+	}
+	
+	public Pawn getPawn() {
+		return this.pawn;
+	}
+	
+	public Color getColor() {
+		return c;
+	}
+	
+	public Color getDefaultColor() {
+		return this.type.getColor();
+	}
+	
+	public void setColor(Color c) {
+		this.c = c;
+	}
 
-    public Boolean isSlected() {
-        return this.selected;
-    }
-    
-    public Boolean canPass(Pawn pw) {
-        return true;
-    }
-    
-    public Boolean canOccupy(Pawn pw) {
-    	
-        if (this.pawn != null && this.pawn.getOwner().equals(pw.getOwner())) {
-        	return false;
-        }
-        return true;
-    }
+	public Boolean isSlected() {
+		return this.selected;
+	}
+	
+	public Boolean canPass(Pawn pw) {
+		return true;
+	}
+	
+	public Boolean canOccupy(Pawn pw) {
+		
+		if (this.pawn != null && this.pawn.getOwner().equals(pw.getOwner())) {
+			return false;
+		}
+		return true;
+	}
 }

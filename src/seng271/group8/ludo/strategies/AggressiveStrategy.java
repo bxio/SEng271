@@ -31,6 +31,7 @@ public class AggressiveStrategy extends AbstractStrategy {
 			return moves.get(0);
 		}else{
 			//let's sort the moves
+			/*
 			for(int i=0;i<moves.size();i++){
 				if(moves.get(i).doesKick()){
 					kickmoves.add(moves.get(i));
@@ -40,6 +41,7 @@ public class AggressiveStrategy extends AbstractStrategy {
 					System.out.println(i+": Doesn't kick");
 				}
 			}
+			*/
 			//if you roll 6 and you should prioritize, pick one of them and return it.
 			if(moves.get(0).getRoll() == 6 && moves.get(0).getPlayer().shouldPrioritizeMovingOutOfHome()){
 				// get one of them and move it

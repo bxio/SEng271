@@ -5,6 +5,7 @@
 package seng271.group8.ludo.model;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -131,5 +132,16 @@ public class Move {
 	 */
 	public Player getPlayer(){
 		return this.pawn.getOwner();
+	}
+	
+	public boolean pathContainsEnemyPawn(){
+		for(Square s : this.squares){
+			if(s.getPawn() != null){
+				if(!this.getPlayer().getPawns().contains(s.getPawn())){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }
