@@ -15,7 +15,7 @@ public class Die extends GameEntity {
     private int result;
     private Random generator;
     public static final String ROLL = "ROLL";
-	private boolean cheat = false;
+	private boolean cheat = true;
 	private List<Integer> rig;
     
     public Die(){
