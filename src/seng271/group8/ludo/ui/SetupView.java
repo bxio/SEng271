@@ -10,7 +10,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import seng271.group8.ludo.actions.StartGameAction;
 import seng271.group8.ludo.strategies.AggressiveStrategy;
-import seng271.group8.ludo.strategies.BrutalStrategy;
 import seng271.group8.ludo.strategies.CautiousStrategy;
 import seng271.group8.ludo.strategies.DefensiveStrategy;
 import seng271.group8.ludo.strategies.HumanStrategy;
@@ -32,8 +31,8 @@ public class SetupView extends JPanel {
         
         Strategy[] strategies = {
             new AggressiveStrategy(),
-			//new CautiousStrategy(),
-			//new DefensiveStrategy(),
+			new CautiousStrategy(),
+			new DefensiveStrategy(),
             new HumanStrategy(),
             new MoveFirstStrategy(),
             new MoveLastStrategy(),

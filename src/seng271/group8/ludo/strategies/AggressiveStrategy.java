@@ -59,7 +59,7 @@ public class AggressiveStrategy extends AbstractStrategy {
 				}
 				return bestMove;
 			}
-			return moves.get(0);
+			return moves.get(rng.nextInt(moves.size()));
 		}
 	}
 }

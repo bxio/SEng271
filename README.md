@@ -7,7 +7,7 @@ SEng271 A01 Summer 2013 Project Group.
 Please see `Project.pdf` for Specification of the project.
 
 ## Running the Game ##
-Run ``
+Run `LudoWindow.java`
 
 ## Writeups ##
 The Writeups for the milestones and the source file for the diagram is on Google Docs.
