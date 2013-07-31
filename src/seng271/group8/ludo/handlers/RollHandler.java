@@ -29,6 +29,8 @@ public class RollHandler extends BaseHandler<RollEvent> {
         if(evt.getRoll() == -1) {
             System.out.println("Human rolled " + game.generateRoll());      
             game.getCurrentPlayer().setHasRolled(true);
+            GameController.publish(new RollEvent(game.getRoll(),TimingConfig.get(TimingConfig.ROLL)));
+            return;
         }
         
         Move m = game.getNextMove();
