@@ -200,11 +200,13 @@ public class GameLogic {
         	for(Square sq : pw.getOwner().getPath().getHomeSquares()) {
         		if(sq.getPawn() == null) {
         			squares.add(sq);
-        			pw.setPosition(sq);
+        			//pw.setPosition(sq);
         			break;
         		} 
         	}
-        	move.setKickMove(new Move(pw, squares));
+                Move m = new Move(pw, squares);
+                m.setWasKicked(true);
+        	move.setKickMove(m);
         }
    }
    

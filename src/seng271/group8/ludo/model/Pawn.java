@@ -53,7 +53,7 @@ public class Pawn extends GameEntity {
     public void setMove(Move m) {
         Move old = this.move;
         this.move = m;
-        this.setPosition(m.getSquares().getLast());
+        this.setPosition(m.getSquares().getLast(), m.wasKicked());
         pcs.firePropertyChange(MOVE, old, move);
     }
     
@@ -61,8 +61,8 @@ public class Pawn extends GameEntity {
         return this.move;
     }
     
-    public void setPosition(Square position){
-        if(this.square != null)
+    public void setPosition(Square position, Boolean wasKicked){
+        if(this.square != null && !wasKicked)
             this.square.setPawn(null);
         
         this.square = position;
