@@ -176,17 +176,15 @@ public class GameLogic {
                 squares.add(next.getSquare());
                 steps++;
                 
+                if(steps > roll)
+                    break;
+                
                 if(roll == steps && 
                         next.getSquare().canOccupy(pw)) {
                    move = new Move(pw, squares, roll);
                    checkForKick(next.getSquare(),move);
                    break;
                 }      
-                else if (next.getNext() == null && 
-                            next.getSquare().canOccupy(pw)) {
-                   move = new Move(pw, squares, roll);
-                   break;
-                }
                 
                 cur = next;
             }
