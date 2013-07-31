@@ -59,12 +59,10 @@ public class Square extends GameEntity {
     }
     
     public Boolean canOccupy(Pawn pw) {
-        Boolean can = true;
-        
-        if(this.pawn != null) {
-            if(this.pawn.getOwner().equals(pw.getOwner()))
-                can = false;
+    	
+        if (this.pawn != null && this.pawn.getOwner().equals(pw.getOwner())) {
+        	return false;
         }
-        return can;
+        return true;
     }
 }

@@ -4,6 +4,7 @@
  */
 package seng271.group8.ludo;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import seng271.group8.ludo.model.Board;
@@ -93,15 +94,37 @@ public class GameLogic {
     * @return 
     */
    public LinkedList<Move> getValidMoves (Player player) {
+	   
        LinkedList<Move> moves = new LinkedList<Move>();
+       boolean mustMoveFromHome = false;
        
-       for(Pawn pw : player.getPawns()) {
+       //Loop through the player's pawns and get their moves
+       for (Pawn pw : player.getPawns()) {
            Move m = getValidMove(pw);
-           if(m != null)
+           
+           if (m != null) {
+        	   
+        	   //If the player can move a pawn out of their home, they must do it
+               if (m.isMovingFromHome()) {
+            	   mustMoveFromHome = true;
+               }
+               
                moves.add(m);
+           }
+       }
+
+       //If mustMoveFromHome is set, remove any moves that don't move pawns out of the home
+       if (mustMoveFromHome) {
+    	   Iterator<Move> iterator = moves.iterator();
+    	   while (iterator.hasNext()) {
+    		   Move move = iterator.next();
+    		   if (!move.isMovingFromHome()) {
+    	    	   iterator.remove();
+    		   }
+    	   }
        }
        
-        return moves;
+       return moves;
    }
    
    public Move getValidMove(Pawn pw) {
@@ -116,19 +139,27 @@ public class GameLogic {
         int steps = 0;
         cur = path.getSegment(pw.getSquare());
         
-        if(cur == null) {
-            // Clicked Pawn is not on the Path
-            // Must be on the home squares
-            if(roll == 6) {
-                //Must roll a 6 to enter the board
-                Square s = path.getHomeSquare(pw);
-                Square start = path.getFirst().getSquare();
-                if(s != null && start.canOccupy(pw)) {
-                   squares.add(start);
-                   move = new Move(pw, squares ,roll);
-                   checkForKick(start, move);
-                }
-            }
+        //Pawn is not on the path (therefore must be on a home square)
+        if (cur == null) {
+        	
+	        //Player must roll a 6 to enter board
+	        if (roll == 6) {
+	
+	            Square startSquare = path.getFirst().getSquare();
+	            
+	            //Gets the pawn's home square if it's sitting on it (null otherwise)
+	            Square homeSquare = path.getHomeSquare(pw);
+	            
+	            //Player must not have a pawn on the start square (and selected pawn is on the home square)
+	            if (homeSquare != null && startSquare.canOccupy(pw)) {
+					squares.add(startSquare);
+					move = new Move(pw, squares, roll);
+					move.setMovingFromHome(true);
+					
+					//Kick any opponent players on that square
+					checkForKick(startSquare, move);
+	            }
+	        }
         }
         else {
             // Clicked pawn is on the path
@@ -164,18 +195,18 @@ public class GameLogic {
    }
    
    private void checkForKick(Square s, Move move) {
-        Pawn pw = s.getPawn();
+	   Pawn pw = s.getPawn();
         
         if(pw != null) {
-                LinkedList<Square> squares = new LinkedList<Square>();
-            for(Square sq : pw.getOwner().getPath().getHomeSquares()) {
-              if(sq.getPawn() == null) {
-                  squares.add(sq);
-                  pw.setPosition(sq);
-                  break;
-              } 
-          }
-             move.setKickMove(new Move(pw, squares));
+        	LinkedList<Square> squares = new LinkedList<Square>();
+        	for(Square sq : pw.getOwner().getPath().getHomeSquares()) {
+        		if(sq.getPawn() == null) {
+        			squares.add(sq);
+        			pw.setPosition(sq);
+        			break;
+        		} 
+        	}
+        	move.setKickMove(new Move(pw, squares));
         }
    }
    

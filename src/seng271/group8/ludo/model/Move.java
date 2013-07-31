@@ -16,7 +16,8 @@ public class Move {
     private LinkedList<Square> squares;///< the squares that the pawn pass through. We need this in order to animate the moves on the board.
     private Boolean human = false;///< used in RollHandler to make the human strategy asychronous
     private Boolean kick = false;///< whether the move will kick another pawn
-    private Move kickMove;///< the move of the pawn after it's kicked
+    private Boolean movingFromHome = false;///< whether the pawn is moving from their home
+	private Move kickMove;///< the move of the pawn after it's kicked
     
     public Move() {
         
@@ -58,6 +59,23 @@ public class Move {
     public Boolean isHuman() {
         return human;
     }
+    
+    /** Sets whether the pawn is moving from their home
+   	 * 
+   	 * @param movingFromHome whether this pawn is moving from their home
+   	 */
+	public void setMovingFromHome(Boolean movingFromHome) {
+		this.movingFromHome = movingFromHome;
+	}
+    
+    /** 
+	 * 
+	 * @return	whether this pawn is moving from their home
+	 */
+    public Boolean isMovingFromHome() {
+		return movingFromHome;
+	}
+	
     /** 
 	 * 
 	 * @return			the pawn to be moved

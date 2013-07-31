@@ -32,9 +32,11 @@ public class Path extends LinkedList<PathSegment> {
         return found;
     }
     
+
+    //Gets the pawn's home square if it's sitting on it (null otherwise)
     public Square getHomeSquare(Pawn pw) {
         Square home = null;
-        
+
         for(Square s : homeSquares) {
                 if(pw.getSquare().equals(s)) {
                     home = s; break;
