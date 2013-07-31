@@ -85,7 +85,6 @@ public class DieGraphic extends LudoGraphic {
         g2.fill(shape);
         
         //Draw the border
-        g2.setColor(new Color(139,137,137));
         g2.setStroke( new BasicStroke(2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
         g2.setColor(Color.BLACK);
         g2.draw(shape);

@@ -4,6 +4,8 @@
  */
 package seng271.group8.ludo.graphics;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -34,17 +36,21 @@ public class PawnGraphic extends LudoGraphic{
         Point2D size = this.getDrawSize(squareSize);
         Point2D pos = this.getDrawPosition(squareSize);
         Ellipse2D shape = new Ellipse2D.Double(pos.getX(), pos.getY(), size.getX(), size.getY());
+        
+        
+        
         this.setLastDrawPosition(position);
 //        g2.setColor(Color.red);
 //        g2.drawRect((int)lastPosition.getX(), (int)lastPosition.getY(), squareSize.width, squareSize.height);
         float[] rgb = new float[3];
         ColorConfig.PLAYER_COLORS[pawn.getOwner().getId()].getRGBColorComponents(rgb);
         g2.setColor(ColorConfig.PLAYER_COLORS[pawn.getOwner().getId()]);
-        //g2.setColor(new Color(rgb[0],rgb[1],rgb[2],0.5f));
         g2.fill(shape);
         
-//        g2.setColor(Color.gray);
-//        g2.draw(shape);
+        //Draw the border
+        g2.setStroke( new BasicStroke(2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+        g2.setColor(Color.WHITE);
+        g2.draw(shape);
        
     }
     
