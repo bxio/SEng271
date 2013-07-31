@@ -7,7 +7,10 @@ import seng271.group8.ludo.model.Square;
 /** Give preference to a move to a target field where the pawn cannot be kicked.
  * This strategy picks the move that moves the player's pawns as far away from 
  * other player's pawns as possible.
- *
+ * 
+ * In other words, I am a coward and I make my pawns 
+ * run as far away from others as possible.
+ * 
  * @author bill
  */
 public class DefensiveStrategy extends AbstractStrategy {

@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Random;
 import seng271.group8.ludo.model.Move;
 
-/** gives preference to a move that kicks a pawn
+/** The Aggressive strategy gives preference to a move that kicks a pawn
  *
+ * I'll be a large dbag and kick as many people as possible. 
+ * 
  * @author bill
  */
 public class AggressiveStrategy extends AbstractStrategy {
@@ -16,6 +18,7 @@ public class AggressiveStrategy extends AbstractStrategy {
 	}
 
 	public Move getMove(List<Move> moves) {
+		System.out.println("#Moves:"+moves.size());
 		List<Move> kickmoves = new ArrayList<Move>(), nonkickmoves = new ArrayList<Move>();
 		Random rng = new Random();
 		Move bestMove = null;

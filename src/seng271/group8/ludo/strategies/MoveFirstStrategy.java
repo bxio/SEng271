@@ -12,8 +12,8 @@ import seng271.group8.ludo.model.Pawn;
  */
 public class MoveFirstStrategy extends AbstractStrategy {
 	public MoveFirstStrategy() {
-            this.name = "Move First";
-        }
+		this.name = "Move First";
+	}
 
 	public Move getMove(List<Move> moves) {
 		if(moves.isEmpty()){
