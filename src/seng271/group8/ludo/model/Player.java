@@ -1,6 +1,7 @@
 package seng271.group8.ludo.model;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 import seng271.group8.ludo.Die;
 import seng271.group8.ludo.strategies.Strategy;
@@ -101,4 +102,44 @@ public class Player extends GameEntity {
        public void setHasRolled(Boolean hasRolled) {
             this.hasRolled = hasRolled;
        }
+	   
+	   public boolean hasPawnsAtHome(){
+		   for(Pawn p : this.pawns){
+			   if(this.path.getHomeSquares().contains(p.getSquare())){
+				   //pawn is at home.
+				   return true;
+			   }
+		   }
+		   return false;
+	   }
+	   
+	   public List<Pawn> getPawnsAtHome(){
+		   List<Pawn> assemble = new ArrayList<Pawn>();
+		   for(Pawn p : this.pawns){
+			   if(this.path.getHomeSquares().contains(p.getSquare())){
+				   //this pawn is at home
+				   assemble.add(p);
+			   }
+		   }
+		   return assemble;
+	   }
+	   
+	   public boolean startSpaceIsEmptyOrOccupiedByOpponents(){
+		   Pawn p = this.path.getFirst().getSquare().getPawn();
+		   if(p != null){
+			   //someone is occupying the start space.
+			   
+			   //let's see if it's a friendly
+			   if(this.pawns.contains(p)){
+				   return true;
+			   }else{
+				   return false;
+			   }
+		   }
+		   return false;
+	   }
+	   
+	   public boolean shouldPrioritizeMovingOutOfHome(){
+		   return (this.hasPawnsAtHome() && this.startSpaceIsEmptyOrOccupiedByOpponents());
+	   }
 }
