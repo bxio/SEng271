@@ -39,7 +39,8 @@ public class MessageGraphic extends LudoGraphic {
         Point2D pos = this.getDrawPosition(squareSize);
         double x = pos.getX() + squareSize.getWidth()/2;
         double y = pos.getY() + squareSize.getWidth()/2;
-        g2.setFont(new Font("Arial", Font.ITALIC, (int)(40*scale)));
+        // Magic scaling factor (1/2) the squareSize 
+        g2.setFont(new Font("Arial", Font.ITALIC, (int)((1f/2f)*squareSize.width*scale)));
         int stringSize = g2.getFontMetrics().stringWidth(message);
         int stringHeight = g2.getFontMetrics().getHeight();
         g2.setColor(new Color(0,0,0,40));
