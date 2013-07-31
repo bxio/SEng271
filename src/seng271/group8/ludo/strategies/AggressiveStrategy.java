@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import seng271.group8.ludo.model.Move;
+import seng271.group8.ludo.model.Pawn;
 
 /** The Aggressive strategy gives preference to a move that kicks a pawn
  *
@@ -18,7 +19,7 @@ public class AggressiveStrategy extends AbstractStrategy {
 	}
 
 	public Move getMove(List<Move> moves) {
-		System.out.println("#Moves:"+moves.size());
+		//System.out.println("#Moves:"+moves.size());
 		List<Move> kickmoves = new ArrayList<Move>(), nonkickmoves = new ArrayList<Move>();
 		Random rng = new Random();
 		Move bestMove = null;
@@ -29,21 +30,36 @@ public class AggressiveStrategy extends AbstractStrategy {
 		}else if(moves.size() == 1){
 			return moves.get(0);
 		}else{
+			//let's sort the moves
 			for(int i=0;i<moves.size();i++){
 				if(moves.get(i).doesKick()){
 					kickmoves.add(moves.get(i));
+					System.out.println(i+": Kicks");
 				}else{
 					nonkickmoves.add(moves.get(i));
+					System.out.println(i+": Doesn't kick");
 				}
 			}
-			if(!kickmoves.isEmpty()){
-				//there is a move that kicks a pawn. Randomly pick a victim
-				bestMove = kickmoves.get(rng.nextInt(kickmoves.size()));
+			//if you roll 6 and you should prioritize, pick one of them and return it.
+			if(moves.get(0).getRoll() == 6 && moves.get(0).getPlayer().shouldPrioritizeMovingOutOfHome()){
+				// get one of them and move it
+				List<Pawn> leftAtHome = moves.get(0).getPlayer().getPawnsAtHome();
+				for(Move m : moves){
+					if(leftAtHome.contains(m.getPawn())){
+						return m;
+					}
+				}
 			}else{
-				//there is no move that kicks another pawn.
-				bestMove = nonkickmoves.get(rng.nextInt(nonkickmoves.size()));
+				if(!kickmoves.isEmpty()){
+					//there is a move that kicks a pawn. Randomly pick a victim
+					bestMove = kickmoves.get(rng.nextInt(kickmoves.size()));
+				}else{
+					//there is no move that kicks another pawn.
+					bestMove = nonkickmoves.get(rng.nextInt(nonkickmoves.size()));
+				}
+				return bestMove;
 			}
-			return bestMove;
+			return moves.get(0);
 		}
 	}
 }
