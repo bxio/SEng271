@@ -28,20 +28,18 @@ public class GameMouseListener implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("Am I missing clicks?");
-        Point p = playArea.graphicToGridCoords(e.getX(), e.getY());
-        BoardClickEvent bc = new BoardClickEvent(p);         
-        GameController.publish(bc);
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        System.out.println("pressed");
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        Point p = playArea.graphicToGridCoords(e.getX(), e.getY());
+        BoardClickEvent bc = new BoardClickEvent(p);         
+        GameController.publish(bc);
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -57,7 +55,7 @@ public class GameMouseListener implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

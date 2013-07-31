@@ -54,7 +54,7 @@ public class PawnChangeListener extends AbstractChangeListener {
          if(ani != null && ge != null)
             animator.addAnimation(ani, ge);
          else if(ani != null)
-            animator.addAnimation(ani); 
+            animator.addAnimation(ani);
     }
     
 }
