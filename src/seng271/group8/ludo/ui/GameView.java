@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import seng271.group8.ludo.Die;
 import seng271.group8.ludo.GameController;
 import seng271.group8.ludo.GameLogic;
+import seng271.group8.ludo.TimingConfig;
 import seng271.group8.ludo.events.BoardClickEvent;
 import seng271.group8.ludo.events.KickPawnEvent;
 import seng271.group8.ludo.events.MoveEvent;
@@ -87,6 +88,6 @@ public class GameView extends JPanel {
         this.add(new GameStatePanel(gamelogic), BorderLayout.SOUTH);
         
         // Start the game (after 5 seconds)
-        GameController.publish(new TurnEvent(5000));
+        GameController.publish(new TurnEvent(TimingConfig.get(TimingConfig.TURN)));
     }
 }

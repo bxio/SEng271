@@ -6,6 +6,7 @@ package seng271.group8.ludo.handlers;
 
 import seng271.group8.ludo.GameController;
 import seng271.group8.ludo.GameLogic;
+import seng271.group8.ludo.TimingConfig;
 import seng271.group8.ludo.events.GameOverEvent;
 import seng271.group8.ludo.events.RollEvent;
 import seng271.group8.ludo.events.TurnEvent;
@@ -35,7 +36,7 @@ public class TurnEventHandler extends BaseHandler<TurnEvent> {
         int roll = game.makeRoll(); 
         System.out.println("Player " + game.getCurrentPlayer().getId() + " rolled: " + roll);
         if(roll != -1) {
-            GameController.publish(new RollEvent(roll,1000));
+            GameController.publish(new RollEvent(roll,TimingConfig.get(TimingConfig.ROLL)));
         }
     }
 }

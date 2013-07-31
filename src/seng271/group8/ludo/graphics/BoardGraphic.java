@@ -63,10 +63,10 @@ public class BoardGraphic extends LudoGraphic {
        
        g2.setColor(new Color(101,67,33));
        g2.setStroke(new BasicStroke(10.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-       g2.drawRect(0, 0, boardWidth, boardHeight);
+       //g2.drawRect(0, 0, boardWidth, boardHeight);
        g2.setStroke(new BasicStroke(2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
        g2.setColor(new Color(255,255,240));
-       g2.drawRect(2, 2, boardWidth-4, boardHeight-4);
+       //g2.drawRect(2, 2, boardWidth-4, boardHeight-4);
        
     }
    

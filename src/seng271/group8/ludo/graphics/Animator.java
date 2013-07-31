@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import seng271.group8.ludo.GameController;
+import seng271.group8.ludo.TimingConfig;
 import seng271.group8.ludo.events.GameEvent;
 import seng271.group8.ludo.ui.GamePanel;
 
@@ -96,7 +97,7 @@ public class Animator extends Thread {
             lastFrame = start;
             long wait;
         
-            refresh(dt);
+            refresh(dt*(long)TimingConfig.getGameSpeed());
             
             // Calculate how long to wait for the next frame
             wait = FRAME_PERIOD - (System.currentTimeMillis() - start);
