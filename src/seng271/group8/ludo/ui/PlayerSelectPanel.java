@@ -4,6 +4,9 @@
  */
 package seng271.group8.ludo.ui;
 
+import java.awt.Dimension;
+import java.awt.Font;
+
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,8 +21,16 @@ public class PlayerSelectPanel extends JPanel {
     private JComboBox select;
     
     public PlayerSelectPanel(String name, Strategy[] strategies) {
+        Font h1 = new Font("Verdana", Font.BOLD, 16);
+        Font h2 = new Font("Verdana", Font.BOLD, 12);
+        
         JLabel label = new JLabel(name);
+        label.setFont(h1);
+        
         select = new JComboBox(strategies);
+        select.setFont(h2);
+        select.setPreferredSize(new Dimension(140, 30));
+        
         this.add(label);
         this.add(select);
     }
