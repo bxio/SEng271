@@ -51,14 +51,12 @@ public class QuitGameAction extends AbstractAction {
         jpanel.add(jbtnNo);
         jbtnYes.addActionListener(new QuitGameActionExit());
         jbtnNo.addActionListener(new QuitGameActionExit());
-            
-        jd.add(jpanel);
-        jd.setVisible(true);
-        
         
         // Set to default game window location. This is not relative to the game window. 
         jd.setLocationRelativeTo(this.game);
-        
+            
+        jd.add(jpanel);
+        jd.setVisible(true);
     }
     
     class QuitGameActionExit implements ActionListener {

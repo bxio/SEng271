@@ -41,12 +41,12 @@ public class RestartGameAction extends AbstractAction {
         jpanel.add(jbtnYes);
         jpanel.add(jbtnNo);
         jbtnNo.addActionListener(new RestartGameActionExit());
-            
+
+        // Set to default game window location. This is not relative to the game window. 
+        jd.setLocationRelativeTo(null);
+          
         jd.add(jpanel);
         jd.setVisible(true);
-        
-      // Set to default game window location. This is not relative to the game window. 
-        jd.setLocationRelativeTo(null);
     }
     
     class RestartGameActionExit implements ActionListener {

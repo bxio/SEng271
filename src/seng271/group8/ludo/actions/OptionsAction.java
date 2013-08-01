@@ -38,11 +38,10 @@ public class OptionsAction extends AbstractAction {
         JButton jbtnReturn = new JButton("Return to the game");
         jpanel.add(jbtnReturn);
         
-        jd.add(jpanel);
-        jd.setVisible(true);
-        
-        
         // Set to default game window location. This is not relative to the game window. 
         jd.setLocationRelativeTo(null);
+        
+        jd.add(jpanel);
+        jd.setVisible(true);
     }
 }
