@@ -57,7 +57,7 @@ public class BoardClickHandler extends BaseHandler<BoardClickEvent> {
                s.getPawn().getOwner().equals(player)) {
            setSelectedPawn(s.getPawn());
        } else if(selected != null) {
-            move = game.getValidMove(selected);
+            move = game.getValidMoveForPawn(selected);
             if(move != null) {
                 queueMove(s);
             } 
@@ -77,13 +77,13 @@ public class BoardClickHandler extends BaseHandler<BoardClickEvent> {
     public void setSelectedPawn(Pawn p) {
     	if(selected != null) {
     		selected.setSelected(false);
-    		Move old = game.getValidMove(selected);
+    		Move old = game.getValidMoveForPawn(selected);
     		if(old != null)
     			old.getSquares().getLast().setSelected(false);
     	}
     	
         selected = p;
-        move = game.getValidMove(selected);
+        move = game.getValidMoveForPawn(selected);
         selected.setSelected(true);
         player.setSelectedPawn(selected);
         

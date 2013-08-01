@@ -127,7 +127,20 @@ public class GameLogic {
        return moves;
    }
    
-   public Move getValidMove(Pawn pw) {
+   public Move getValidMoveForPawn(Pawn pw) {
+	   List<Move> moves = this.getValidMoves(this.getCurrentPlayer());
+	   Move valid = null;
+	   for (Move m : moves) {
+		   if (pw.equals(m.getPawn())) {
+			   valid = m;
+			   break;
+		   }
+	   }
+	   
+	   return valid;
+   }
+   
+   private Move getValidMove(Pawn pw) {
        return getValidMove(pw, pw.getOwner());
    }
    
