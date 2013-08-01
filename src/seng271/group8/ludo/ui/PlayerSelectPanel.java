@@ -21,6 +21,10 @@ public class PlayerSelectPanel extends JPanel {
     private JComboBox select;
     
     public PlayerSelectPanel(String name, Strategy[] strategies) {
+    	this (name, strategies, strategies[0]);
+    }
+    
+    public PlayerSelectPanel(String name, Strategy[] strategies, Strategy defaultStrategy) {
         Font h1 = new Font("Verdana", Font.BOLD, 16);
         Font h2 = new Font("Verdana", Font.BOLD, 12);
         
@@ -30,6 +34,7 @@ public class PlayerSelectPanel extends JPanel {
         select = new JComboBox(strategies);
         select.setFont(h2);
         select.setPreferredSize(new Dimension(140, 30));
+        select.setSelectedItem(defaultStrategy);
         
         this.add(label);
         this.add(select);

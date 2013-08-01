@@ -58,26 +58,26 @@ public class SetupView extends JPanel {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = gbc.weighty = 1.0;
-        players[0] = new PlayerSelectPanel("Player 1", strategies);
+        players[0] = new PlayerSelectPanel("Player 1", strategies, strategies[3]);
         players[0].setPreferredSize(new Dimension(160, 80));
         this.add(players[0], gbc);
         
         gbc.gridx = 1;
         gbc.gridy = 0;
-        players[1] = new PlayerSelectPanel("Player 2", strategies);
+        players[1] = new PlayerSelectPanel("Player 2", strategies, strategies[0]);
         players[1].setPreferredSize(new Dimension(160, 80));
         this.add(players[1], gbc); 
         
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth =1;
-        players[2] = new PlayerSelectPanel("Player 3", strategies);
+        players[2] = new PlayerSelectPanel("Player 3", strategies, strategies[4]);
         players[2].setPreferredSize(new Dimension(160, 80));
         this.add(players[2], gbc);
         
         gbc.gridx = 1;
         gbc.gridy = 2;
-        players[3] = new PlayerSelectPanel("Player 4", strategies);
+        players[3] = new PlayerSelectPanel("Player 4", strategies, strategies[2]);
         players[3].setPreferredSize(new Dimension(160, 80));
         this.add(players[3], gbc);
         
