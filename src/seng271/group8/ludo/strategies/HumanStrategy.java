@@ -12,7 +12,7 @@ import seng271.group8.ludo.model.Move;
 public class HumanStrategy extends AbstractStrategy {
 
 	public HumanStrategy() {
-		this.name = "Human Player";
+		this.name = "Human";
 	}
     
 	@Override
