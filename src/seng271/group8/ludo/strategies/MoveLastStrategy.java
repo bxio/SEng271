@@ -33,7 +33,7 @@ public class MoveLastStrategy extends AbstractStrategy {
 				path = path.getNext();
 			}
 			
-			if((moves.get(0).getRoll() == 6 && moves.get(0).getPlayer().shouldPrioritizeMovingOutOfHome()) || placement.isEmpty()){
+			if(moves.get(0).getRoll() == 6 || placement.isEmpty()){
 				//I rolled 6 and I should move out.
 				List<Pawn> pawnsAtHome = moves.get(0).getPlayer().getPawnsAtHome();
 				for(Move m : moves){

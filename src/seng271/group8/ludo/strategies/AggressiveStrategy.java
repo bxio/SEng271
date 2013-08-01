@@ -31,19 +31,19 @@ public class AggressiveStrategy extends AbstractStrategy {
 			return moves.get(0);
 		}else{
 			//let's sort the moves
-			/*
+			
 			for(int i=0;i<moves.size();i++){
 				if(moves.get(i).doesKick()){
 					kickmoves.add(moves.get(i));
-					System.out.println(i+": Kicks");
+					//System.out.println(i+": Kicks");
 				}else{
 					nonkickmoves.add(moves.get(i));
-					System.out.println(i+": Doesn't kick");
+					//System.out.println(i+": Doesn't kick");
 				}
 			}
-			*/
+			
 			//if you roll 6 and you should prioritize, pick one of them and return it.
-			if(moves.get(0).getRoll() == 6 && moves.get(0).getPlayer().shouldPrioritizeMovingOutOfHome()){
+			if(moves.get(0).getRoll() == 6){
 				// get one of them and move it
 				List<Pawn> leftAtHome = moves.get(0).getPlayer().getPawnsAtHome();
 				for(Move m : moves){
@@ -59,6 +59,7 @@ public class AggressiveStrategy extends AbstractStrategy {
 					//there is no move that kicks another pawn.
 					bestMove = nonkickmoves.get(rng.nextInt(nonkickmoves.size()));
 				}
+
 				return bestMove;
 			}
 			return moves.get(rng.nextInt(moves.size()));
