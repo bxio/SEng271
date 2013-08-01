@@ -4,9 +4,15 @@
  */
 package seng271.group8.ludo.ui;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+
 import seng271.group8.ludo.strategies.Strategy;
 //import seng271.group8.ludo.BufferStrategyDemo;
 
@@ -16,8 +22,10 @@ import seng271.group8.ludo.strategies.Strategy;
  */
 public class LudoWindow extends JFrame {
     
-    private static final int WIDTH = 800;
-    private static final int HEIGHT = 800;
+    private static final int GAME_WIDTH = 800;
+    private static final int GAME_HEIGHT = 800;
+    private static final int SETUP_WIDTH = 600;
+    private static final int SETUP_HEIGHT = 400;
     private static final String TITLE = "Group 8 Ludo";
     
     private SetupView setupView = null;
@@ -26,9 +34,11 @@ public class LudoWindow extends JFrame {
     
     
     public LudoWindow () {
-        this.setSize(WIDTH, HEIGHT);
+    	try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) { }
+        
         this.setTitle(TITLE);
-        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setup();
         this.setVisible(true);
@@ -43,10 +53,12 @@ public class LudoWindow extends JFrame {
      */
     public void showSetupView() {
         removeCurrentView();
+        this.setSize(SETUP_WIDTH, SETUP_HEIGHT);
+        this.setLocationRelativeTo(null);
         
         if(setupView == null)
             setupView = new SetupView(this);
-            
+        
         currentView = setupView;
         this.add(currentView);
         this.revalidate();
@@ -57,6 +69,8 @@ public class LudoWindow extends JFrame {
      */
     public void showGameView(Strategy[] strategies) {
         removeCurrentView();
+        this.setSize(GAME_WIDTH, GAME_HEIGHT);
+        this.setLocationRelativeTo(null);
         
         if(gameView == null) {
             gameView = new GameView(strategies);
