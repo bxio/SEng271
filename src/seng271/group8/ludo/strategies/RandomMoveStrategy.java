@@ -9,11 +9,11 @@ import seng271.group8.ludo.model.Pawn;
  * TODO: Bill actually make this work.
  * @author bill
  */
-public class StupidStrategy extends AbstractStrategy{
+public class RandomMoveStrategy extends AbstractStrategy{
 	private Random generator;
 
-	public StupidStrategy() {
-		this.name = "Stupid";
+	public RandomMoveStrategy() {
+		this.name = "Random Move";
 		generator = new Random();
 	}
 		

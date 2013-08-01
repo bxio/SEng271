@@ -23,7 +23,7 @@ import seng271.group8.ludo.strategies.DefensiveStrategy;
 import seng271.group8.ludo.strategies.HumanStrategy;
 import seng271.group8.ludo.strategies.MoveFirstStrategy;
 import seng271.group8.ludo.strategies.MoveLastStrategy;
-import seng271.group8.ludo.strategies.StupidStrategy;
+import seng271.group8.ludo.strategies.RandomMoveStrategy;
 import seng271.group8.ludo.strategies.Strategy;
 
 /**
@@ -46,7 +46,7 @@ public class SetupView extends JPanel {
             new MoveFirstStrategy(),
             new MoveLastStrategy(),
 			//new BrutalStrategy(),
-			new StupidStrategy(),
+			new RandomMoveStrategy(),
         };
         
         this.setLayout(new GridBagLayout());
