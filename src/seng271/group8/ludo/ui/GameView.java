@@ -1,7 +1,6 @@
 package seng271.group8.ludo.ui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
@@ -10,19 +9,18 @@ import seng271.group8.ludo.GameController;
 import seng271.group8.ludo.GameLogic;
 import seng271.group8.ludo.TimingConfig;
 import seng271.group8.ludo.events.BoardClickEvent;
+import seng271.group8.ludo.events.GameOverEvent;
 import seng271.group8.ludo.events.KickPawnEvent;
 import seng271.group8.ludo.events.MoveEvent;
 import seng271.group8.ludo.events.RollEvent;
 import seng271.group8.ludo.events.TurnEvent;
-import seng271.group8.ludo.graphics.DieGraphic;
-import seng271.group8.ludo.graphics.Renderer2D;
 import seng271.group8.ludo.handlers.BoardClickHandler;
+import seng271.group8.ludo.handlers.GameOverEventHandler;
 import seng271.group8.ludo.handlers.KickPawnEventHandler;
 import seng271.group8.ludo.handlers.MoveHandler;
 import seng271.group8.ludo.handlers.RollHandler;
 import seng271.group8.ludo.handlers.TurnEventHandler;
 import seng271.group8.ludo.model.Board;
-import seng271.group8.ludo.model.DieChangeListener;
 import seng271.group8.ludo.model.Player;
 import seng271.group8.ludo.strategies.HumanStrategy;
 import seng271.group8.ludo.strategies.Strategy;
@@ -75,6 +73,7 @@ public class GameView extends JPanel {
         GameController.register(KickPawnEvent.class, new KickPawnEventHandler(gamelogic));
         GameController.register(TurnEvent.class, new TurnEventHandler(gamelogic));
         GameController.register(RollEvent.class, new RollHandler(gamelogic));
+        GameController.register(GameOverEvent.class, new GameOverEventHandler(gamelogic));
         
         // Start GameEvents thread
         controllerThread = new Thread(gameController);
