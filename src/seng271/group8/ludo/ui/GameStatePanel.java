@@ -9,10 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import seng271.group8.ludo.GameLogic;
 
@@ -33,9 +31,11 @@ public class GameStatePanel extends JPanel{
     private JButton options;
     private JButton quit;
     private GameLogic game;
+    private LudoWindow ludo;
     
-    public GameStatePanel(GameLogic game) {
+    public GameStatePanel(LudoWindow ludo, GameLogic game) {
         this.game = game;
+        this.ludo = ludo;
         this.setup();
     }
     
@@ -86,7 +86,7 @@ public class GameStatePanel extends JPanel{
         quit = new JButton("Quit");
         quit.setPreferredSize(buttonSize);
         contentPaneCenter.add(quit, gbc);
-        quit.addActionListener(new QuitGameAction());
+        quit.addActionListener(new QuitGameAction(ludo));
         
         // Set titles for player's turn status and roll history
         JLabel players = new JLabel("Players");

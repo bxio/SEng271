@@ -35,6 +35,7 @@ public class GameView extends JPanel {
     
     private GamePanel playArea;
     private GameStatePanel gameState;
+    private LudoWindow ludo;
     
     private GameController gameController;
     private GameLogic gamelogic;
@@ -43,7 +44,7 @@ public class GameView extends JPanel {
     
     private Thread controllerThread;
     
-    public GameView(Strategy[] strategies) {
+    public GameView(LudoWindow ludo, Strategy[] strategies) {
         //this.setBackground(Color.red);
         this.setLayout(new BorderLayout());
        
@@ -53,6 +54,7 @@ public class GameView extends JPanel {
         //d.addPropertyChangeListener(new DieChangeListener())
         //d.setRendering(new DieGraphic(board.getCentrePoint()));
         gamelogic = new GameLogic(board, die);
+        this.ludo = ludo;
     }
     
     public void start() {
@@ -85,7 +87,7 @@ public class GameView extends JPanel {
         this.add(playArea);
         
         // Create game state
-        this.add(new GameStatePanel(gamelogic), BorderLayout.SOUTH);
+        this.add(new GameStatePanel(ludo, gamelogic), BorderLayout.SOUTH);
         
         // Start the game (after 5 seconds)
         GameController.publish(new TurnEvent(TimingConfig.get(TimingConfig.TURN)));

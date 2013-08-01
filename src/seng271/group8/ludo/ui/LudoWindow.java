@@ -59,7 +59,7 @@ public class LudoWindow extends JFrame {
         removeCurrentView();
         
         if(gameView == null) {
-            gameView = new GameView(strategies);
+            gameView = new GameView(this, strategies);
             gameView.start();
         }
         
