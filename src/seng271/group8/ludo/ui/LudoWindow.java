@@ -8,7 +8,9 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.net.URL;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
@@ -37,7 +39,8 @@ public class LudoWindow extends JFrame {
     	try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) { }
-        
+
+        this.setIconImage(new ImageIcon("res/icon.png").getImage());
         this.setTitle(TITLE);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setup();
