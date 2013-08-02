@@ -44,7 +44,7 @@ public class Pawn extends GameEntity {
     
     /** Returns the pawn's square
     * 
-    * @return the pawn's position
+    * @return the square that the pawn is on
     */
     public Square getSquare(){
         return this.square;
@@ -56,7 +56,7 @@ public class Pawn extends GameEntity {
         this.setPosition(m.getSquares().getLast(), m.wasKicked());
         pcs.firePropertyChange(MOVE, old, move);
     }
-    
+
     public Move getMove() {
         return this.move;
     }
@@ -77,7 +77,10 @@ public class Pawn extends GameEntity {
     public Point getPosition() {
         return this.square.getPosition();
     }
-    
+    /**
+	 * 
+	 * @return True if the pawn is on the goal
+	 */
     public Boolean isOnGoal() {
         return this.onGoal;
     }

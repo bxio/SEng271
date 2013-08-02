@@ -5,7 +5,6 @@
 package seng271.group8.ludo.model;
 
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  *

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package seng271.group8.ludo.model;
 
 import java.util.LinkedList;
@@ -30,7 +26,6 @@ public class Path extends LinkedList<PathSegment> {
         }
         return found;
     }
-    
 
     //Gets the pawn's home square if it's sitting on it (null otherwise)
     public Square getHomeSquare(Pawn pw) {
@@ -43,12 +38,20 @@ public class Path extends LinkedList<PathSegment> {
         }
         return home;
     }
-    
+    /**
+	 * 
+	 * @return A List of the home squares included in this path
+	 */
     public List<Square> getHomeSquares() {
         return this.homeSquares;
     }
-	
-	public List<PathSegment> getCollectionOfPreviousSquares(int numSquares, Square last) {
+	/**
+	 * Returns a collection of path segments before given square
+	 * @param numSquares the number of squares you want in front of last
+	 * @param last the square that is last in this sequence
+	 * @return a list of PathSegments, with the last PathSegment containing the square last.
+	 */
+	public List<PathSegment> getPathSegmentsBeforeSquare(int numSquares, Square last) {
 		int lastPos = this.indexOf(last);
 		if(numSquares > lastPos){
 			return null;
@@ -66,7 +69,12 @@ public class Path extends LinkedList<PathSegment> {
 		}
 		return ret;
 	}
-	
+	/**
+	 * Returns a single path segment that is numBefore the given square
+	 * @param numBefore the number of squares behind last
+	 * @param last the last square
+	 * @return PathSegment containing that square.
+	 */
 	public PathSegment getPreviousPathSegment(int numBefore, Square last) {
 		int lastPos = this.indexOf(last);
 		if(numBefore > lastPos){
@@ -75,5 +83,4 @@ public class Path extends LinkedList<PathSegment> {
 			return this.get(lastPos-numBefore);
 		}
 	}
-	
 }

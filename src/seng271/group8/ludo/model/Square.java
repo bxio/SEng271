@@ -23,7 +23,11 @@ public class Square extends GameEntity {
 		this.c = this.type.getColor();
 		this.position = position;
 	}
-	
+	/**
+	 * Removes the old pawn on this square (if any), sets a new pawn, 
+	 * and fires a property change so that the animations repaint this square.
+	 * @param p the new pawn that is about to enter this square
+	 */
 	public void setPawn(Pawn p) {
 		Pawn oldPawn = this.pawn;
 		this.pawn = p;
@@ -33,7 +37,10 @@ public class Square extends GameEntity {
 	public Grid getType() {
 		return this.type;
 	}
-	
+	/**
+	 * returns the pawn that is on this square
+	 * @return the pawn that is currently occupying this square
+	 */
 	public Pawn getPawn() {
 		return this.pawn;
 	}
@@ -49,11 +56,19 @@ public class Square extends GameEntity {
 	public void setColor(Color c) {
 		this.c = c;
 	}
-
+	/**
+	 * 
+	 * @return whether this square is selected by the player or not
+	 */
 	public Boolean isSlected() {
 		return this.selected;
 	}
-	
+	/**
+	 * Returns whether a pawn can pass over this square. In our implementation, 
+	 * you can always pass other pawns.
+	 * @param pw the pawn to pass this square.
+	 * @return true if it can pass, false if it can't.
+	 */
 	public Boolean canPass(Pawn pw) {
 		return true;
 	}

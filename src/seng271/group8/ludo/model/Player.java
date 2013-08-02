@@ -31,14 +31,21 @@ public class Player extends GameEntity {
 	public Player(int num) {
 		this.id = num;
 	}
+	
 	public Boolean getIsFinished() {
 		return this.finished;
 	}
-	
+	/**
+	 * Sets the player to human or not
+	 * @param human a boolean signifying whether this player is human or not
+	 */
 	public void setHuman(Boolean human) {
 		this.human = human;
 	}
-	
+	/**
+	 * 
+	 * @return if this player is human or not
+	 */
 	public Boolean isHuman(){
 		return this.human;
 	}
@@ -102,7 +109,10 @@ public class Player extends GameEntity {
 	public void setHasRolled(Boolean hasRolled) {
 		this.hasRolled = hasRolled;
 	}
-	
+	/**
+	 * 
+	 * @return True if the player has pawns still at home. False otherwise.
+	 */
 	public boolean hasPawnsAtHome(){
 		for(Pawn p : this.pawns){
 			if(this.path.getHomeSquares().contains(p.getSquare())){
@@ -112,7 +122,10 @@ public class Player extends GameEntity {
 		}
 		return false;
 	}
-	
+	/**
+	 * 
+	 * @return a list of the player's pawns that are still left at home.
+	 */
 	public List<Pawn> getPawnsAtHome(){
 		List<Pawn> assemble = new ArrayList<Pawn>();
 		for(Pawn p : this.pawns){
@@ -123,7 +136,10 @@ public class Player extends GameEntity {
 		}
 		return assemble;
 	}
-	
+	/**
+	 * 
+	 * @return 
+	 */
 	public boolean startSpaceIsEmptyOrOccupiedByOpponents(){
 		Pawn p = this.path.getFirst().getSquare().getPawn();
 		if(p != null){

@@ -31,7 +31,7 @@ public class AggressiveStrategy extends AbstractStrategy {
 			return moves.get(0);
 		}else{
 			//let's sort the moves
-			
+
 			for(int i=0;i<moves.size();i++){
 				if(moves.get(i).doesKick()){
 					kickmoves.add(moves.get(i));
