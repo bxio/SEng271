@@ -23,15 +23,8 @@ public class Die extends GameEntity {
         log = new ArrayList<Integer>();
 		rig = new ArrayList<Integer>();
 		if(cheat){
-			System.out.println("We're using the cheater die.");
+			System.out.println("We're using the cheater die. Don't forget to disable this in production code!");
 			//add the results you want the rigged dice to return.
-			/*
-			rig.add(6);rig.add(6);rig.add(6);rig.add(6);rig.add(6);rig.add(6);
-			rig.add(6);rig.add(6);rig.add(6);rig.add(6);rig.add(6);rig.add(6);
-			rig.add(6);rig.add(6);rig.add(6);rig.add(6);rig.add(6);rig.add(6);
-			rig.add(6);rig.add(6);rig.add(6);rig.add(6);rig.add(6);rig.add(6);
-			rig.add(6);rig.add(6);rig.add(6);rig.add(6);rig.add(6);rig.add(6);
-			*/
 			//blue
 			rig.add(6);
 			rig.add(6);rig.add(6);
@@ -40,10 +33,10 @@ public class Die extends GameEntity {
 			rig.add(6);
 			rig.add(1);
 			//green
-			//rig.add(6);
+			rig.add(6);
 			rig.add(1);
 			//red
-			//rig.add(6);
+			rig.add(6);
 			rig.add(1);
 			//blue again
 			rig.add(6);
