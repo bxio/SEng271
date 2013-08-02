@@ -15,7 +15,7 @@ public class Die extends GameEntity {
     private int result;
     private Random generator;
     public static final String ROLL = "ROLL";
-	private boolean cheat = true;
+	private boolean cheat = false;
 	private List<Integer> rig;
     
     public Die(){
@@ -25,18 +25,25 @@ public class Die extends GameEntity {
 		if(cheat){
 			System.out.println("We're using the cheater die.");
 			//add the results you want the rigged dice to return.
+			/*
+			rig.add(6);rig.add(6);rig.add(6);rig.add(6);rig.add(6);rig.add(6);
+			rig.add(6);rig.add(6);rig.add(6);rig.add(6);rig.add(6);rig.add(6);
+			rig.add(6);rig.add(6);rig.add(6);rig.add(6);rig.add(6);rig.add(6);
+			rig.add(6);rig.add(6);rig.add(6);rig.add(6);rig.add(6);rig.add(6);
+			rig.add(6);rig.add(6);rig.add(6);rig.add(6);rig.add(6);rig.add(6);
+			*/
 			//blue
 			rig.add(6);
-			rig.add(6);
+			rig.add(6);rig.add(6);
 			rig.add(3);
 			//yellow
 			rig.add(6);
 			rig.add(1);
 			//green
-			rig.add(6);
+			//rig.add(6);
 			rig.add(1);
 			//red
-			rig.add(6);
+			//rig.add(6);
 			rig.add(1);
 			//blue again
 			rig.add(6);

@@ -35,7 +35,7 @@ public class CautiousStrategy extends AbstractStrategy {
 				}
 			}
 			//if you roll 6 and you should prioritize, pick one of them and return it.
-			if(moves.get(0).getRoll() == 6){
+			if(moves.get(0).getRoll() == 6  && !moves.get(0).getPlayer().getPawnsAtHome().isEmpty()){
 				// get one of them and move it
 				List<Pawn> leftAtHome = moves.get(0).getPlayer().getPawnsAtHome();
 				for(Move m : moves){

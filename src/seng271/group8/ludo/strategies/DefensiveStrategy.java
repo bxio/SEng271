@@ -1,8 +1,11 @@
 package seng271.group8.ludo.strategies;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import seng271.group8.ludo.model.Move;
-import seng271.group8.ludo.model.PathSegment;
+import seng271.group8.ludo.model.Pawn;
+import seng271.group8.ludo.model.Square;
 
 /** Give preference to a move to a target field where the pawn cannot be kicked.
  * This strategy picks the move that moves the player's pawns as far away from 
@@ -24,23 +27,43 @@ public class DefensiveStrategy extends AbstractStrategy {
 		}else if(moves.size() == 1){
 			return moves.get(0);
 		}else{
-			//get the path
-
-			//for each move, get the pawn, then get 11 spaces around the pawn (5 behind, 6 ahead)
-			
-			//check these spaces for enemies
-			
-			//Add move according to its rank.
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			return null;
+			if(moves.get(0).getRoll() == 6 && !moves.get(0).getPlayer().getPawnsAtHome().isEmpty()){
+				// get one of them and move it
+				List<Pawn> leftAtHome = moves.get(0).getPlayer().getPawnsAtHome();
+				for(Move m : moves){
+					if(leftAtHome.contains(m.getPawn())){
+						return m;
+					}
+				}
+			}else{
+				//look ahead
+				int roll = moves.get(0).getRoll();
+				List<Integer> firstPawnAhead = new ArrayList<Integer>();
+				
+				List<Square> currentSquares;
+				
+				List<Move> clear = new ArrayList<Move>();
+				List<Move> blocked = new ArrayList<Move>();
+				
+				boolean block = false;
+				for(Move m : moves){
+					if(m.pathContainsEnemyPawn()){
+						blocked.add(m);
+					}else{
+						clear.add(m);
+					}
+				}
+				System.out.println("#Blocked:"+blocked.size()+" #Clear:"+clear.size());
+				if(!clear.isEmpty()){
+					System.out.println("Returning clear move!");
+					return clear.get(0);
+				}else if(!blocked.isEmpty()){
+					System.out.println("Returning Blocked Move!");
+					return blocked.get(0);
+				}
+			}
+			Random rng = new Random();
+			return moves.get(rng.nextInt(moves.size()));
 		}
 	}
 }

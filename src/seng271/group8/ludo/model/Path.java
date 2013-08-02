@@ -47,4 +47,33 @@ public class Path extends LinkedList<PathSegment> {
     public List<Square> getHomeSquares() {
         return this.homeSquares;
     }
+	
+	public List<PathSegment> getCollectionOfPreviousSquares(int numSquares, Square last) {
+		int lastPos = this.indexOf(last);
+		if(numSquares > lastPos){
+			return null;
+		}
+		List<PathSegment> list = new LinkedList<PathSegment>();
+		
+		for(int i=lastPos; i>=lastPos-numSquares; i--){
+			list.add(this.get(i));
+		}
+		List<PathSegment> ret = new LinkedList<PathSegment>();
+		
+		for(PathSegment s: list){//reverse the list
+			ret.add(list.get(list.size()-1));
+			list.remove(list.size()-1);
+		}
+		return ret;
+	}
+	
+	public PathSegment getPreviousPathSegment(int numBefore, Square last) {
+		int lastPos = this.indexOf(last);
+		if(numBefore > lastPos){
+			return null;
+		}else{
+			return this.get(lastPos-numBefore);
+		}
+	}
+	
 }

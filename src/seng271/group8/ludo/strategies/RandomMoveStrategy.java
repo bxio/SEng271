@@ -24,7 +24,7 @@ public class RandomMoveStrategy extends AbstractStrategy{
 		}else if(moves.size() == 1){
 			return moves.get(0);
 		}else{
-			if(moves.get(0).getRoll() == 6 && moves.get(0).getPlayer().shouldPrioritizeMovingOutOfHome()){
+			if(moves.get(0).getRoll() == 6 && !moves.get(0).getPlayer().getPawnsAtHome().isEmpty()){
 				List<Pawn> pawnsAtHome = moves.get(0).getPlayer().getPawnsAtHome();
 				for(Move m : moves){
 					if(pawnsAtHome.contains(m.getPawn())){
