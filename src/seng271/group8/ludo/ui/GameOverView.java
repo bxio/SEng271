@@ -15,7 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import seng271.group8.ludo.actions.QuitGameAction;
+import seng271.group8.ludo.actions.CloseAction;
 import seng271.group8.ludo.model.Player;
 
 /**
@@ -28,9 +28,10 @@ public class GameOverView extends JPanel {
     private static final int GAME_OVER_HEIGHT = 300;
     List<Player> winners;
     JDialog jd = new JDialog();
+    private LudoWindow window;
     
     // Constructor
-    public GameOverView(List<Player> winners) {
+    public GameOverView(List<Player> winners, LudoWindow l) {
         //this.winners = winners;
         this.winners = new ArrayList<Player>();
         this.winners.add(new Player(1));
@@ -48,6 +49,7 @@ public class GameOverView extends JPanel {
         JPanel buttonPanel = new JPanel();
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
 
+        jd.setLocationRelativeTo(window);
         jd.setModal(true);
         jd.setSize(new Dimension(GAME_OVER_WIDTH, GAME_OVER_HEIGHT));
         jd.setResizable(false);
@@ -83,7 +85,7 @@ public class GameOverView extends JPanel {
         // Setup buttons on the bottom
         JButton quitButton = new JButton("Quit Game");
         buttonPanel.add(quitButton);
-        
+        quitButton.addActionListener(new CloseAction(window, jd));
         
         jd.add(titlePanel);
         jd.add(buttonPanel);

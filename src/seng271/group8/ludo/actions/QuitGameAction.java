@@ -49,26 +49,13 @@ public class QuitGameAction extends AbstractAction {
         JButton jbtnNo = new JButton("No");
         jpanel.add(jbtnYes);
         jpanel.add(jbtnNo);
-        jbtnYes.addActionListener(new QuitGameActionExit());
-        jbtnNo.addActionListener(new QuitGameActionExit());
+        jbtnYes.addActionListener(new CloseAction(game, jd));
+        jbtnNo.addActionListener(new CloseAction(game, jd));
         
         // Set to default game window location. This is not relative to the game window. 
         jd.setLocationRelativeTo(this.game);
             
         jd.add(jpanel);
         jd.setVisible(true);
-    }
-    
-    class QuitGameActionExit implements ActionListener {
-        
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if(e.getActionCommand().equals("Yes")) {
-                jd.dispose();
-                game.dispatchEvent(new WindowEvent(game, WindowEvent.WINDOW_CLOSING));
-            }
-            if(e.getActionCommand().equals("No"))
-                jd.dispose();
-        }
     }
 }

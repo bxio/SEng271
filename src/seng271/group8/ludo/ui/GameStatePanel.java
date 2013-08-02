@@ -89,18 +89,6 @@ public class GameStatePanel extends JPanel{
         contentPaneCenter.add(quit, gbc);
         quit.addActionListener(new QuitGameAction(ludo));
         
-        // Set titles for player's turn status and roll history
-        JLabel players = new JLabel("Players");
-        JLabel rollHist = new JLabel("Roll History");
-        
-        contentPaneLeft.add(players);
-        contentPaneRight.add(rollHist);
-        
-        // Temporary button for triggering Game Over View (Remove later)
-        JButton forceGameOver = new JButton("Force Game Over!");
-        forceGameOver.addActionListener(new GameOverAction(game));
-        contentPaneLeft.add(forceGameOver);
-        
         // Add three main components of game state panel
         this.add(contentPaneCenter, BorderLayout.CENTER);
         this.add(contentPaneLeft, BorderLayout.WEST);

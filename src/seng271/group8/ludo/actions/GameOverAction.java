@@ -10,6 +10,7 @@ import javax.swing.AbstractAction;
 import seng271.group8.ludo.GameLogic;
 import seng271.group8.ludo.model.Player;
 import seng271.group8.ludo.ui.GameOverView;
+import seng271.group8.ludo.ui.LudoWindow;
 
 /**
  *
@@ -18,6 +19,7 @@ import seng271.group8.ludo.ui.GameOverView;
 public class GameOverAction extends AbstractAction {
     private GameLogic game;
     private GameOverView gameoverview = null;
+    private LudoWindow window;
     
     public GameOverAction(GameLogic game) {
         this.game = game;
@@ -28,6 +30,6 @@ public class GameOverAction extends AbstractAction {
          // Get the game results
         List<Player> finishPositions = game.getGameResults();
         //Show the game over panel here.
-        gameoverview = new GameOverView(finishPositions);
+        gameoverview = new GameOverView(finishPositions, window);
     }
 }
