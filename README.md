@@ -6,7 +6,7 @@ The "final" group project for SEng271 A01 Summer 2013 Project Group 8 at UVic fo
 Please see `Project.pdf` for Specification of the project.
 
 ## Running the Project ##
-Most group members used Netbeans 7.3 and JRE 1.7 to code this project, although the code should be IDE-independent. Please follow the sort instructions to get it to run:
+Most group members used Netbeans 7.3 and JRE 1.7 to code this project, although the code should be IDE-independent. Please follow these instructions to get it to run:
 
 1. Clone this Repo or [download it](https://github.com/bxio/SEng271/archive/master.zip) in some other fashion.
 2. CD to the download location and run `ant jar` to compile the project. This requires the [Apache Ant](http://ant.apache.org/) utility

@@ -180,7 +180,7 @@ public class Renderer2D {
     }
     
     private void computeSquareSize(Dimension panelSize) {
-        System.out.println(Math.min(panelSize.width, panelSize.height));
+        //System.out.println(Math.min(panelSize.width, panelSize.height));
         side = Math.min(panelSize.width-30, panelSize.height-30)/BoardConfig.WIDTH;
         this.squareSize.setSize(side, side);
     }
