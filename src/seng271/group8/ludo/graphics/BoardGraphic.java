@@ -44,7 +44,7 @@ public class BoardGraphic extends LudoGraphic {
        
        BufferedImage resized;
        
-       double size = Math.min(boardBackground.getWidth(), 2*squareSize.width);
+       double size = Math.min(boardBackground.getWidth(), 4*squareSize.width);
        
        resized = new BufferedImage((int)size, 
                (int)size, BufferedImage.TYPE_INT_ARGB);

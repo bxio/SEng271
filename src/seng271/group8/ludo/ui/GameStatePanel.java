@@ -11,8 +11,14 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
-import javax.swing.JLabel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import seng271.group8.ludo.GameLogic;
+import seng271.group8.ludo.TimingConfig;
 
 import seng271.group8.ludo.actions.DiceRollAction;
 /*
@@ -25,13 +31,14 @@ import seng271.group8.ludo.actions.RestartGameAction;*/
  *
  * @author Hiroki
  */
-public class GameStatePanel extends JPanel{
+public class GameStatePanel extends JPanel implements ChangeListener {
     
     private JButton diceRoll;
     /*private JButton newGame;
     private JButton restart;
     private JButton options;
     private JButton quit;*/
+    private JSpinner gameSpeed;
     private GameLogic game;
     private LudoWindow ludo;
     
@@ -90,11 +97,26 @@ public class GameStatePanel extends JPanel{
         contentPaneCenter.add(quit, gbc);
         quit.addActionListener(new QuitGameAction(ludo));*/
         
+
+        gameSpeed = new JSpinner();
+        SpinnerNumberModel gameSpeedRange =  new SpinnerNumberModel(1,1,10000,1);
+        gameSpeed.setModel(gameSpeedRange);
+        gameSpeed.addChangeListener(this);
+     
+        contentPaneRight.add(gameSpeed);
+        
         // Add three main components of game state panel
         this.add(contentPaneCenter, BorderLayout.CENTER);
         this.add(contentPaneLeft, BorderLayout.WEST);
         this.add(contentPaneRight, BorderLayout.EAST);
 
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        SpinnerModel speedModel = gameSpeed.getModel();
+        int speed = (int)speedModel.getValue();
+        TimingConfig.setGameSpeed(speed);
     }
 
 }

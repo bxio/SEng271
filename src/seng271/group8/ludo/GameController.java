@@ -47,7 +47,7 @@ public class GameController implements Runnable {
        while(isRunning) {
            try {
                GameEvent ge = gameEvents.take();
-               synchronized(map) {dispatch(ge);}
+               dispatch(ge);
            } catch (InterruptedException ex) {
                Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
            }
@@ -74,7 +74,7 @@ public class GameController implements Runnable {
     }
     
     public static void publish(GameEvent e) {
-        if(e.getDefer() > 0) {
+        if(e.getDefer() > 5) {
             GameController.publish(e, e.getDefer());
         } else {
             GameController.put(e);

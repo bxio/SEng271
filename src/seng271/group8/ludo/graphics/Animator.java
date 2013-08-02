@@ -96,11 +96,12 @@ public class Animator extends Thread {
             dt = lastFrame == 0 ? 0 : start - lastFrame;
             lastFrame = start;
             long wait;
+            long gameSpeed = (long)TimingConfig.getGameSpeed();
         
-            refresh(dt*(long)TimingConfig.getGameSpeed());
+            refresh(dt*gameSpeed);
             
             // Calculate how long to wait for the next frame
-            wait = FRAME_PERIOD - (System.currentTimeMillis() - start);
+            wait = FRAME_PERIOD/gameSpeed - (System.currentTimeMillis() - start);
             
             //System.out.println("Wait was:" + wait);
             if(wait > 0) {
