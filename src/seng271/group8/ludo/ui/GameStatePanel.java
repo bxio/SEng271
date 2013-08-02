@@ -15,10 +15,11 @@ import javax.swing.JLabel;
 import seng271.group8.ludo.GameLogic;
 
 import seng271.group8.ludo.actions.DiceRollAction;
+/*
 import seng271.group8.ludo.actions.GameOverAction;
 import seng271.group8.ludo.actions.QuitGameAction;
 import seng271.group8.ludo.actions.OptionsAction;
-import seng271.group8.ludo.actions.RestartGameAction;
+import seng271.group8.ludo.actions.RestartGameAction;*/
 
 /**
  *
@@ -27,10 +28,10 @@ import seng271.group8.ludo.actions.RestartGameAction;
 public class GameStatePanel extends JPanel{
     
     private JButton diceRoll;
-    private JButton newGame;
+    /*private JButton newGame;
     private JButton restart;
     private JButton options;
-    private JButton quit;
+    private JButton quit;*/
     private GameLogic game;
     private LudoWindow ludo;
     
@@ -49,7 +50,7 @@ public class GameStatePanel extends JPanel{
         
         contentPaneCenter.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-    	Dimension buttonSize = new Dimension(80, 30);
+    	//Dimension buttonSize = new Dimension(80, 30);
         
         // Locate "Roll" button onto the center
     	gbc.gridx = 1;
@@ -61,7 +62,7 @@ public class GameStatePanel extends JPanel{
         contentPaneCenter.add(diceRoll);
         contentPaneCenter.add(diceRoll, gbc);
 
-        // Additional buttons
+        /*// Additional buttons
         gbc.gridx = 0;
         gbc.gridy = 0;     
         newGame = new JButton("New");
@@ -87,7 +88,7 @@ public class GameStatePanel extends JPanel{
         quit = new JButton("Quit");
         quit.setPreferredSize(buttonSize);
         contentPaneCenter.add(quit, gbc);
-        quit.addActionListener(new QuitGameAction(ludo));
+        quit.addActionListener(new QuitGameAction(ludo));*/
         
         // Add three main components of game state panel
         this.add(contentPaneCenter, BorderLayout.CENTER);
