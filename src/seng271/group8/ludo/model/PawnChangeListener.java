@@ -6,6 +6,7 @@ package seng271.group8.ludo.model;
 
 import java.beans.PropertyChangeEvent;
 import java.util.Map;
+import seng271.group8.ludo.TimingConfig;
 import seng271.group8.ludo.events.GameEvent;
 import seng271.group8.ludo.events.KickPawnEvent;
 import seng271.group8.ludo.events.TurnEvent;
@@ -36,11 +37,11 @@ public class PawnChangeListener extends AbstractChangeListener {
         if(Pawn.MOVE.equals(propertyName)) {
             Pawn p = (Pawn)evt.getSource();
             if(p.getMove().doesKick()) {
-                ge = new KickPawnEvent(p.getMove().getKickMove(),50);
+                ge = new KickPawnEvent(p.getMove().getKickMove(),TimingConfig.get(TimingConfig.KICK));
                 ani = builders.get(MoveBuilder.class).build(p,0,0);
             }
             else {
-                ge = new TurnEvent(400);
+                ge = new TurnEvent((int)(TimingConfig.get(TimingConfig.TURN)*0.4f));
                 ani = builders.get(MoveBuilder.class).build(p,0,0);
             }
         } else if (Pawn.SELECTED.equals(propertyName)) {

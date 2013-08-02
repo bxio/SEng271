@@ -45,14 +45,16 @@ public class GameLogic {
    }
    
    public Boolean checkForWin() {
-       Boolean gameOver = true;
+       Boolean gameOver = false;
+
        for(Player p : this.players) {
-           if(p.getIsFinished() && !rankings.contains(p)) {
+           if(p.checkIsFinished() && !rankings.contains(p)) {
                rankings.add(p);
-           } else {
-               gameOver = false;
-           }         
+           }      
        }
+       
+       if(rankings.size() == 3)
+           gameOver = true;
        
        return gameOver;
    }

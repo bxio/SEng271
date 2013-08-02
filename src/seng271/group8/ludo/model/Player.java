@@ -35,6 +35,24 @@ public class Player extends GameEntity {
 	public Boolean getIsFinished() {
 		return this.finished;
 	}
+        
+        public Boolean checkIsFinished() {
+            
+            Boolean done = false;
+            
+            for(Pawn pw : this.pawns) {
+                if(pw.isOnGoal()) {
+                   done = true;
+                } else {
+                   done = false;
+                   break;
+                }
+            }
+            
+            this.finished = done;
+            return this.finished;
+        }
+        
 	/**
 	 * Sets the player to human or not
 	 * @param human a boolean signifying whether this player is human or not

@@ -15,6 +15,7 @@ public class TimingConfig {
     
     public static String TURN = "TURN";
     public static String ROLL = "ROLL";
+    public static String KICK = "KICK";
     
    /* All Times in milliseconds */
     private static float GAMESPEED = 1;
@@ -24,6 +25,7 @@ public class TimingConfig {
     static {
         times.put(TURN, 500);
         times.put(ROLL, 1000);
+        times.put(KICK, 50);
     }
     
     public static void setGameSpeed(float f) {
@@ -38,7 +40,7 @@ public class TimingConfig {
         Integer n = times.get(timing);
         int time = 1;
         if(n!= null)
-            time = (int)(n*TimingConfig.getGameSpeed());
+            time = (int)(n/TimingConfig.getGameSpeed());
         return time;
     }
 }
