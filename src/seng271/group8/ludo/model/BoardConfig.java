@@ -43,13 +43,13 @@ public class BoardConfig {
         {Grid.P1_STA,Grid.SQUARE,Grid.SQUARE,Grid.SQUARE,Grid.SQUARE,Grid.P2_GOA,Grid.SQUARE,Grid.SQUARE,Grid.SQUARE,Grid.SQUARE,Grid.SQUARE},
         {Grid.P1_END,Grid.P1_GOA,Grid.P1_GOA,Grid.P1_GOA,Grid.P1_GOA,Grid.CENTER,Grid.P3_GOA,Grid.P3_GOA,Grid.P3_GOA,Grid.P3_GOA,Grid.P3_END},
         {Grid.SQUARE,Grid.SQUARE,Grid.SQUARE,Grid.SQUARE,Grid.SQUARE,Grid.P4_GOA,Grid.SQUARE,Grid.SQUARE,Grid.SQUARE,Grid.SQUARE,Grid.P3_STA},
-        {Grid.EMP_SQ,Grid.EMP_SQ,Grid.EMP_SQ,Grid.EMP_SQ,Grid.SQUARE,Grid.P4_GOA,Grid.SQUARE,Grid.EMP_SQ,Grid.EMP_SQ,Grid.EMP_SQ,Grid.EMP_SQ},
+        {Grid.EMP_SQ,Grid.		EMP_SQ,Grid.EMP_SQ,Grid.EMP_SQ,Grid.SQUARE,Grid.P4_GOA,Grid.SQUARE,Grid.EMP_SQ,Grid.EMP_SQ,Grid.EMP_SQ,Grid.EMP_SQ},
         {Grid.EMP_SQ,Grid.EMP_SQ,Grid.EMP_SQ,Grid.EMP_SQ,Grid.SQUARE,Grid.P4_GOA,Grid.SQUARE,Grid.EMP_SQ,Grid.EMP_SQ,Grid.EMP_SQ,Grid.EMP_SQ},
         {Grid.P4_HOM,Grid.P4_HOM,Grid.EMP_SQ,Grid.EMP_SQ,Grid.SQUARE,Grid.P4_GOA,Grid.SQUARE,Grid.EMP_SQ,Grid.EMP_SQ,Grid.P3_HOM,Grid.P3_HOM},
         {Grid.P4_HOM,Grid.P4_HOM,Grid.EMP_SQ,Grid.EMP_SQ,Grid.P4_STA,Grid.P4_END,Grid.SQUARE,Grid.EMP_SQ,Grid.EMP_SQ,Grid.P3_HOM,Grid.P3_HOM}
     };
    
-    // Shape of path around board as seen from player 1's perspected (Top-left)
+    // Shape of path around board as seen from player 1's perspective (Top-left)
     // Stored as vector [x-dir, y-dir], eg: [4,0]==[4 squares right, zero left]
     public static final Point[] PATH = {new Point(4,0),new Point(0,4),new Point(2,0),new Point(0,-4),
                                         new Point(4,0),new Point(0,-2),new Point(-4,0),new Point(0,-4),
@@ -60,7 +60,7 @@ public class BoardConfig {
     // #degrees (in radians) each players path is offset from player 1
     // starting at player one (top-right) and rotating clockwise
     public static final double ROTATION_OFFSET = -Math.PI/2;
-    // Location of top left home square for each player
+    // Location of top left home square for each	 player
     public static final Point[] PAWN_HOME = {new Point(0,0), new Point(WIDTH-2,0), new Point(WIDTH-2, HEIGHT-2), new Point(0, HEIGHT-2)};
     // Pawns offset
     public static final Point[] PAWN_OFFSETS =  {new Point(0,0), new Point(0,1), new Point(1,0), new Point(1,1)};
