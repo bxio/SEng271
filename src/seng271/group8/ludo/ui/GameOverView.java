@@ -32,13 +32,8 @@ public class GameOverView extends JPanel {
     
     // Constructor
     public GameOverView(List<Player> winners, LudoWindow l) {
-        //this.winners = winners;
-        this.winners = new ArrayList<Player>();
-        this.winners.add(new Player(1));
-        this.winners.add(new Player(2));
-        this.winners.add(new Player(3));
-        this.winners.add(new Player(4));
-        
+        this.winners = winners;
+        this.window = l;
         this.setup();
     }
     
@@ -62,10 +57,10 @@ public class GameOverView extends JPanel {
         gameOverTitle.setFont(new Font(currFont.getFontName(), currFont.getStyle(), 50));
         
         // Setup winner list
-        JLabel firstPlayer = new JLabel("Winner: " + "Player " + winners.get(0).getId());
-        JLabel secondPlayer = new JLabel("2nd: " + "Player " + winners.get(1).getId());
-        JLabel thirdPlayer = new JLabel("3rd: " + "Player " + winners.get(2).getId());
-        JLabel fourthPlayer = new JLabel("4th: " + "Player " + winners.get(3).getId());
+        JLabel firstPlayer = new JLabel("Winner: " + "Player " + (winners.get(0).getId() + 1));
+        JLabel secondPlayer = new JLabel("2nd: " + "Player " + (winners.get(1).getId() + 1));
+        JLabel thirdPlayer = new JLabel("3rd: " + "Player " + (winners.get(2).getId() + 1));
+        JLabel fourthPlayer = new JLabel("4th: " + "Player " + (winners.get(3).getId() + 1));
         
         firstPlayer.setAlignmentX(java.awt.Component.CENTER_ALIGNMENT);
         secondPlayer.setAlignmentX(java.awt.Component.CENTER_ALIGNMENT);

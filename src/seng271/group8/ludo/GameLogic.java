@@ -53,8 +53,16 @@ public class GameLogic {
            }      
        }
        
-       if(rankings.size() == 3)
+       if(rankings.size() == 3) {
            gameOver = true;
+           
+           // TODO: this is ugly fix it.
+           for(Player p : this.players) {
+               if(!rankings.contains(p))
+                   rankings.add(p);
+           }
+           
+       }
        
        return gameOver;
    }
