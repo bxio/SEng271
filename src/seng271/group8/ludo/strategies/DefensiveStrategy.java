@@ -53,12 +53,12 @@ public class DefensiveStrategy extends AbstractStrategy {
 						clear.add(m);
 					}
 				}
-				System.out.println("#Blocked:"+blocked.size()+" #Clear:"+clear.size());
+				//System.out.println("#Blocked:"+blocked.size()+" #Clear:"+clear.size());
 				if(!clear.isEmpty()){
-					System.out.println("Returning clear move!");
+					//System.out.println("Returning clear move!");
 					return clear.get(0);
 				}else if(!blocked.isEmpty()){
-					System.out.println("Returning Blocked Move!");
+					//System.out.println("Returning Blocked Move!");
 					return blocked.get(0);
 				}
 			}

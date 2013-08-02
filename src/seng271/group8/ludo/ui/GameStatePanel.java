@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import seng271.group8.ludo.GameLogic;
 
 import seng271.group8.ludo.actions.DiceRollAction;
+import seng271.group8.ludo.actions.GameOverAction;
 import seng271.group8.ludo.actions.QuitGameAction;
 import seng271.group8.ludo.actions.OptionsAction;
 import seng271.group8.ludo.actions.RestartGameAction;
@@ -94,6 +95,11 @@ public class GameStatePanel extends JPanel{
         
         contentPaneLeft.add(players);
         contentPaneRight.add(rollHist);
+        
+        // Temporary button for triggering Game Over View (Remove later)
+        JButton forceGameOver = new JButton("Force Game Over!");
+        forceGameOver.addActionListener(new GameOverAction(game));
+        contentPaneLeft.add(forceGameOver);
         
         // Add three main components of game state panel
         this.add(contentPaneCenter, BorderLayout.CENTER);
