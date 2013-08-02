@@ -1,17 +1,23 @@
 SEng271 Group 8 LudoGame Project
 =======
-
-SEng271 A01 Summer 2013 Project Group.
+The "final" group project for SEng271 A01 Summer 2013 Project Group 8 at UVic for SENG 271 A01 with Jens Weber. The professor is Jens Weber and the authors of this project are Alastair Fehr, Bill Xiong (@bill_xiong), Greg Richardson, and Hiroki Yun.
 
 ## Specifications ##
 Please see `Project.pdf` for Specification of the project.
 
-## Running the Game ##
-* Run `ant jar` to compile the project. This requires the Apache Ant utility, then Double-click the SEng271.jar file under `./dist`, Or 
-* Open this folder in Netbeans.
+## Running the Project ##
+Most group members used Netbeans 7.3 and JRE 1.7 to code this project, although the code should be IDE-independent. Please follow the sort instructions to get it to run:
+1. Clone this Repo or [download it](https://github.com/bxio/SEng271/archive/master.zip) in some other fashion.
+2. CD to the download location and run `ant jar` to compile the project. This requires the [Apache Ant](http://ant.apache.org/) utility
+3. Double-click the SEng271.jar file under `./dist`
+
+Or Open this folder directly in Netbeans
 
 ## Writeups ##
-The Writeups for the milestones and the source file for the diagram is in the folders `Milestone1` and `Milestone2`.
+The Writeups for the milestones and the source file for the diagram is in the folders `Milestone 1 Deliverables` and `Milestone 2 Deliverables`.
+
+## Contributing to this Project ##
+If, for some crazy reason, you want to contribute to this project, please fork it. Feel free to submit a pull request!
 
 Group members:
 =======
