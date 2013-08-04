@@ -17,8 +17,7 @@ public class BoardMessage extends GameEntity {
     }
     
     public void setMessage(String message) {
-        String old = this.message;
         this.message = message;
-        this.pcs.firePropertyChange(MESSAGE, old, message);
+        this.pcs.firePropertyChange(MESSAGE, null, message);
     }
 }
