@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JDialog;
+import javax.swing.JPanel;
+
+import seng271.group8.ludo.ui.GameContainer;
 import seng271.group8.ludo.ui.LudoWindow;
 
 /**
@@ -17,11 +20,11 @@ import seng271.group8.ludo.ui.LudoWindow;
  */
 public class CloseAction extends AbstractAction {
     
-    LudoWindow game;
+    GameContainer game;
     JDialog jd;
     
     public CloseAction(Container game, JDialog toClose) {
-        this.game = (LudoWindow)game;
+        this.game = (GameContainer)game;
         this.jd = toClose;
     }
     
@@ -30,7 +33,7 @@ public class CloseAction extends AbstractAction {
             if(e.getActionCommand().equals("Yes")) {
                 jd.setVisible(false);
                 jd.dispose();
-                game.dispatchEvent(new WindowEvent(game, WindowEvent.WINDOW_CLOSING));
+                game.close();
             }
             if(e.getActionCommand().equals("No")) {
                 jd.setVisible(false);
@@ -39,7 +42,7 @@ public class CloseAction extends AbstractAction {
             if(e.getActionCommand().equals("Quit Game")) {
                 jd.setVisible(false);
                 jd.dispose();
-                game.dispatchEvent(new WindowEvent(game, WindowEvent.WINDOW_CLOSING));
+                game.close();
             }
     }
 }

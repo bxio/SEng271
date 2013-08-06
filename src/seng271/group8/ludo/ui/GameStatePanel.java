@@ -32,7 +32,7 @@ import seng271.group8.ludo.actions.RestartGameAction;*/
  * @author Hiroki
  */
 public class GameStatePanel extends JPanel implements ChangeListener {
-    
+
     private JButton diceRoll;
     /*private JButton newGame;
     private JButton restart;
@@ -40,29 +40,29 @@ public class GameStatePanel extends JPanel implements ChangeListener {
     private JButton quit;*/
     private JSpinner gameSpeed;
     private GameLogic game;
-    private LudoWindow ludo;
-    
-    public GameStatePanel(LudoWindow ludo, GameLogic game) {
+    private GameContainer ludo;
+
+    public GameStatePanel(GameContainer ludo, GameLogic game) {
         this.game = game;
         this.ludo = ludo;
         this.setup();
     }
-    
+
     public void setup() {
-        
+
         this.setLayout(new BorderLayout());
         JPanel contentPaneCenter = new JPanel();
         JPanel contentPaneLeft = new JPanel();
         JPanel contentPaneRight = new JPanel();
-        
+
         contentPaneCenter.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
     	//Dimension buttonSize = new Dimension(80, 30);
-        
+
         // Locate "Roll" button onto the center
     	gbc.gridx = 1;
         gbc.gridy = 1;
-        
+
         diceRoll = new JButton("Roll");
         diceRoll.setPreferredSize(new Dimension(80, 60));
         diceRoll.addActionListener(new DiceRollAction(game));
@@ -71,40 +71,40 @@ public class GameStatePanel extends JPanel implements ChangeListener {
 
         /*// Additional buttons
         gbc.gridx = 0;
-        gbc.gridy = 0;     
+        gbc.gridy = 0;
         newGame = new JButton("New");
         newGame.setPreferredSize(buttonSize);
         contentPaneCenter.add(newGame, gbc);
-        
+
         gbc.gridx = 2;
-        gbc.gridy = 0;      
+        gbc.gridy = 0;
         restart = new JButton("Restart");
         restart.setPreferredSize(buttonSize);
         contentPaneCenter.add(restart, gbc);
         restart.addActionListener(new RestartGameAction());
-        
+
         gbc.gridx = 0;
-        gbc.gridy = 2;    
+        gbc.gridy = 2;
         options = new JButton("Options");
         options.setPreferredSize(buttonSize);
         contentPaneCenter.add(options, gbc);
         options.addActionListener(new OptionsAction());
-        
+
         gbc.gridx = 2;
-        gbc.gridy = 2;   
+        gbc.gridy = 2;
         quit = new JButton("Quit");
         quit.setPreferredSize(buttonSize);
         contentPaneCenter.add(quit, gbc);
         quit.addActionListener(new QuitGameAction(ludo));*/
-        
+
 
         gameSpeed = new JSpinner();
         SpinnerNumberModel gameSpeedRange =  new SpinnerNumberModel(1,1,10000,1);
         gameSpeed.setModel(gameSpeedRange);
         gameSpeed.addChangeListener(this);
-     
+
         contentPaneRight.add(gameSpeed);
-        
+
         // Add three main components of game state panel
         this.add(contentPaneCenter, BorderLayout.CENTER);
         this.add(contentPaneLeft, BorderLayout.WEST);
@@ -115,7 +115,7 @@ public class GameStatePanel extends JPanel implements ChangeListener {
     @Override
     public void stateChanged(ChangeEvent e) {
         SpinnerModel speedModel = gameSpeed.getModel();
-        int speed = (int)speedModel.getValue();
+        int speed = (Integer)speedModel.getValue();
         TimingConfig.setGameSpeed(speed);
     }
 

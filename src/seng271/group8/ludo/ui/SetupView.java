@@ -34,9 +34,9 @@ public class SetupView extends JPanel {
     
     private PlayerSelectPanel[] players = new PlayerSelectPanel[4];
     JButton playNow;
-    private LudoWindow ludo;
+    private GameContainer ludo;
  
-    public SetupView(LudoWindow ludo) {
+    public SetupView(GameContainer ludo) {
     	
         Strategy[] strategies = {
             new HumanStrategy(),

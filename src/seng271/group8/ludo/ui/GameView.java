@@ -33,7 +33,7 @@ public class GameView extends JPanel {
     
     private GamePanel playArea;
     private GameStatePanel gameState;
-    private LudoWindow ludo;
+    private GameContainer ludo;
     
     private GameController gameController;
     private GameLogic gamelogic;
@@ -42,7 +42,7 @@ public class GameView extends JPanel {
     
     private Thread controllerThread;
     
-    public GameView(LudoWindow ludo, Strategy[] strategies) {
+    public GameView(GameContainer ludo, Strategy[] strategies) {
         //this.setBackground(Color.red);
         this.setLayout(new BorderLayout());
        
