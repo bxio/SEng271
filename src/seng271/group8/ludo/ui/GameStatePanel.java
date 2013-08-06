@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridLayout;
+
+import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerModel;
@@ -50,7 +53,8 @@ public class GameStatePanel extends JPanel implements ChangeListener {
 
     public void setup() {
 
-        this.setLayout(new BorderLayout());
+
+    	this.setLayout(new GridLayout(1,3));
         JPanel contentPaneCenter = new JPanel();
         JPanel contentPaneLeft = new JPanel();
         JPanel contentPaneRight = new JPanel();
@@ -96,19 +100,23 @@ public class GameStatePanel extends JPanel implements ChangeListener {
         quit.setPreferredSize(buttonSize);
         contentPaneCenter.add(quit, gbc);
         quit.addActionListener(new QuitGameAction(ludo));*/
-
+        
+        
+        // Locate "Roll" button onto the center
+    	JLabel speed = new JLabel("Speed: ");    
 
         gameSpeed = new JSpinner();
         SpinnerNumberModel gameSpeedRange =  new SpinnerNumberModel(1,1,10000,1);
         gameSpeed.setModel(gameSpeedRange);
         gameSpeed.addChangeListener(this);
 
+        contentPaneRight.add(speed);
         contentPaneRight.add(gameSpeed);
 
         // Add three main components of game state panel
-        this.add(contentPaneCenter, BorderLayout.CENTER);
-        this.add(contentPaneLeft, BorderLayout.WEST);
-        this.add(contentPaneRight, BorderLayout.EAST);
+        this.add(contentPaneLeft);
+        this.add(contentPaneCenter);
+        this.add(contentPaneRight);
 
     }
 
