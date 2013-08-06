@@ -37,4 +37,9 @@ public class LudoApplet extends JApplet {
             }
         });
     }
+    
+    @Override
+    public void destroy() {
+    	System.exit(0);
+    }
 }

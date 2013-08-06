@@ -77,7 +77,7 @@ public class GameView extends JPanel {
         
         // Start GameEvents thread
         controllerThread = new Thread(gameController);
-        controllerThread.setName("GameEvent Dispatcher");
+        //controllerThread.setName("GameEvent Dispatcher");
         controllerThread.setDaemon(true);
         controllerThread.start();
         
