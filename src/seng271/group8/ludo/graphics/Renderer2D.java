@@ -62,6 +62,7 @@ public class Renderer2D {
         // If the view size has changed need to recompute the entire view
         // All drawing is done to a buffered image which is then copied to the 
         // Panel area
+        System.out.println(panelSize.getWidth() + ", " + panelSize.getHeight());
          viewSize = (int)Math.min(panelSize.getWidth()-30,panelSize.getHeight()-30);
          if(repaintAll) {
              for(Layer l : layers) {

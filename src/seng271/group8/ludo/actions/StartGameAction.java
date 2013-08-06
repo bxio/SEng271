@@ -8,7 +8,7 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import seng271.group8.ludo.strategies.Strategy;
-import seng271.group8.ludo.ui.LudoWindow;
+import seng271.group8.ludo.ui.GameContainer;
 import seng271.group8.ludo.ui.PlayerSelectPanel;
 
 /**
@@ -16,11 +16,11 @@ import seng271.group8.ludo.ui.PlayerSelectPanel;
  * @author Alastairs
  */
 public class StartGameAction extends AbstractAction {
-    private LudoWindow game;
+    private GameContainer game;
     private PlayerSelectPanel[] options;
     
     public StartGameAction(Container game, PlayerSelectPanel[] options) {
-        this.game = (LudoWindow)game;
+        this.game = (GameContainer)game;
         this.options = options;
     }
     

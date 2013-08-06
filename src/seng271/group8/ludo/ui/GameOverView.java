@@ -28,12 +28,12 @@ public class GameOverView extends JPanel {
     private static final int GAME_OVER_HEIGHT = 300;
     List<Player> winners;
     JDialog jd = new JDialog();
-    private LudoWindow window;
+    private GameContainer container;
     
     // Constructor
-    public GameOverView(List<Player> winners, LudoWindow l) {
+    public GameOverView(List<Player> winners, GameContainer l) {
         this.winners = winners;
-        this.window = l;
+        this.container = l;
         this.setup();
     }
     
@@ -44,7 +44,7 @@ public class GameOverView extends JPanel {
         JPanel buttonPanel = new JPanel();
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
 
-        jd.setLocationRelativeTo(window);
+        jd.setLocationRelativeTo(container);
         jd.setModal(true);
         jd.setSize(new Dimension(GAME_OVER_WIDTH, GAME_OVER_HEIGHT));
         jd.setResizable(false);
@@ -80,7 +80,7 @@ public class GameOverView extends JPanel {
         // Setup buttons on the bottom
         JButton quitButton = new JButton("Quit Game");
         buttonPanel.add(quitButton);
-        quitButton.addActionListener(new CloseAction(window, jd));
+        quitButton.addActionListener(new CloseAction(container, jd));
         
         jd.add(titlePanel);
         jd.add(buttonPanel);

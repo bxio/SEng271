@@ -33,9 +33,9 @@ public class GameStatePanel extends JPanel{
     private JButton options;
     private JButton quit;*/
     private GameLogic game;
-    private LudoWindow ludo;
+    private GameContainer ludo;
     
-    public GameStatePanel(LudoWindow ludo, GameLogic game) {
+    public GameStatePanel(GameContainer ludo, GameLogic game) {
         this.game = game;
         this.ludo = ludo;
         this.setup();

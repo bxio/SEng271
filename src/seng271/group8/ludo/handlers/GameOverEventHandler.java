@@ -8,6 +8,7 @@ import java.util.List;
 import seng271.group8.ludo.GameLogic;
 import seng271.group8.ludo.events.GameOverEvent;
 import seng271.group8.ludo.model.Player;
+import seng271.group8.ludo.ui.GameContainer;
 import seng271.group8.ludo.ui.GameOverView;
 import seng271.group8.ludo.ui.LudoWindow;
 
@@ -17,12 +18,12 @@ import seng271.group8.ludo.ui.LudoWindow;
  */
 public class GameOverEventHandler extends BaseHandler<GameOverEvent> {
     
-    private LudoWindow window;
+    private GameContainer container;
     
     // Constructor could include a reference to the panel to show
-    public GameOverEventHandler(GameLogic game, LudoWindow l) {
+    public GameOverEventHandler(GameLogic game, GameContainer l) {
         super(game);
-        this.window = l;
+        this.container = l;
     }
         
         /**
@@ -33,6 +34,6 @@ public class GameOverEventHandler extends BaseHandler<GameOverEvent> {
         // Get the game results
         List<Player> finishPositions = game.getGameResults();
         //Show the game over panel here.
-        GameOverView overView = new GameOverView(finishPositions, this.window);
+        GameOverView overView = new GameOverView(finishPositions, this.container);
     }
 }
