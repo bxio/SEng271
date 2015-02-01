@@ -2,7 +2,7 @@ SEng271 Group 8 LudoGame Project
 =======
 The "final" group project for SEng271 A01 Summer 2013 Project Group 8 at UVic for SENG 271 A01 with Jens Weber. The professor is Jens Weber and the authors of this project are Alastair Fehr, Bill Xiong (@bill_xiong), Greg Richardson, and Hiroki Yun.
 
-![LudoBoard](https://github.com/hrky/readme-image/blob/master/images/ludoboard.png)
+![LudoBoard](https://raw.github.com/hrky/readme-image/blob/master/images/ludoboard.png)
 
 ## Specifications ##
 Please see `Project.pdf` for Specification of the project.
